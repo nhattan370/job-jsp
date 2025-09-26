@@ -55,7 +55,7 @@ CREATE TABLE category (
 CREATE TABLE recruitment (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     address VARCHAR(255),
-    created_at VARCHAR(255),
+    created_at DATETIME,
     description VARCHAR(255),
     experience VARCHAR(255),
     quantity INT(11),
@@ -64,10 +64,10 @@ CREATE TABLE recruitment (
     status INT(11),
     title VARCHAR(255),
     type VARCHAR(255),
-    view INT(11),
+    views INT(11),
     category_id INT(11),
     company_id INT(11),
-    deadline VARCHAR(255),
+    deadline DATE,
     FOREIGN KEY (category_id) REFERENCES category(id),
     FOREIGN KEY (company_id) REFERENCES company(id)
 );
@@ -93,7 +93,7 @@ CREATE TABLE follow_company (
 -- Bảng applypost
 CREATE TABLE applypost (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    created_at VARCHAR(255),
+    created_at DATETIME,
     recruitment_id INT(11),
     user_id INT(11),
     name_cv VARCHAR(255),
@@ -193,20 +193,23 @@ INSERT INTO category (id, name, number_choose) VALUES
 -- ========================
 -- RECRUITMENT (13 job postings từ 5 company)
 -- ========================
-INSERT INTO recruitment (id, address, created_at, description, experience, quantity, `rank`, salary, status, title, type, view, category_id, company_id, deadline) VALUES
-(1, 'HCM', '2025-09-01', 'Backend Java Spring', '2 years', 2, 'Junior', '1000$', 1, 'Java Backend Dev', 'Full-time', 0, 1, 1, '2025-10-01'),
-(2, 'HCM', '2025-09-02', 'Python Data Engineer', '3 years', 1, 'Mid', '1500$', 1, 'Python Data Engineer', 'Full-time', 0, 2, 1, '2025-10-05'),
-(3, 'HCM', '2025-09-03', 'Frontend ReactJS', '1 year', 2, 'Junior', '900$', 1, 'ReactJS Dev', 'Full-time', 0, 5, 2, '2025-10-03'),
-(4, 'HCM', '2025-09-04', 'iOS Mobile Dev', '2 years', 1, 'Senior', '2000$', 1, 'iOS Dev', 'Full-time', 0, 9, 2, '2025-10-07'),
-(5, 'HCM', '2025-09-05', 'Unity Game Dev', '1 year', 3, 'Junior', '1200$', 1, 'Game Developer', 'Full-time', 0, 17, 3, '2025-10-10'),
-(6, 'HCM', '2025-09-06', 'Unreal Game Dev', '2 years', 2, 'Mid', '1800$', 1, 'Game Developer', 'Full-time', 0, 17, 3, '2025-10-15'),
-(7, 'HCM', '2025-09-07', 'E-commerce Backend', '2 years', 2, 'Mid', '1300$', 1, 'Backend Dev', 'Full-time', 0, 6, 4, '2025-10-12'),
-(8, 'HCM', '2025-09-08', 'Frontend VueJS', '1 year', 2, 'Junior', '1000$', 1, 'VueJS Dev', 'Full-time', 0, 5, 4, '2025-10-18'),
-(9, 'HCM', '2025-09-09', 'Data Scientist', '3 years', 1, 'Senior', '2500$', 1, 'ML Engineer', 'Full-time', 0, 13, 5, '2025-10-20'),
-(10, 'HCM', '2025-09-10', 'AI Researcher', '5 years', 1, 'Senior', '3000$', 1, 'AI Engineer', 'Full-time', 0, 14, 5, '2025-10-25'),
-(11, 'HCM', '2025-09-11', 'DevOps Engineer', '2 years', 2, 'Mid', '1500$', 1, 'DevOps Engineer', 'Full-time', 0, 11, 1, '2025-10-22'),
-(12, 'HCM', '2025-09-12', 'Database Admin', '3 years', 1, 'Mid', '1600$', 1, 'DBA', 'Full-time', 0, 15, 2, '2025-10-28'),
-(13, 'HCM', '2025-09-13', 'Cloud Engineer', '2 years', 2, 'Mid', '1800$', 1, 'Cloud Engineer', 'Full-time', 0, 16, 5, '2025-10-30');
+INSERT INTO recruitment 
+(id, address, created_at, description, experience, quantity, `rank`, salary, status, title, type, views, category_id, company_id, deadline) 
+VALUES
+(1, 'HCM', '2025-09-01 09:00:00', 'Backend Java Spring', '2 years', 2, 'Junior', '1000$', 1, 'Java Backend Dev', 'Full-time', 0, 1, 1, '2025-10-01'),
+(2, 'HCM', '2025-09-02 09:00:00', 'Python Data Engineer', '3 years', 1, 'Mid', '1500$', 1, 'Python Data Engineer', 'Full-time', 0, 2, 1, '2025-10-05'),
+(3, 'HCM', '2025-09-03 09:00:00', 'Frontend ReactJS', '1 year', 2, 'Junior', '900$', 1, 'ReactJS Dev', 'Full-time', 0, 5, 2, '2025-10-03'),
+(4, 'HCM', '2025-09-04 09:00:00', 'iOS Mobile Dev', '2 years', 1, 'Senior', '2000$', 1, 'iOS Dev', 'Full-time', 0, 9, 2, '2025-10-07'),
+(5, 'HCM', '2025-09-05 09:00:00', 'Unity Game Dev', '1 year', 3, 'Junior', '1200$', 1, 'Game Developer', 'Full-time', 0, 17, 3, '2025-10-10'),
+(6, 'HCM', '2025-09-06 09:00:00', 'Unreal Game Dev', '2 years', 2, 'Mid', '1800$', 1, 'Game Developer', 'Full-time', 0, 17, 3, '2025-10-15'),
+(7, 'HCM', '2025-09-07 09:00:00', 'E-commerce Backend', '2 years', 2, 'Mid', '1300$', 1, 'Backend Dev', 'Full-time', 0, 6, 4, '2025-10-12'),
+(8, 'HCM', '2025-09-08 09:00:00', 'Frontend VueJS', '1 year', 2, 'Junior', '1000$', 1, 'VueJS Dev', 'Full-time', 0, 5, 4, '2025-10-18'),
+(9, 'HCM', '2025-09-09 09:00:00', 'Data Scientist', '3 years', 1, 'Senior', '2500$', 1, 'ML Engineer', 'Full-time', 0, 13, 5, '2025-10-20'),
+(10, 'HCM', '2025-09-10 09:00:00', 'AI Researcher', '5 years', 1, 'Senior', '3000$', 1, 'AI Engineer', 'Full-time', 0, 14, 5, '2025-10-25'),
+(11, 'HCM', '2025-09-11 09:00:00', 'DevOps Engineer', '2 years', 2, 'Mid', '1500$', 1, 'DevOps Engineer', 'Full-time', 0, 11, 1, '2025-10-22'),
+(12, 'HCM', '2025-09-12 09:00:00', 'Database Admin', '3 years', 1, 'Mid', '1600$', 1, 'DBA', 'Full-time', 0, 15, 2, '2025-10-28'),
+(13, 'HCM', '2025-09-13 09:00:00', 'Cloud Engineer', '2 years', 2, 'Mid', '1800$', 1, 'Cloud Engineer', 'Full-time', 0, 16, 5, '2025-10-30');
+
 
 -- ========================
 -- SAVE_JOB (7 lưu việc)
@@ -255,3 +258,16 @@ INSERT INTO applypost (id, created_at, recruitment_id, user_id, name_cv, status,
 (19, '2025-09-10', 6, 5, 'cv_user5.pdf', 1, 'Ứng tuyển Game Unreal'),
 (20, '2025-09-10', 7, 6, 'cv_user6.pdf', 1, 'Ứng tuyển Backend E-com');
 SELECT * FROM user;
+SELECT COUNT(DISTINCT a.user_id) AS number_candidate, 
+	   COUNT(DISTINCT c.id) AS number_company, 
+       COUNT(a.recruitment_id) AS number_recruitment
+FROM applypost a
+JOIN recruitment r ON a.recruitment_id = r.id
+RIGHT JOIN company c ON c.id = r.company_id
+
+
+
+
+
+
+

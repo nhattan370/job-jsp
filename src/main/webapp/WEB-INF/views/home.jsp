@@ -11,7 +11,7 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-<div th:if="${msg_register_success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+<div class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
     <script>
         swal({
             title: 'Đăng nhập thành công!',
@@ -40,7 +40,7 @@
                                             <span class="flaticon-visitor"></span>
                                         </div>
                                         <div class="desc text-left">
-                                            <strong class="number" data-number="46" th:text="${numberCandidate}"></strong>
+                                            <strong class="number" data-number="46" >${stats.numberCandidate}</strong>
                                             <span>Ứng cử viên</span>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                             <span class="flaticon-visitor"></span>
                                         </div>
                                         <div class="desc text-left">
-                                            <strong class="number" data-number="450" th:text="${numberCompany}"></strong>
+                                            <strong class="number" data-number="450">${stats.numberCompany}</strong>
                                             <span>Công ty</span>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                             <span class="flaticon-resume"></span>
                                         </div>
                                         <div class="desc text-left">
-                                            <strong class="number" data-number="80000" th:text="${numberRecruitment}"></strong>
+                                            <strong class="number" data-number="80000">${stats.numberRecruitment}</strong>
                                             <span>Tuyển dụng</span>
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@
                     <div class="icon"><span class="flaticon-resume"></span></div>
                     <div class="media-body">
                         <h3 class="heading mb-3">Tìm kiếm hàng triệu việc làm</h3>
-                        <p>Một con sông nhỏ tên là Duden chảy qua nơi ở và nguồn cung cấp của họ.</p>
+                        <p> ở và nguồn cung cấp của họ.Cơ hội nghề nghiệp phong phú, chỉ một cú nhấp chuột để bắt đầu hành trình mới.</p>
                     </div>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                     <div class="icon"><span class="flaticon-team"></span></div>
                     <div class="media-body">
                         <h3 class="heading mb-3">Dễ dàng quản lý công việc</h3>
-                        <p>Một con sông nhỏ tên là Duden chảy qua nơi ở và nguồn cung cấp của họ.</p>
+                        <p>Theo dõi, sắp xếp và tối ưu hóa công việc của bạn mọi lúc, mọi nơi.</p>
                     </div>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                     <div class="icon"><span class="flaticon-career"></span></div>
                     <div class="media-body">
                         <h3 class="heading mb-3">Top Nghề nghiệp</h3>
-                        <p>Một con sông nhỏ tên là Duden chảy qua nơi ở và nguồn cung cấp của họ.</p>
+                        <p>Khám phá những ngành nghề hot nhất và định hướng sự nghiệp bền vững cho tương lai.</p>
                     </div>
                 </div>
             </div>
@@ -223,7 +223,7 @@
                     <div class="icon"><span class="flaticon-employees"></span></div>
                     <div class="media-body">
                         <h3 class="heading mb-3">Ứng viên Chuyên gia Tìm kiếm</h3>
-                        <p>Một con sông nhỏ tên là Duden chảy qua nơi ở và nguồn cung cấp của họ.</p>
+                        <p>Kết nối nhanh chóng với ứng viên chất lượng, phù hợp đúng nhu cầu tuyển dụng.</p>
                     </div>
                 </div>
             </div>
