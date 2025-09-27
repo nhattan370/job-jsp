@@ -5,6 +5,8 @@
 <html lang="en">
 <head>
 	<%@ include file="/WEB-INF/common/head.jsp" %>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/categories.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <body>
@@ -175,16 +177,20 @@
                 <h2 class="mb-0">Top Danh Mục</h2>
             </div>
         </div>
-        <div class="row">
-            <th:block th:each="categorie : ${categories}">
-            <div class="col-md-3 ">
-                <ul class="category text-center">
-
-                    <li><a style="text-decoration: none !important;" th:href="${'/recruitment/category/'}+${categorie.id}"> <p th:text="${categorie.name}"></p><span class="number" th:text="${categorie.numberChoose}"></span> <span>Vị trí</span><i class="ion-ios-arrow-forward"></i></a></li>
-                </ul>
-            </div>
-            </th:block>
-        </div>
+        
+        <!--Render in js  -->
+        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+		  <div class="carousel-inner" id="category-container">
+		  </div>
+			<button class="prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			</button>
+			<button class="next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			</button>
+		</div>      
+        <!--Render in js  -->
+        
     </div>
 </section>
 
@@ -560,4 +566,6 @@
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
 </body>
+<script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

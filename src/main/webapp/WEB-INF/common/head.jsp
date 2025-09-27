@@ -23,6 +23,7 @@
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap-grid.css">
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap-reboot.css">
+	  
 	
 	  <!-- JS -->
 	  <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
@@ -42,3 +43,4 @@
 	  <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 	  <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	  
