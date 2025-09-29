@@ -1,15 +1,21 @@
 package controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import enums.Search;
 import model.Category;
 import service.CategoryService;
 import service.CompanyService;
@@ -36,7 +42,10 @@ public class HomeController {
 	
 	
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(Model model, HttpSession session) {
+
+		session.setAttribute("listType",Arrays.asList(Search.JOB.getValue(), Search.USER.getValue(), Search.ADDRESS.getValue()));
+		
 		model.addAttribute("stats", dashboardService.getDashboardStats());
 		model.addAttribute("recruitments", recruitmentService.findTwoAndSort());
 		model.addAttribute("companies",companyService.findTwoAndSort());
@@ -46,7 +55,6 @@ public class HomeController {
 	@GetMapping("/api/categories")
 	@ResponseBody
 	public List<Category> getAllCategories(){
-		logger.info(ColorExample.GREEN + "Hello" +ColorExample.RESET);
 		return categoryService.findAll();
 	}
 

@@ -58,7 +58,7 @@ public class Cv {
 
 	@Override
 	public String toString() {
-		return "Cv [id=" + id + ", fileName=" + fileName + ", user=" + user + "]";
+		return "Cv [id=" + id + ", fileName=" + fileName + "]";
 	}
     
 }

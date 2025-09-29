@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -44,7 +48,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
-   
+    
+    @OneToMany(mappedBy = "user")
+    private List<Cv> cvs = new ArrayList<Cv>(); 
 
 	public User() {}
 
@@ -146,7 +152,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", address=" + address + ", description=" + description + ", email=" + email
 				+ ", fullName=" + fullName + ", image=" + image + ", password=" + password + ", phoneNumber="
-				+ phoneNumber + ", status=" + status + ", role=" + role + "]";
+				+ phoneNumber + ", status=" + status + ", role=" + role + ", cv=" + cvs + "]";
 	}
     
 }
