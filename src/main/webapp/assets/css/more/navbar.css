@@ -1,0 +1,11 @@
+/* @charset "UTF-8";
+.navbar {
+    padding-top: 0.25rem;  mặc định là 0.5rem
+    padding-bottom: 0.25rem;
+}
+
+.navbar .nav-link {
+    padding-top: 0.25rem;  mặc định là 0.5rem
+    padding-bottom: 0.25rem;
+}
+ */

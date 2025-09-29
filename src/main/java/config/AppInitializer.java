@@ -10,10 +10,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	
 	private final Logger logger = Logger.getLogger(AppInitializer.class.getName());
 
-	public AppInitializer() {
-		logger.info(ColorExample.WHITE + "AppInitializer" + ColorExample.RESET);
-	}
-
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class<?>[]{DatabaseConfig.class};
