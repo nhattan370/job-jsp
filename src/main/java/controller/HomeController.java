@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dto.CompanyHomeDTO;
+import dto.DashboardStatus;
+import dto.RecruitmentDTO;
 import enums.Search;
+import enums.Session;
 import model.Category;
 import service.CategoryService;
 import service.CompanyService;
@@ -42,13 +47,16 @@ public class HomeController {
 	
 	
 	@GetMapping("/")
-	public String home(Model model, HttpSession session) {
-
-		session.setAttribute("listType",Arrays.asList(Search.JOB.getValue(), Search.USER.getValue(), Search.ADDRESS.getValue()));
+	public String home(Model model, HttpSession session, HttpServletResponse response) {		
+		DashboardStatus ds = dashboardService.getDashboardStats();
+		List<RecruitmentDTO> listRe = recruitmentService.findTwoAndSort();
+		List<CompanyHomeDTO> listCo = companyService.findTwoAndSort();
 		
-		model.addAttribute("stats", dashboardService.getDashboardStats());
-		model.addAttribute("recruitments", recruitmentService.findTwoAndSort());
-		model.addAttribute("companies",companyService.findTwoAndSort());
+		model.addAttribute("recruitments", listRe);
+		model.addAttribute("companies",listCo);
+		
+		session.setAttribute(Session.STATS.getValue(), ds);
+		session.setAttribute(Session.LIST_TYPE.getValue(),Arrays.asList(Search.JOB.getValue(), Search.USER.getValue(), Search.ADDRESS.getValue()));
 		return "home";
 	}
 	

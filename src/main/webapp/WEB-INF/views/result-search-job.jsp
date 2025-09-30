@@ -12,116 +12,12 @@
 	<div class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
 	
 	</div>
+	
 <!-- general interface -->
 	<%@include file="/WEB-INF/common/general.jsp" %>
-
-<section class="ftco-section bg-light" th:if="${session.user}">
-    <div class="container">
-        <h4 style="margin-top: -20px">Kết quả tìm kiếm cho : <span th:text="${keySearch}"></span></h4>
-        <div class="row">
-            <div class="col-lg-12 pr-lg-5">
-                <div class="row">
-                    <th:block th:if="${list.totalPages>0}" th:each="recruitment : ${list.content}">
-                        <div class="col-md-12 ">
-                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-                                <div class="one-third mb-4 mb-md-0">
-                                    <div class="job-post-item-header align-items-center">
-                                        <span class="subadge" th:text="${recruitment.type}"></span>
-                                        <h2 class="mr-3 text-black" ><a th:text="${recruitment.title}" th:href="${'/recruitment/detail/'} +${recruitment.id}"></a></h2>
-                                    </div>
-                                    <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#" th:text="${recruitment.Company.nameCompany}" ></a></div>
-                                        <div><span class="icon-my_location"></span> <span th:text="${recruitment.address}"></span></div>
-                                    </div>
-                                </div>
-                                <input type="hidden" th:id="${'idRe'}+${recruitment.id}" th:value="${recruitment.id}">
-                                <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                    <div th:if="${session.user.role.id == 1 }">
-                                        <a  th:onclick="'save(' +${recruitment.id}+ ')'" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-                                            <span class="icon-heart"></span>
-                                        </a>
-                                    </div>
-                                    <a  data-toggle="modal" th:data-target="${'#exampleModal'}+${recruitment.id}" class="btn btn-primary py-2" th:if="${session.user.role.id == 1 }">Apply Job</a>
-                                </div>
-                            </div>
-                        </div><!-- end -->
-                        <!-- Modal -->
-                        <div class="modal fade" th:id="${'exampleModal'}+${recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ứng tuyển: <span th:text="${recruitment.title}"></span></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form method="post" action="/user/apply-job">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <select th:id="${'choose'}+${recruitment.id}" th:onchange="'choosed(' +${recruitment.id}+ ')'" class="form-control" aria-label="Default select example">
-                                                        <option selected>Chọn phương thức nộp</option>
-                                                        <option value="1">Dùng cv đã cập nhật</option>
-                                                        <option value="2">Nộp cv mới</option>
-                                                    </select>
-                                                </div>
-                                                <div th:id="${'loai1'}+${recruitment.id}" style="display:none" class="col-12">
-                                                    <label for="fileUpload"
-                                                           class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control"  th:id="${'text'}+${recruitment.id}" >
-
-                                                    </textarea>
-                                                </div>
-                                                <div th:id="${'loai2'}+${recruitment.id}" style="display:none" class="col-12">
-
-                                                    <label for="fileUpload"
-                                                           class="col-form-label">Chọn cv:</label>
-                                                    <input type="file" class="form-control"
-                                                           th:id="${'fileUpload'}+${recruitment.id}" name="file"   required>
-                                                    <label for="fileUpload"
-                                                           class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control"  th:id="${'text'}+${recruitment.id}" >
-
-                                                    </textarea>
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                <button type="button" th:id="${'button1'}+${recruitment.id}" style="display: none" th:onclick="'apply1(' +${recruitment.id}+ ')'" class="btn btn-primary">Nộp</button>
-                                                <button type="button" th:id="${'button2'}+${recruitment.id}" style="display: none" th:onclick="'apply(' +${recruitment.id}+ ')'" class="btn btn-primary">Nộp</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </th:block>
-                    <div   style="text-align: center" th:if="${list.totalPages == 0}">
-                        <p style="color: red">Không có kết quả nào</p>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{'/recruitment/search/'+ ${keySearch}(page = ${list.number - 1})}">&lt;</a></li>
-                                <th:block th:each="recruitment,state  : ${recruitmentList}">
-                                    <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{'/recruitment/search/'+ ${keySearch}(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                                </th:block>
-                                <li th:if="${numberPage<list.totalPages - 1}"><a th:href="@{'/recruitment/search/'+ ${keySearch}(page = ${list.number + 1})}">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+	
+<!-- show result search with typeSearch=job -->
+	<c:if test="${param.typeSearch==sessionScope.listType[0]}"><%@include file="/WEB-INF/common/result-search-job.jsp" %></c:if>
 
 <script>
     function apply1(id){

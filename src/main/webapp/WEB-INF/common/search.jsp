@@ -3,18 +3,16 @@
  <div class="row">
     <div class="col-md-12 nav-link-wrap">
         <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link ${typeSearch==sessionScope.listType[0] || typeSearch==null ? 'active' : ''} mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Tìm công việc</a>
-            <a class="nav-link ${typeSearch==sessionScope.listType[1] ? 'active' : ''}" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Tìm ứng cử viên</a>
-            <a class="nav-link ${typeSearch==sessionScope.listType[2] ? 'active' : ''}" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Tìm theo địa điểm</a>
+            <a class="nav-link ${param.typeSearch==sessionScope.listType[0] || param.typeSearch==null ? 'active' : ''} mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Tìm công việc</a>
+            <a class="nav-link ${param.typeSearch==sessionScope.listType[1] ? 'active' : ''}" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Tìm ứng cử viên</a>
+            <a class="nav-link ${param.typeSearch==sessionScope.listType[2] ? 'active' : ''}" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Tìm theo địa điểm</a>
         </div>
     </div>
     <div class="col-md-12 tab-wrap">
         <div class="tab-content p-4" id="v-pills-tabContent">
-
             <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                <form action="search" method="post" class="search-job">
+                <form action="${pageContext.request.contextPath}/search/search-job" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
-
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
                                 <div class="form-field">
@@ -36,7 +34,7 @@
             </div>
 
             <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="search" method="post" class="search-job">
+                <form action="${pageContext.request.contextPath}/recruiter/search" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
@@ -58,7 +56,7 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="search" method="post" class="search-job">
+                <form action="${pageContext.request.contextPath}/search/search-job" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">

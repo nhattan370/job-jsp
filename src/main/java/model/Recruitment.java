@@ -216,7 +216,7 @@ public class Recruitment {
 		return "Recruitment [id=" + id + ", address=" + address + ", createdAt=" + createdAt + ", description="
 				+ description + ", experience=" + experience + ", quantity=" + quantity + ", rank=" + rank + ", salary="
 				+ salary + ", status=" + status + ", title=" + title + ", type=" + type + ", view=" + view
-				+ ", deadline=" + deadline + ", category=" + category + ", company=" + company + "]";
+				+ ", deadline=" + deadline + "]";
 	}
     
 }

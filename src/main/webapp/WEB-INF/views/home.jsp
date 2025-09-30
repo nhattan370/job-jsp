@@ -20,7 +20,6 @@
 	<%@include file="/WEB-INF/common/general.jsp" %>
 	
 	<!-- show feature job when it doesn't handle search -->
-	<c:if test="${typeSearch==null}">
 	<section class="ftco-section">
 	    <div class="container">
 	        <div class="row justify-content-center mb-5">
@@ -92,13 +91,11 @@
 	</section>
 
 		<%@include file="/WEB-INF/common/featured-job.jsp" %>
-	</c:if>
-	<!-- show result search with typeSearch=job -->
-	<c:if test="${typeSearch==sessionScope.listType[0]}"><%@include file="/WEB-INF/common/result-search-job.jsp" %></c:if>
+
 	<!-- show result search with typeSearch=user -->
-	<c:if test="${typeSearch==sessionScope.listType[1]}"><%@include file="/WEB-INF/common/result-search-user.jsp"%></c:if>
+	<c:if test="${param.typeSearch==sessionScope.listType[1]}"><%@include file="/WEB-INF/common/result-search-user.jsp"%></c:if>
 	<!-- show result search with typeSearch=address -->
-	<c:if test="${typeSearch==sessionScope.listType[2]}"><%@include file="/WEB-INF/common/result-search-address.jsp"%></c:if>
+	<c:if test="${param.typeSearch==sessionScope.listType[2]}"><%@include file="/WEB-INF/common/result-search-address.jsp"%></c:if>
 	
 <script>
     function save(id){

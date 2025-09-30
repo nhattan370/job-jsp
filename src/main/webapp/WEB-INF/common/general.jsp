@@ -17,7 +17,7 @@
                                             <span class="flaticon-visitor"></span>
                                         </div>
                                         <div class="desc text-left">
-                                            <strong class="number" data-number="46" >${stats.numberCandidate}</strong>
+                                            <strong class="number" data-number="46" >${sessionScope.stats.numberCandidate}</strong>
                                             <span>Ứng cử viên</span>
                                         </div>
                                     </div>
@@ -30,7 +30,7 @@
                                             <span class="flaticon-visitor"></span>
                                         </div>
                                         <div class="desc text-left">
-                                            <strong class="number" data-number="450">${stats.numberCompany}</strong>
+                                            <strong class="number" data-number="450">${sessionScope.stats.numberCompany}</strong>
                                             <span>Công ty</span>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                             <span class="flaticon-resume"></span>
                                         </div>
                                         <div class="desc text-left">
-                                            <strong class="number" data-number="80000">${stats.numberRecruitment}</strong>
+                                            <strong class="number" data-number="80000">${sessionScope.stats.numberRecruitment}</strong>
                                             <span>Tuyển dụng</span>
                                         </div>
                                     </div>

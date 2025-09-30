@@ -152,7 +152,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", address=" + address + ", description=" + description + ", email=" + email
 				+ ", fullName=" + fullName + ", image=" + image + ", password=" + password + ", phoneNumber="
-				+ phoneNumber + ", status=" + status + ", role=" + role + ", cv=" + cvs + "]";
+				+ phoneNumber + ", status=" + status + "]";
 	}
     
 }
