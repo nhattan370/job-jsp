@@ -17,7 +17,9 @@
 	<%@include file="/WEB-INF/common/general.jsp" %>
 	
 <!-- show result search with typeSearch=job -->
-	<c:if test="${param.typeSearch==sessionScope.listType[0]}"><%@include file="/WEB-INF/common/result-search-job.jsp" %></c:if>
+	<c:if test="${param.typeSearch==sessionScope.listType[0] || param.typeSearch==sessionScope.listType[2]}"><%@include file="/WEB-INF/common/result-search-job.jsp" %></c:if>
+<!-- show result search with typeSearch=user -->
+	<c:if test="${param.typeSearch==sessionScope.listType[1]}"><%@include file="/WEB-INF/common/result-search-user.jsp"%></c:if>
 
 <script>
     function apply1(id){

@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-12 tab-wrap">
         <div class="tab-content p-4" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+            <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[0] || param.typeSearch==null ? 'show active' : ''}" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                 <form action="${pageContext.request.contextPath}/search/search-job" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
@@ -33,7 +33,7 @@
                 </form>
             </div>
 
-            <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
+            <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[1] ? 'show active' : ''}" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
                 <form action="${pageContext.request.contextPath}/recruiter/search" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
@@ -55,7 +55,7 @@
                     </div>
                 </form>
             </div>
-            <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-performance-tab">
+            <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[2] ? 'show active' : ''}" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-performance-tab">
                 <form action="${pageContext.request.contextPath}/search/search-job" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">

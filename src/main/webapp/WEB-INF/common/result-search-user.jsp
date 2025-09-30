@@ -3,31 +3,37 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <section class="ftco-section bg-light">
   <div class="container">
-    <h4 style="margin-top: -20px">Kết quả tìm kiếm cho : <span th:text="${keySearch}"></span></h4>
+    <h4 style="margin-top: -20px">Kết quả tìm kiếm cho : <span>${keySearch}</span></h4>
     <div class="row">
       <div class="col-lg-12 pr-lg-5">
         <div class="row">
-          <th:block th:each="applyPost : ${list.content}">
+          <c:forEach var="applyPost" items="${list}">
             <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
               <div class="team d-md-flex p-4 bg-white">
-                <IMG style="margin-top: 10px" class="img" th:src="${applyPost.image != null ? applyPost.image : 'https://st.quantrimang.com/photos/image/072015/22/avatar.jpg'}"></IMG>
+                <img style="margin-top: 10px" class="img" src="${applyPost.user.image != null ? applyPost.user.image : 'https://st.quantrimang.com/photos/image/072015/22/avatar.jpg'}"/>
                 <div class="text pl-md-4">
-                  <H5 class="location mb-0" th:text="${applyPost.fullName}"></H5>
-                  <p style="display: block;color: black" th:text="${applyPost.address}"></p>
-                  <span class="position" style="display: block;color: black" th:text="${applyPost.email}"></span>
-                  <p class="mb-4" style="width: 700px" th:utext="${applyPost.description}">.</p>
-                  <div th:if="${applyPost.cv != null}" style="margin-left: 1px" class="row">
-                    <p><a th:href="${'/user/getCv/'}+${applyPost.id}"  class="btn btn-primary">Xem cv</a></p>
-                  </div>
+                  <H5 class="location mb-0">${applyPost.user.fullName}</H5>
+                  <p style="display: block;color: black">${applyPost.user.address}</p>
+                  <span class="position" style="display: block;color: black">${applyPost.user.email}</span>
+                  <p class="mb-4" style="width: 700px">
+                  	<c:out value="${applyPost.user.description}" escapeXml="false"/>
+                  </p>
+                  <c:if test="${applyPost.nameCv != null}">
+	                  <div style="margin-left: 1px" class="row">
+	                    <p><a href="user/getCv/${applyPost.id}" class="btn btn-primary">Xem cv</a></p>
+	                  </div>
+                  </c:if>
                 </div>
               </div>
             </div>
-          </th:block>
-          <div  style="text-align: center" th:if="${list.totalPages == 0}">
+          </c:forEach>
+          <c:if test="${list.size() == 0}">
+          <div style="text-align: center">
             <p style="color: red">Không có kết quả nào</p>
           </div>
+          </c:if>
         </div>
-        <div class="row mt-5">
+<%--         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
@@ -39,9 +45,9 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div> --%>
+        
       </div>
-
     </div>
   </div>
 </section>

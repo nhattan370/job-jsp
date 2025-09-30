@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dao.SearchDAO;
 import enums.Search;
+import exception.SearchTypeNotFoundException;
 import util.SearchUtil;
 
 @Service
@@ -25,15 +26,15 @@ public class SearchServiceImpl implements SearchService{
 		
 		List<?> list = null;
 		if(typeSearch.equals(Search.JOB.getValue())) {
-			list = searchDAO.searchRecruitment(key);
-		}else if(typeSearch.equals(Search.ADDRESS.getValue())){
-			
-		}else if(typeSearch.equals(Search.USER.getValue())) {
-			
-		}else {
-			
+			list = searchDAO.searchTitleRecruitment(key);
 		}
-		
+		else if(typeSearch.equals(Search.USER.getValue())) {
+			list = searchDAO.searchUser(key);
+		}else if(typeSearch.equals(Search.ADDRESS.getValue())) {
+			list = searchDAO.searchAddressRecruitment(key);
+		}else {
+			throw new SearchTypeNotFoundException("Unsupport search type "+typeSearch);
+		}
 		
 		return list;
 	}

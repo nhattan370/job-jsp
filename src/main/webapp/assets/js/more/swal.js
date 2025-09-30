@@ -14,3 +14,5 @@ function handleEmpty(event){
 		event.preventDefault();
 	}
 }
+
+export default showSwal;

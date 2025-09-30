@@ -9,29 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dto.CompanyHomeDTO;
-import dto.DashboardStatus;
-import dto.RecruitmentDTO;
-import model.Recruitment;
-import service.DashboardService;
 import service.SearchService;
-import share.ColorExample;
 
 @Controller
 public class SearchController {
 	
 	private final SearchService searchService;
-	private final DashboardService dashboardService;
 	private final Logger logger = Logger.getLogger(SearchController.class.getName());
 
 	@Autowired
-	public SearchController(SearchService searchService, DashboardService dashboardService) {
+	public SearchController(SearchService searchService) {
 		this.searchService = searchService;
-		this.dashboardService = dashboardService;
 	}
 	
 	@GetMapping("/search")
@@ -42,20 +33,12 @@ public class SearchController {
 		List<?> searchResult = searchService.searchResult(typeSearch, keySearch);
 		
 		model.addAttribute("list", searchResult);
-		return "result-search-job";
+		return "result-search";
 	}
 	
-//	@GetMapping("/search-applicant")
-//	public String showSearchPageApplicant(Model model, 
-//								 @RequestParam("keySearch") String keySearch,
-//								 @RequestParam("typeSearch") String typeSearch) {
-//		
-//
-//		return "result-search-job";
-//	}
 	
 	//Search recruitment with address or title
-	@PostMapping("/search/search-job")
+	@PostMapping({"/search/search-job", "/recruiter/search"})
 	public String searchJob(RedirectAttributes redirectAttributes,
 						 @RequestParam("keySearch") String keySearch, 
 						 @RequestParam("typeSearch") String typeSearch) {	
@@ -66,9 +49,4 @@ public class SearchController {
 		return "redirect:/search";
 	}
 	
-//	@PostMapping("/recruiter/search-applicant")
-//	public String searchUser() {
-//		
-//		return "redirect:/search-applicant";
-//	}
 }
