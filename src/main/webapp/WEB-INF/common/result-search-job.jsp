@@ -16,7 +16,7 @@
                                         <h2 class="mr-3 text-black" ><a href="/recruitment/detail/${recruitment.id}">${recruitment.title}</a></h2>
                                     </div>
                                     <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#">${recruitment.company.nameCompany}</a></div>
+                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#">${recruitment.nameCompany}</a></div>
                                         <div><span class="icon-my_location"></span> <span>${recruitment.address}</span></div>
                                     </div>
                                 </div>

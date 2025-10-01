@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import dto.ApplyPostDTO;
+import dto.RecruitmentDTO;
 import model.ApplyPost;
 import model.Recruitment;
 import share.ColorExample;
@@ -21,37 +23,42 @@ public class SearchDAOImpl implements SearchDAO{
 	private EntityManager em;
 
 	@Override
-	public List<Recruitment> searchTitleRecruitment(String keySearch) {
-		String query = "SELECT r FROM Recruitment r "
+	public List<RecruitmentDTO> searchTitleRecruitment(String keySearch) {
+		String query = "SELECT new dto.RecruitmentDTO(r.company.id, "
+					  + "r.company.nameCompany, r.id, r.title, r.type, r.address) "
+					  + "FROM Recruitment r "
 					  + "WHERE LOWER(r.title) LIKE :kw "
 					  + "OR LOWER(r.description) LIKE :kw";
 		
-		logger.info(ColorExample.GREEN+ "Title" +ColorExample.RESET);
-		
-		return em.createQuery(query,Recruitment.class)
+		return em.createQuery(query,RecruitmentDTO.class)
 				 .setParameter("kw", "%" + keySearch + "%")
 				 .getResultList();
 	}
 
 	@Override
-	public List<ApplyPost> searchUser(String keySearch) {
-		String query = "SELECT a FROM ApplyPost a "
+	public List<ApplyPostDTO> searchUser(String keySearch) {
+		String query = "SELECT new dto.ApplyPostDTO(a.id, a.user.image, "
+					 + "a.user.fullName, a.user.address, a.user.email, "
+					 + "a.user.description, a.nameCv) "
+					 + "FROM ApplyPost a "
 					 + "WHERE LOWER(a.user.address) LIKE :kw "
 					 + "OR LOWER(a.user.fullName) LIKE :kw "
 					 + "OR LOWER(a.user.phoneNumber) Like :kw";
-		logger.info(ColorExample.GREEN + "User" + ColorExample.RESET);
-		return em.createQuery(query, ApplyPost.class)
+		
+		return em.createQuery(query, ApplyPostDTO.class)
 				 .setParameter("kw", "%"+keySearch+"%")
 				 .getResultList();
 	}
 
 	@Override
-	public List<Recruitment> searchAddressRecruitment(String keySearch) {
-		String query = "SELECT r FROM Recruitment r "
+	public List<RecruitmentDTO> searchAddressRecruitment(String keySearch) {
+		String query = "SELECT new dto.RecruitmentDTO(r.company.id, "
+				  + "r.company.nameCompany, r.id, r.title, r.type, r.address) "
+				  + "FROM Recruitment r "
 				  + "WHERE LOWER(r.address) LIKE :kw "
 				  + "OR LOWER(r.company.address) LIKE :kw";
-		logger.info(ColorExample.GREEN+ "Address" +ColorExample.RESET);
-		return em.createQuery(query,Recruitment.class)
+		
+		return em.createQuery(query,RecruitmentDTO.class)
 				 .setParameter("kw", "%" + keySearch + "%")
 				 .getResultList();
 	}

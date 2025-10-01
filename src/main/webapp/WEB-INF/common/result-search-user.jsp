@@ -10,13 +10,15 @@
           <c:forEach var="applyPost" items="${list}">
             <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
               <div class="team d-md-flex p-4 bg-white">
-                <img style="margin-top: 10px" class="img" src="${applyPost.user.image != null ? applyPost.user.image : 'https://st.quantrimang.com/photos/image/072015/22/avatar.jpg'}"/>
+				<img style="margin-top: 10px" class="img"
+				     src="${not empty applyPost.image ? applyPost.image : pageContext.request.contextPath.concat('/assets/images/user.png')}" />
+
                 <div class="text pl-md-4">
-                  <H5 class="location mb-0">${applyPost.user.fullName}</H5>
-                  <p style="display: block;color: black">${applyPost.user.address}</p>
-                  <span class="position" style="display: block;color: black">${applyPost.user.email}</span>
+                  <H5 class="location mb-0">${applyPost.fullName}</H5>
+                  <p style="display: block;color: black">${applyPost.address}</p>
+                  <span class="position" style="display: block;color: black">${applyPost.email}</span>
                   <p class="mb-4" style="width: 700px">
-                  	<c:out value="${applyPost.user.description}" escapeXml="false"/>
+                  	<c:out value="${applyPost.description}" escapeXml="false"/>
                   </p>
                   <c:if test="${applyPost.nameCv != null}">
 	                  <div style="margin-left: 1px" class="row">

@@ -18,8 +18,7 @@
 	
 <!-- general interface -->
 	<%@include file="/WEB-INF/common/general.jsp" %>
-	
-	<!-- show feature job when it doesn't handle search -->
+
 	<section class="ftco-section">
 	    <div class="container">
 	        <div class="row justify-content-center mb-5">
@@ -32,7 +31,6 @@
 	        <!--Render in js  -->
 	
 	        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-	        
 				<div class="carousel-inner" id="category-container">
 				</div>
 				<button class="prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -90,13 +88,15 @@
 	    </div>
 	</section>
 
-		<%@include file="/WEB-INF/common/featured-job.jsp" %>
+	<%@include file="/WEB-INF/common/featured-job.jsp" %>
 
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
+
 </body>
 <script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/more/apply-job.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

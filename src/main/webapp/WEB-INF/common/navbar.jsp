@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
   <div class="container-fluid px-md-4 d-flex justify-content-between">
   
-    <div><a class="navbar-brand" href="">Work CV</a></div>
+    <div><a class="navbar-brand" href="/">Work CV</a></div>
 
     <div class="navbar-nav d-flex align-items-center" id="navbarNav">
       <ul class="navbar-nav ms-auto d-flex align-items-center">

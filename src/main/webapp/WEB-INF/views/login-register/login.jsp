@@ -31,8 +31,8 @@
 	            <button type="submit">Login</button>
 	        </div>
 	        <div class="demo-link">
-			    <a href="${pageContext.request.contextPath}/test-account" target="_blank">
-			        🚀 Dùng thử tài khoản demo
+			    <a href="test-account" target="_blank">
+			        🚀 Tài khoản demo
 			    </a>
 			</div>
 	
