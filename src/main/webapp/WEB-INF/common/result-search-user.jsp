@@ -10,9 +10,13 @@
           <c:forEach var="applyPost" items="${list}">
             <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
               <div class="team d-md-flex p-4 bg-white">
+<<<<<<< HEAD
 				<img style="margin-top: 10px" class="img"
 				     src="${not empty applyPost.image ? applyPost.image : pageContext.request.contextPath.concat('/assets/images/user.png')}" />
 
+=======
+                <img style="margin-top: 10px" class="img" src="${applyPost.image != null ? applyPost.image : 'https://st.quantrimang.com/photos/image/072015/22/avatar.jpg'}"/>
+>>>>>>> search
                 <div class="text pl-md-4">
                   <H5 class="location mb-0">${applyPost.fullName}</H5>
                   <p style="display: block;color: black">${applyPost.address}</p>

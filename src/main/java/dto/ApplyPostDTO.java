@@ -1,19 +1,18 @@
 package dto;
 
 public class ApplyPostDTO {
-	private int id;
+	private Integer id;
 	private String image;
 	private String fullName;
 	private String address;
 	private String email;
 	private String description;
 	private String nameCv;
-		
-	public ApplyPostDTO() {
-	}
 
-	public ApplyPostDTO(int id, String image, String fullName, String address, String email, String description,
-			String nameCv) {
+	private String phoneNumber;
+	
+	public ApplyPostDTO(Integer id, String image, String fullName, String address, String email, String description,
+			String nameCv, String phoneNumber) {
 		this.id = id;
 		this.image = image;
 		this.fullName = fullName;
@@ -21,13 +20,14 @@ public class ApplyPostDTO {
 		this.email = email;
 		this.description = description;
 		this.nameCv = nameCv;
+		this.phoneNumber = phoneNumber;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -77,6 +77,14 @@ public class ApplyPostDTO {
 
 	public void setNameCv(String nameCv) {
 		this.nameCv = nameCv;
+	}
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 }
