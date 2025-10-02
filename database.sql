@@ -113,27 +113,27 @@ INSERT INTO role (role_name) VALUES
 -- ========================
 -- USER
 -- ========================
-INSERT INTO user (address, description, email, full_name, image, password, phone_number, status, role_id) VALUES
-('Hanoi', 'Normal user', 'user1@gmail.com', 'User One', 'user1.png', '123456', '0901000001', 1, 1),
-('Hanoi', 'Normal user', 'user2@gmail.com', 'User Two', 'user2.png', '123456', '0901000002', 1, 1),
-('Hanoi', 'Normal user', 'user3@gmail.com', 'User Three', 'user3.png', '123456', '0901000003', 1, 1),
-('Hanoi', 'Normal user', 'user4@gmail.com', 'User Four', 'user4.png', '123456', '0901000004', 1, 1),
-('Hanoi', 'Normal user', 'user5@gmail.com', 'User Five', 'user5.png', '123456', '0901000005', 1, 1),
-('Hanoi', 'Normal user', 'user6@gmail.com', 'User Six', 'user6.png', '123456', '0901000006', 1, 1),
-('Hanoi', 'Normal user', 'user7@gmail.com', 'User Seven', 'user7.png', '123456', '0901000007', 1, 1),
-('Hanoi', 'Normal user', 'user8@gmail.com', 'User Eight', 'user8.png', '123456', '0901000008', 1, 1),
-('Hanoi', 'Normal user', 'user9@gmail.com', 'User Nine', 'user9.png', '123456', '0901000009', 1, 1),
-('Hanoi', 'Normal user', 'user10@gmail.com', 'User Ten', 'user10.png', '123456', '0901000010', 1, 1),
-('Hanoi', 'Normal user', 'user11@gmail.com', 'User Eleven', 'user11.png', '123456', '0901000011', 1, 1),
-('Hanoi', 'Normal user', 'user12@gmail.com', 'User Twelve', 'user12.png', '123456', '0901000012', 1, 1),
-('Hanoi', 'Normal user', 'user13@gmail.com', 'User Thirteen', 'user13.png', '123456', '0901000013', 1, 1),
-('Hanoi', 'Normal user', 'user14@gmail.com', 'User Fourteen', 'user14.png', '123456', '0901000014', 1, 1),
-('Hanoi', 'System admin', 'admin@gmail.com', 'Admin User', 'admin.png', 'admin123', '0901000099', 1, 2),
-('HCM', 'Recruiter', 'recruiter1@gmail.com', 'Recruiter One', 'rec1.png', '123456', '0902000001', 1, 3),
-('HCM', 'Recruiter', 'recruiter2@gmail.com', 'Recruiter Two', 'rec2.png', '123456', '0902000002', 1, 3),
-('HCM', 'Recruiter', 'recruiter3@gmail.com', 'Recruiter Three', 'rec3.png', '123456', '0902000003', 1, 3),
-('HCM', 'Recruiter', 'recruiter4@gmail.com', 'Recruiter Four', 'rec4.png', '123456', '0902000004', 1, 3),
-('HCM', 'Recruiter', 'recruiter5@gmail.com', 'Recruiter Five', 'rec5.png', '123456', '0902000005', 1, 3);
+	INSERT INTO user (address, description, email, full_name, image, password, phone_number, status, role_id) VALUES
+	('Hà Nội', 'Normal user', 'nguyenvanan.user@gmail.com', 'Nguyễn Văn An', 'user1.png', '$2y$10$DLA9.ahOt8bsDti8HaEJk.DGHUwZ0WeBAxN7DOeDf7pmmcdnnn2VG', '0901000001', 1, 1),
+	('Đà Nẵng', 'Normal user', 'tranthibich.user@gmail.com', 'Trần Thị Bích', 'user2.png', '$2y$10$dSwLL5L8FxdDLk4L.TOUi.7lH9XPkmKSVq2QYajFg1Ox9hOUMXYMq', '0901000002', 1, 1),
+	('Hồ Chí Minh', 'Normal user', 'lehoangnam.user@gmail.com', 'Lê Hoàng Nam', 'user3.png', '$2y$10$LcRKKw0Gqv/CDhKi7xGl9uSFGvTILlMoNoaBhwiZbKnT4QmEB7wUu', '0901000003', 1, 1),
+	('Cần Thơ', 'Normal user', 'phamminhquan.user@gmail.com', 'Phạm Minh Quân', 'user4.png', '$2y$10$TAH02KTxAXWvidNCZrHNueOYzED6PhLryZ9Qo3p28.r.7LfoSYKcu', '0901000004', 1, 1),
+	('Hải Phòng', 'Normal user', 'vuthilan.user@gmail.com', 'Vũ Thị Lan', 'user5.png', '$2y$10$W7kb9LIhC.QVAehk5GWFg.4/DKWepsJRLjOSyfg2p1CGGdQeXckJe', '0901000005', 1, 1),
+	('Bình Dương', 'Normal user', 'dangquockhanh.user@gmail.com', 'Đặng Quốc Khánh', 'user6.png', '$2y$10$sZv4iAzgN8uFvrsUQHBNWeZge/h0n3kO9VF.XNLruIYhiVQNBJLxa', '0901000006', 1, 1),
+	('Quảng Ninh', 'Normal user', 'hoangthuha.user@gmail.com', 'Hoàng Thu Hà', 'user7.png', '$2y$10$Fe8lCCUAe.17Gt9BOpe39OMOKJlOG.5UMGrWptDLp43uOLkonj4NW', '0901000007', 1, 1),
+	('Huế', 'Normal user', 'nguyenhuuph uoc.user@gmail.com', 'Nguyễn Hữu Phước', 'user8.png', '$2y$10$bCn.AdkegttJtU.AliuaQum855ti4J/2hKbjq9LIR327/yrsOqXYm', '0901000008', 1, 1),
+	('Đà Lạt', 'Normal user', 'trinhtimai.user@gmail.com', 'Trịnh Thị Mai', 'user9.png', '$2y$10$1BBtpLsLAtdriD/pY3mb0.S2klJxdLhQNY/T.6uAqHY/5KSE8csgW', '0901000009', 1, 1),
+	('Nha Trang', 'Normal user', 'lamgiahuy.user@gmail.com', 'Lâm Gia Huy', 'user10.png', '$2y$10$pBi/RBxXJtXc49O.OpQwZuJ9fqTzBKanF1xKglEZzkOPt4frnRJCa', '0901000010', 1, 1),
+	('Hà Nội', 'Normal user', 'phanthikimngan.user@gmail.com', 'Phan Thị Kim Ngân', 'user11.png', '$2y$10$MP51JjmV3ASgI8u45IrdqOzEk43nzuB4IOwZoCqbttsT4zOfiR37u', '0901000011', 1, 1),
+	('Hải Dương', 'Normal user', 'nguyenducthinh.user@gmail.com', 'Nguyễn Đức Thịnh', 'user12.png', '$2y$10$xMzrOdMsUgQ7.KdkT5J7fe6Yy6o5vIrjfLhAzpy4zyzXjvxXHvxni', '0901000012', 1, 1),
+	('Thanh Hóa', 'Normal user', 'hoangthiyen.user@gmail.com', 'Hoàng Thị Yến', 'user13.png', '$2y$10$lNEt2jMRC6h02RRs5pc88uwLyUYjRYbykNRI0fHBoJ82/BUKDISr.', '0901000013', 1, 1),
+	('Nghệ An', 'Normal user', 'tranvan.toan.user@gmail.com', 'Trần Văn Toàn', 'user14.png', '$2y$10$3cxM.2/45KHkmElPvoyxsuFLp8NkZJ.P3LtdIXdECYMIHnFATxACG', '0901000014', 1, 1),
+	('Hà Nội', 'System admin', 'admin@gmail.com', 'Admin Master', 'admin.png', '$2y$12$2wRmEuoF0x6ck8/sMwjExuj5ycCNA/VK912ifJwtmvhFIcnXJ3X8W', '0901000099', 1, 2),
+	('Hồ Chí Minh', 'Recruiter', 'nguyenthituyet.recruiter@gmail.com', 'Nguyễn Thị Tuyết', 'rec1.png', '$2y$12$Li/VKZZ02DZudEgUIa8a2ONBGNEWf30HCrVWkCzg609cQz6fksH/e', '0902000001', 1, 3),
+	('Đà Nẵng', 'Recruiter', 'phamvancuong.recruiter@gmail.com', 'Phạm Văn Cường', 'rec2.png', '$2y$12$Ed10Zgj5IHnLuWB2sbFin.dhw/6lCDmqcN13fyWpCSpZ3HumPyYBG', '0902000002', 1, 3),
+	('Cần Thơ', 'Recruiter', 'tranhoa.recruiter@gmail.com', 'Trần Hoài Nam', 'rec3.png', '$2y$12$LMAfhpkf8Nf7nn4lM0UmAexhme.O1G0yOdwlDuPU.rW0m/Rw4G442', '0902000003', 1, 3),
+	('Hải Phòng', 'Recruiter', 'lethimyduyen.recruiter@gmail.com', 'Lê Thị Mỹ Duyên', 'rec4.png', '$2y$12$9UwlToHU9kOS7WjTDpxWh.vbX26UZ59qNMtEcGhytLBelcfscGqYC', '0902000004', 1, 3),
+	('Huế', 'Recruiter', 'vominhkhang.recruiter@gmail.com', 'Võ Minh Khang', 'rec5.png', '$2y$12$dM5eKah6xakPLXN5F3lote6yMfgH0cfZw7WuUuHnJ/.urj6k4W2Ri', '0902000005', 1, 3);
 
 -- ========================
 -- CV (14 cho user)
@@ -196,18 +196,19 @@ INSERT INTO category (name, number_choose) VALUES
 INSERT INTO recruitment 
 (address, created_at, description, experience, quantity, `rank`, salary, status, title, type, views, category_id, company_id, deadline) 
 VALUES
-('HCM', '2025-09-01 09:00:00', 'Backend Java Spring', '2 years', 2, 'Junior', '1000$', 1, 'Java Backend Dev', 'Full-time', 0, 1, 1, '2025-10-01'),
-('HCM', '2025-09-02 09:00:00', 'Python Data Engineer', '3 years', 1, 'Mid', '1500$', 1, 'Python Data Engineer', 'Full-time', 0, 2, 1, '2025-10-05'),
-('HCM', '2025-09-03 09:00:00', 'Frontend ReactJS', '1 year', 2, 'Junior', '900$', 1, 'ReactJS Dev', 'Full-time', 0, 5, 2, '2025-10-03'),
-('HCM', '2025-09-04 09:00:00', 'iOS Mobile Dev', '2 years', 1, 'Senior', '2000$', 1, 'iOS Dev', 'Full-time', 0, 9, 3, '2025-10-07'),
-('HCM', '2025-09-07 09:00:00', 'E-commerce Backend', '2 years', 2, 'Mid', '1300$', 1, 'Backend Dev', 'Full-time', 0, 6, 4, '2025-10-12'),
-('HCM', '2025-09-08 09:00:00', 'Frontend VueJS', '1 year', 2, 'Junior', '1000$', 1, 'VueJS Dev', 'Full-time', 0, 5, 4, '2025-10-18'),
-('HCM', '2025-09-09 09:00:00', 'Data Scientist', '3 years', 1, 'Senior', '2500$', 1, 'ML Engineer', 'Full-time', 0, 13, 5, '2025-10-20'),
-('HCM', '2025-09-10 09:00:00', 'AI Researcher', '5 years', 1, 'Senior', '3000$', 1, 'AI Engineer', 'Full-time', 0, 14, 5, '2025-10-25'),
-('HCM', '2025-09-11 09:00:00', 'DevOps Engineer', '2 years', 2, 'Mid', '1500$', 1, 'DevOps Engineer', 'Full-time', 0, 11, 1, '2025-10-22'),
-('HCM', '2025-09-12 09:00:00', 'Database Admin', '3 years', 1, 'Mid', '1600$', 1, 'DBA', 'Full-time', 0, 15, 2, '2025-10-28'),
-('HCM', '2025-09-13 09:00:00', 'Cloud Engineer', '2 years', 2, 'Mid', '1800$', 1, 'Cloud Engineer', 'Full-time', 0, 16, 5, '2025-10-30'),
-('HN', '2025-09-15 10:30:00', 'Cloudinary', '1.5 years', 2, 'Fresher', '900$', 1, 'Cloudinary', 'Full-time', 0, 16, 5, '2025-10-30');
+('TP.HCM - Quận 1', '2025-09-01 09:00:00', 'Backend Java Spring', '2 years', 2, 'Junior', '1000$', 1, 'Java Backend Dev', 'Full-time', 0, 1, 1, '2025-10-01'),
+('Hà Nội - Cầu Giấy', '2025-09-02 09:00:00', 'Python Data Engineer', '3 years', 1, 'Mid', '1500$', 1, 'Python Data Engineer', 'Full-time', 0, 2, 1, '2025-10-05'),
+('Đà Nẵng - Hải Châu', '2025-09-03 09:00:00', 'Frontend ReactJS', '1 year', 2, 'Junior', '900$', 1, 'ReactJS Dev', 'Full-time', 0, 5, 2, '2025-10-03'),
+('TP.HCM - Bình Thạnh', '2025-09-04 09:00:00', 'iOS Mobile Dev', '2 years', 1, 'Senior', '2000$', 1, 'iOS Dev', 'Full-time', 0, 9, 3, '2025-10-07'),
+('Hải Phòng - Lê Chân', '2025-09-07 09:00:00', 'E-commerce Backend', '2 years', 2, 'Mid', '1300$', 1, 'Backend Dev', 'Full-time', 0, 6, 4, '2025-10-12'),
+('TP.HCM - Thủ Đức', '2025-09-08 09:00:00', 'Frontend VueJS', '1 year', 2, 'Junior', '1000$', 1, 'VueJS Dev', 'Full-time', 0, 5, 4, '2025-10-18'),
+('Hà Nội - Hoàn Kiếm', '2025-09-09 09:00:00', 'Data Scientist', '3 years', 1, 'Senior', '2500$', 1, 'ML Engineer', 'Full-time', 0, 13, 5, '2025-10-20'),
+('Đà Nẵng - Sơn Trà', '2025-09-10 09:00:00', 'AI Researcher', '5 years', 1, 'Senior', '3000$', 1, 'AI Engineer', 'Full-time', 0, 14, 5, '2025-10-25'),
+('Cần Thơ - Ninh Kiều', '2025-09-11 09:00:00', 'DevOps Engineer', '2 years', 2, 'Mid', '1500$', 1, 'DevOps Engineer', 'Full-time', 0, 11, 1, '2025-10-22'),
+('Hà Nội - Nam Từ Liêm', '2025-09-12 09:00:00', 'Database Admin', '3 years', 1, 'Mid', '1600$', 1, 'DBA', 'Full-time', 0, 15, 2, '2025-10-28'),
+('Đà Nẵng - Ngũ Hành Sơn', '2025-09-13 09:00:00', 'Cloud Engineer', '2 years', 2, 'Mid', '1800$', 1, 'Cloud Engineer', 'Full-time', 0, 16, 5, '2025-10-30'),
+('Hà Nội - Long Biên', '2025-09-15 10:30:00', 'Cloudinary', '1.5 years', 2, 'Fresher', '900$', 1, 'Cloudinary', 'Full-time', 0, 16, 5, '2025-10-30');
+
 
 -- ========================
 -- SAVE_JOB (7 lưu việc)
@@ -252,19 +253,15 @@ INSERT INTO applypost (created_at, recruitment_id, user_id, name_cv, status, tex
 ('2025-09-10', 6, 5, 'cv_user5.pdf', 1, 'Ứng tuyển Game Unreal'),
 ('2025-09-10', 7, 6, 'cv_user6.pdf', 1, 'Ứng tuyển Backend E-com');
 
-SELECT c.id, c.name_company, r.id, r.title, r.type, r.address
-FROM company c
-LEFT JOIN recruitment r ON r.company_id = c.id
-LEFT JOIN applypost a ON r.id = a.recruitment_id
-GROUP BY c.id, c.name_company, r.id, r.title, r.type, r.address
-ORDER BY COUNT(*) DESC
-LIMIT 2 OFFSET 0;
+SELECT * FROM recruitment r WHERE r.title LIKE '%%' OR r.description LIKE '%%';
 
-SELECT c.id, c.name_company, c.logo,
-       COUNT(DISTINCT r.id) AS total_recruitments
-FROM company c
-LEFT JOIN recruitment r ON r.company_id = c.id
-LEFT JOIN applypost a ON r.id = a.recruitment_id
-GROUP BY c.id, c.name_company, c.logo
-ORDER BY COUNT(a.id) DESC
-LIMIT 1 OFFSET 0;
+
+
+
+
+
+
+
+
+
+
