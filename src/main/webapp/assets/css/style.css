@@ -10012,21 +10012,26 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 .dropdown {
+/*   
   visibility: hidden;
   opacity: 0;
-  top: 100%;
-  position: absolute;
-  text-align: left;
+  position: absolute; 
   border-top: 2px solid #89ba16;
+  margin-top: 20px;
+  margin-left: 20px;
+*/
+  top: 100%;
+  text-align: left;
   -webkit-box-shadow: 0 2px 20px -2px rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 20px -2px rgba(0, 0, 0, 0.2);
   padding: 0px 0;
-  margin-top: 20px;
-  margin-left: 20px;
   background: #fff;
   -webkit-transition: 0.2s 0s;
   -o-transition: 0.2s 0s;
-  transition: 0.2s 0s; }
+  transition: 0.2s 0s; 
+  /* more */
+  background-color: transparent;
+  }
 .dropdown.arrow-top {
   position: absolute; }
 .dropdown.arrow-top:before {

@@ -2,8 +2,12 @@ package config;
 
 import java.util.logging.Logger;
 
+import javax.servlet.Filter;
+
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import security.SecurityConfig;
 import share.ColorExample;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -12,7 +16,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[]{DatabaseConfig.class};
+		return new Class<?>[]{DatabaseConfig.class, SecurityConfig.class};
 	}
 
 	@Override
@@ -24,4 +28,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
+	
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] { new DelegatingFilterProxy("springSecurityFilterChain") };
+    }
 }

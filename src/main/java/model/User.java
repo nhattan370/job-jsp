@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import converter.UserStatusConverter;
+import enums.UserStatus;
 
 @Entity
 @Table(name="user")
@@ -42,8 +46,8 @@ public class User {
     @Column(name = "phone_number", length = 255)
     private String phoneNumber;
 
-    @Column
-    private Integer status;
+    @Convert(converter = UserStatusConverter.class)
+    private UserStatus status;
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
@@ -55,7 +59,7 @@ public class User {
 	public User() {}
 
 	public User(Integer id, String address, String description, String email, String fullName, String image,
-			String password, String phoneNumber, Integer status, Role role) {
+			String password, String phoneNumber, UserStatus status, Role role) {
 		this.id = id;
 		this.address = address;
 		this.description = description;
@@ -132,11 +136,11 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Integer getStatus() {
+	public UserStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
 

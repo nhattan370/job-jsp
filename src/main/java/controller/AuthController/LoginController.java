@@ -9,4 +9,9 @@ public class LoginController {
 	public String testAccount() {
 		return "login-register/test-account";
 	}
+	
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login-register/login";
+	}
 }

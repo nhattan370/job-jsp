@@ -12,18 +12,18 @@
 <body>
 	<div class="login-container">
 	    <h2>Login</h2>
-	    <form action="login" method="post">
+	    <form action="verify-login" method="post">
 	        <div class="form-group">
 	            <label for="email">Email</label>
 	            <input type="email" id="email" name="email" required>
-	            <c:if test="${sessionScope.error}">
+	            <c:if test="${param.error}">
 	            	<small style = "color:red"> Email or password is wrong</small>            
 	            </c:if>
 	        </div>
 	        <div class="form-group">
 	            <label for="password">Password</label>
 	            <input type="password" id="password" name="password" required>
-	            <c:if test="${sessionScope.error}">
+	            <c:if test="${param.error}">
 	            	<small style = "color:red"> Email or password is wrong</small>            
 	            </c:if>
 	        </div>
@@ -36,7 +36,6 @@
 			    </a>
 			</div>
 	
-	        <c:remove var="error" scope="session"/>
 	    </form>
 	</div>
 </body>
