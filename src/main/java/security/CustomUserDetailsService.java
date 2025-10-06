@@ -31,6 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		logger.info(ColorExample.CYAN + email + ColorExample.RESET);
 		User user = userService.findByEmail(email);
 		if(user==null) throw new UsernameNotFoundException(email);
+		logger.info(ColorExample.CYAN + user.getRole().getRoleName() + ColorExample.RESET);
 		
 		return new CustomUserDetails(user);
 	}

@@ -35,7 +35,12 @@ public class SecurityConfig implements WebMvcConfigurer{
 		http
 		.csrf().disable() //Chỉnh lại chỗ này
 		.authorizeHttpRequests(auth -> auth
-//				.requestMatchers("").authenticated()
+				.antMatchers("/user/**").hasAuthority("USER")
+				.antMatchers("/recruiter/**").hasAuthority("RECRUITER")
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
+//				.requestMatchers("/user/**").hasAuthority("USER")
+//				.requestMatchers("/recruiter/**").hasAuthority("RECRUITER")
+//				.requestMatchers("/admin/**").hasAuthority("ADMIN")
 				.anyRequest().permitAll()
 			)
         .formLogin(form -> form
@@ -43,11 +48,13 @@ public class SecurityConfig implements WebMvcConfigurer{
                 .loginProcessingUrl("/verify-login") // URL mà form sẽ submit
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/", true)    //Mac định khi login thành công
+                .defaultSuccessUrl("/?success-login=true", true)    //Mac định khi login thành công
                 .failureUrl("/login?error=true")     //Tham số khi login thất bại
                 .permitAll()
             )
-		.logout(logout -> logout.permitAll());
+		.logout(logout -> logout
+				.logoutSuccessUrl("/")
+				.permitAll());
 		return http.build();
 	}
 	
