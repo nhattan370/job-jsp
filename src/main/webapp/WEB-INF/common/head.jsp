@@ -46,5 +46,5 @@
 	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	  
 	  <!-- more -->
-	  <script src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
+	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
 	  

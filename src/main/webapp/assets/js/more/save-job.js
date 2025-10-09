@@ -1,4 +1,3 @@
-import showSwal from './swal.js'
 
 /*function save(id){
      var name = "#idRe" +id;
@@ -29,24 +28,31 @@ import showSwal from './swal.js'
      )
  }*/
  
- function save(id){
-	let idRe = $("#idRe"+id).val();
-	$.post("user/save-job", {idRe:idRe})
-		.done(function(data){
-			console.log(data);
-			if(data == "false"){
-			 showSwal('Bạn cần phải đăng nhập!','success',true);
-			}else if(data == "true"){
-			 showSwal('Lưu thành công!','success',true);
-			}else{
-			 showSwal('Bạn đã lưu bài này rồi!','error',true);
-			}
-		})
-		.fail(function(err){
-			console.error(err);
-			alert("Đã có lỗi xảy ra");
-		})
+/* function showToast(){
+	<div id="alertBox" class="alert alert-success alert-dismissible fade show" role="alert">
+	  <strong>Thành công!</strong> Lưu công việc thành công!
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    <span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+ }*/
+ 
+ function save(id) {
+ 	let idRe = $("#idRe" + id).val();
+
+ 	$.get("user/save-job", { idRe: idRe })
+ 		.done(function (data) {
+ 			console.log(data);
+ 		})
+ 		.fail(function (err) {
+			console.log("Status:", err.status);
+			console.log("Status text:", err.statusText);
+			console.log("Response text:", err.responseText);
+			console.log("Response JSON:", err.responseJSON);
+ 			alert("Đã có lỗi xảy ra");
+ 		});
  }
+
 
  function choosed(id){
      var name = '#choose' + id;

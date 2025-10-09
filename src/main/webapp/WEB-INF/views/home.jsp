@@ -13,9 +13,18 @@
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 
 <!-- show swal -->
-	<div class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
-	
-	</div>
+	<c:if test="${not empty sessionScope.mes}">
+	    <script type="text/javascript">
+	        swal({
+	            title: "<c:out value='${sessionScope.mes}'/>",
+	            text: "Redirecting...", 
+	            icon: "success",
+	            timer: 2000,
+	            buttons: true
+	        });
+	    </script>
+	    <c:remove var="mes" scope="session"/>	
+	</c:if>
 	
 <!-- general interface -->
 	<%@include file="/WEB-INF/common/general.jsp" %>
@@ -30,7 +39,6 @@
 	        </div>
 	        
 	        <!--Render in js  -->
-	
 	        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
 				<div class="carousel-inner" id="category-container">
 				</div>
@@ -91,13 +99,13 @@
 
 	<%@include file="/WEB-INF/common/featured-job.jsp" %>
 
-<!-- start footer -->
+	<!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
-<!-- end footer -->
+	<!-- end footer -->
 
 </body>
 <script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script> --%>
 <script src="${pageContext.request.contextPath}/assets/js/more/apply-job.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

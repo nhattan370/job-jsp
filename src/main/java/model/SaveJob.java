@@ -7,9 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "save_job")
+@Table(name = "save_job", uniqueConstraints = @UniqueConstraint(columnNames = {"recruitment_id","user_id"}))
 public class SaveJob {
 
     @Id

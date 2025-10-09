@@ -1,15 +1,19 @@
 const INCREMENT = 4;
-let categories = JSON.parse(localStorage.getItem("categories")) ||[];
+let categories = JSON.parse(localStorage.getItem("categories"));
 let container = document.getElementById("category-container");
 
-fetch(`api/categories`)
-	.then(res=>res.json())
-	.then(data => {
-			localStorage.setItem("categories", JSON.stringify(data));
-			categories=data;
-			renderCategory();
-		}
-	);
+if(!categories){
+	fetch(`api/categories`)
+		.then(res=>res.json())
+		.then(data => {
+				localStorage.setItem("categories", JSON.stringify(data));
+				categories=data;
+				renderCategory();
+			}
+		);	
+}else{
+	renderCategory();
+}
 
 //Show the category 
 function renderCategory(){
@@ -40,11 +44,11 @@ function renderCategory(){
 	container.innerHTML = text;
 }
 
-function getNextCategories(){
+/*function getNextCategories(){
 	startIndex+=INCREMENT;
 	if(startIndex>=categories.length) startIndex=0;
 	renderCategory();
-}
+}*/
 
 
 

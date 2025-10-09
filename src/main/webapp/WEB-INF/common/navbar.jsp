@@ -51,7 +51,7 @@
 			        <sec:authorize access="hasAuthority('RECRUITER')">
 			        	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/list-post">Danh sách bài đăng</a></li>
 			        	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/recruitment">Đăng tuyển</a></li>
-			        </sec:authorize>
+			       </sec:authorize> 
 			        <sec:authorize access="hasAuthority('USER')">
 				        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/save-job">Công việc đã lưu</a></li>
 				        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-apply">Công việc đã ứng tuyển</a></li>

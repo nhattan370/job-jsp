@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
@@ -35,14 +37,18 @@
                                     </div>
                                     <a th:if="${session.user.role.id == 1}" data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
                                 </div> --%>
-                                <div th:unless="${session.user}" class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                    <div >
-                                        <a onclick="save(${recruitment.id})" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-                                            <span class="icon-heart"></span>
-                                        </a>
-                                    </div>
-                                    <a  data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
-                                </div>
+                                <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+  	                                <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+	                                    <div>
+	                                        <a onclick="save(${recruitment.id})" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
+	                                            <span class="icon-heart"></span>
+	                                        </a>
+	                                    </div>
+	                                    <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
+	                                </div>
+	                                
+                                </sec:authorize>
+                      
                             </div>
                         </div>
                         <!-- end -->
@@ -106,17 +112,18 @@
                     </div>
                 </div>
                 <c:forEach items="${companies}" var="company">
-                <div class="sidebar-box">
-                    <div class="">
-                        <a href="user/detail-company?${company.id}" class="company-wrap"><img src="${company.logo}" class="img-fluid" alt="Colorlib Free Template"></a>
-                        <div class="text p-3">
-                            <h3><a href="/user/detail-company?${company.id}">${company.nameCompany}</a></h3>
-                            <p><span class="number" style="color: black">${company.totalRecruitments}</span> <span>Vị trí ứng tuyển</span></p>
-                        </div>
-                    </div>
-                </div>
+	                <div class="sidebar-box">
+	                    <div class="">
+	                        <a href="user/detail-company?${company.id}" class="company-wrap"><img src="${company.logo}" class="img-fluid" alt="Colorlib Free Template"></a>
+	                        <div class="text p-3">
+	                            <h3><a href="/user/detail-company?${company.id}">${company.nameCompany}</a></h3>
+	                            <p><span class="number" style="color: black">${company.totalRecruitments}</span> <span>Vị trí ứng tuyển</span></p>
+	                        </div>
+	                    </div>
+	                </div>
                 </c:forEach>
             </div>
         </div>
     </div>
 </section>
+<script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script>

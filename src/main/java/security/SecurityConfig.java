@@ -23,24 +23,27 @@ public class SecurityConfig implements WebMvcConfigurer{
 	
 	private final Logger log = Logger.getLogger(SecurityConfig.class.getName());
 	private final CustomUserDetailsService customUserDetailsService;
+	private final MyLogoutSuccessHandler myLogoutSuccessHandler;
+	private final MyLoginSuccessHandler myLoginSuccessHandler;
 	
 	@Autowired
-	public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+	public SecurityConfig(CustomUserDetailsService customUserDetailsService,
+						  MyLogoutSuccessHandler myLogoutSuccessHandler, 
+						  MyLoginSuccessHandler myLoginSuccessHandler) {
 		this.customUserDetailsService = customUserDetailsService;
+		this.myLogoutSuccessHandler = myLogoutSuccessHandler;
+		this.myLoginSuccessHandler = myLoginSuccessHandler;
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		log.info(ColorExample.CYAN+"security filter chain"+ColorExample.RESET);
 		http
-		.csrf().disable() //Chỉnh lại chỗ này
+		.csrf(csrf -> csrf.disable()) //Chỉnh lại chỗ này
 		.authorizeHttpRequests(auth -> auth
 				.antMatchers("/user/**").hasAuthority("USER")
 				.antMatchers("/recruiter/**").hasAuthority("RECRUITER")
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
-//				.requestMatchers("/user/**").hasAuthority("USER")
-//				.requestMatchers("/recruiter/**").hasAuthority("RECRUITER")
-//				.requestMatchers("/admin/**").hasAuthority("ADMIN")
 				.anyRequest().permitAll()
 			)
         .formLogin(form -> form
@@ -48,12 +51,12 @@ public class SecurityConfig implements WebMvcConfigurer{
                 .loginProcessingUrl("/verify-login") // URL mà form sẽ submit
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/?success-login=true", true)    //Mac định khi login thành công
+                .successHandler(myLoginSuccessHandler)
                 .failureUrl("/login?error=true")     //Tham số khi login thất bại
                 .permitAll()
             )
 		.logout(logout -> logout
-				.logoutSuccessUrl("/")
+				.logoutSuccessHandler(myLogoutSuccessHandler)
 				.permitAll());
 		return http.build();
 	}
@@ -63,10 +66,6 @@ public class SecurityConfig implements WebMvcConfigurer{
 		return new BCryptPasswordEncoder();
 	}
 	
-//	@Bean
-//	public UserDetailsService userDetailsService(UserService userService) {
-//	    return new CustomUserDetailsService(userService);
-//	}
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
