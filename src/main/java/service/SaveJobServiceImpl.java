@@ -1,18 +1,11 @@
 package service;
 
-
-import java.awt.Color;
 import java.util.logging.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Transactional;
 
 import dao.SaveJobDAO;
 import model.Recruitment;
@@ -21,12 +14,11 @@ import model.User;
 import share.ColorExample;
 
 @Service
-public class SaveJobServiceImpl implements SaveJobService {
-	
-	private final Logger logger = Logger.getLogger(SaveJobServiceImpl.class.getName());
-	@PersistenceContext
-	private EntityManager em; 
+@Transactional
+public class SaveJobServiceImpl implements SaveJobService{
+
 	private final SaveJobDAO dao;
+	private final Logger logger = Logger.getLogger(SaveJobServiceImpl.class.getName()); 
 	
 	@Autowired
 	public SaveJobServiceImpl(SaveJobDAO dao) {
@@ -34,28 +26,19 @@ public class SaveJobServiceImpl implements SaveJobService {
 	}
 
 	@Override
-	@Transactional
-	public SaveJob save(SaveJob saveJob) {
-		logger.info(ColorExample.GREEN+"Save Job Service"+ColorExample.RESET);
-		dao.save(saveJob);
+	public SaveJob findByRecruitmentAndUser(Recruitment recruitment, User user) {
+		SaveJob saveJob = dao.findByRecruitmentAndUser(recruitment, user).orElse(null);
 		return saveJob;
 	}
 
 	@Override
-	@Transactional
-	public int deleteByRecruitmentIdAndUserId(Integer idRe, Integer idUser) {
-		return dao.deleteByRecruitmentIdAndUserId(idRe, idUser);
+	public SaveJob save(SaveJob saveJob) {
+		return dao.save(saveJob);
 	}
-	@Override
-	@Transactional
-	public void toggleSaveJob(int idRec, int userId) {
-		Recruitment reRef = em.getReference(Recruitment.class, idRec);
-		User userRef = em.getReference(User.class, userId);
 
-		try {
-			dao.save(new SaveJob(reRef, userRef));
-		} catch (DataIntegrityViolationException e) {
-			dao.deleteByRecruitmentIdAndUserId(idRec, userId);
-		}
+	@Override
+	public void delete(SaveJob saveJob) {
+		dao.delete(saveJob);		
 	}
+
 }

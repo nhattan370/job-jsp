@@ -1,4 +1,4 @@
-
+let alertContainer = document.getElementById("alert-container");
 /*function save(id){
      var name = "#idRe" +id;
      var idRe = $(name).val();
@@ -35,7 +35,36 @@
 	    <span aria-hidden="true">&times;</span>
 	  </button>
 	</div>
+	
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	  <strong>Đã bỏ lưu!</strong> Công việc đã được gỡ khỏi danh sách lưu.
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    <span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
  }*/
+ 
+ function showToast(message1, message2, type){
+	let alertId = "alert-"+Date.now();
+	
+	let alertStatus = "";
+	if(type==="warning") alertStatus="alert-warning";
+	if(type==="error") alertStatus="alert-danger";
+	if(type==="success"|| !type) alertStatus="alert-success"; 
+	
+	alertContainer.innerHTML = 
+	`
+		<div id=${alertId} class="alert ${alertStatus} alert-dismissible fade show" role="alert">
+		  <strong>${message1}</strong>${message2}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+	`
+	setTimeout(()=>{
+		$("#"+alertId).alert("close");
+	},3000);
+ }
  
  function save(id) {
  	let idRe = $("#idRe" + id).val();
@@ -43,6 +72,13 @@
  	$.get("user/save-job", { idRe: idRe })
  		.done(function (data) {
  			console.log(data);
+			if(data.status==="save"){
+				showToast("Thành công!","Lưu công việc thành công!","success");
+			}else if(data.status==="delete"){
+				showToast("Đã bỏ lưu!","Công việc đã được gỡ khỏi danh sách lưu.","warning");
+			}else{
+				showToast("Không ổn rồi!","Không thể thực hiện được thao tác gì!","error");
+			}
  		})
  		.fail(function (err) {
 			console.log("Status:", err.status);

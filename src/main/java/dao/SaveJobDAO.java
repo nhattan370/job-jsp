@@ -2,10 +2,12 @@ package dao;
 
 import java.util.Optional;
 
+import model.Recruitment;
 import model.SaveJob;
+import model.User;
 
 public interface SaveJobDAO {
-	SaveJob save(SaveJob job);
-	int deleteByRecruitmentIdAndUserId(Integer idRe, Integer idUser);
-//	Optional<SaveJob> findByRecruitmentIdAndUserId(int idRe, int idUser);
+	Optional<SaveJob> findByRecruitmentAndUser(Recruitment recruitment, User user);
+	SaveJob save(SaveJob saveJob);
+	void delete(SaveJob saveJob);
 }

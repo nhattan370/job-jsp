@@ -25,7 +25,7 @@
 	    </script>
 	    <c:remove var="mes" scope="session"/>	
 	</c:if>
-	
+
 <!-- general interface -->
 	<%@include file="/WEB-INF/common/general.jsp" %>
 

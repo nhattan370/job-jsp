@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+//@ComponentScan(basePackages = {"dao", "service"})
 @PropertySource("classpath:application.properties")
 public class DatabaseConfig {
 
@@ -49,7 +50,7 @@ public class DatabaseConfig {
     private Properties hibernateProperties() {
         Properties props = new Properties();
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+//        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         return props;

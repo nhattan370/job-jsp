@@ -1,45 +1,46 @@
 package dao;
 
-import java.util.logging.Logger;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
+import model.Recruitment;
 import model.SaveJob;
-import share.ColorExample;
+import model.User;
 
 @Repository
 public class SaveJobDAOImpl implements SaveJobDAO {
-	
-	private final Logger logger = Logger.getLogger(SaveJobDAOImpl.class.getName());
+
 	@PersistenceContext
-	private EntityManager em;
-
+	private EntityManager entityManager;
+	
 	@Override
-	public SaveJob save(SaveJob job) {
-		logger.info(ColorExample.BLUE+"Save Job DAO Impl"+ColorExample.RESET);
-		em.persist(job);
-		return job;
+	public Optional<SaveJob> findByRecruitmentAndUser(Recruitment recruitment, User user) {
+		try {
+			SaveJob saveJob = entityManager.createQuery("SELECT s FROM SaveJob s WHERE s.recruitment = :r AND s.user =: u", SaveJob.class)
+					.setParameter("r", recruitment)
+					.setParameter("u", user)
+					.getSingleResult();
+			return Optional.of(saveJob);
+		} catch (NoResultException e) {
+			return Optional.empty();
+		}
 	}
 
 	@Override
-	public int deleteByRecruitmentIdAndUserId(Integer idRe, Integer idUser) {
-		return em.createQuery("DELETE FROM SaveJob sj WHERE sj.recruitment.id = :idRe AND sj.user.id =:idUser")
-				 .setParameter("idUser", idUser)
-				 .setParameter("idRe", idRe)
-				 .executeUpdate();
+	public SaveJob save(SaveJob saveJob) {
+		entityManager.persist(saveJob);
+		return saveJob; 
 	}
 
-	/*
-	 * @Override public Optional<SaveJob> findByRecruitmentIdAndUserId(int idRe, int
-	 * idUser) { try { SaveJob saveJob = em.
-	 * createQuery("SELECT sj FROM SaveJob sj WHERE sj.recruitment.id = :idRe AND sj.user.id = :idUser"
-	 * , SaveJob.class) .setParameter("idRe", idRe) .setParameter("idUser", idUser)
-	 * .getSingleResult(); return Optional.of(saveJob); }catch (NoResultException e)
-	 * { return Optional.empty(); } }
-	 */
+	@Override
+	public void delete(SaveJob saveJob) {
+		SaveJob manager = entityManager.contains(saveJob) ? saveJob : entityManager.merge(saveJob);
+		entityManager.remove(manager);
+	}
 
 }

@@ -1,9 +1,11 @@
 package service;
 
+import model.Recruitment;
 import model.SaveJob;
+import model.User;
 
 public interface SaveJobService {
+	SaveJob findByRecruitmentAndUser(Recruitment recruitment, User user);
 	SaveJob save(SaveJob saveJob);
-	int deleteByRecruitmentIdAndUserId(Integer idRe, Integer idUser);
-	void toggleSaveJob(int idRec, int userId);
+	void delete(SaveJob saveJob);
 }

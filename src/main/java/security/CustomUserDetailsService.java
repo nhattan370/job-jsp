@@ -21,18 +21,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	public CustomUserDetailsService(UserService userService) {
-		logger.info(ColorExample.CYAN+"Custom User Deatail Service"+ColorExample.RESET);
 		this.userService = userService;
 	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		
-		logger.info(ColorExample.CYAN + email + ColorExample.RESET);
 		User user = userService.findByEmail(email);
 		if(user==null) throw new UsernameNotFoundException(email);
-		logger.info(ColorExample.CYAN + user.getRole().getRoleName() + ColorExample.RESET);
-		
 		return new CustomUserDetails(user);
 	}
 }

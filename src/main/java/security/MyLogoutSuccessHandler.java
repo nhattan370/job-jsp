@@ -22,7 +22,7 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler{
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		logger.info(ColorExample.WHITE+"My Logout Success Handdler"+ColorExample.RESET);
-		request.getSession().setAttribute("mes", "Đang xuất thành công");
+		request.getSession().setAttribute("mes", "Đăng xuất thành công");
 		response.sendRedirect(request.getContextPath()+"/");
 		
 	}

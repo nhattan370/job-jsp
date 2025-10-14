@@ -4,6 +4,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
 <section class="ftco-section bg-light">
+<!-- show toast -->
+<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+
+<!-- container feature job -->
     <div class="container">
         <div class="row">
             <div class="col-lg-9 pr-lg-5">
@@ -46,7 +50,6 @@
 	                                    </div>
 	                                    <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
 	                                </div>
-	                                
                                 </sec:authorize>
                       
                             </div>
