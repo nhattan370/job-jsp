@@ -1,3 +1,13 @@
+function showSwal(title, status="success", buttons=true){
+	swal({
+	    title: title,
+	    text: 'Redirecting...', 
+	    icon: status,
+	    timer: 2000,
+	    buttons: buttons
+	})
+}
+
 function apply(id){
      var name = "#idRe" +id;
      var nameModal = "#exampleModal" +id;
@@ -86,4 +96,24 @@ function apply(id){
              }
          }
      )
+ }
+ 
+ function choosed(id){
+     var name = '#choose' + id;
+     var name1 = 'loai1' + id;
+     var name2 = 'loai2' + id;
+     var button1 = 'button1' + id;
+     var button2 = 'button2' + id;
+     var giaitri = $(name).val();
+     if(giaitri == 1){
+         document.getElementById(name1).style.display = 'block'
+         document.getElementById(name2).style.display = 'none'
+         document.getElementById(button1).style.display = 'block'
+         document.getElementById(button2).style.display = 'none'
+     }else{
+         document.getElementById(name2).style.display = 'block'
+         document.getElementById(name1).style.display = 'none'
+         document.getElementById(button2).style.display = 'block'
+         document.getElementById(button1).style.display = 'none'
+     }
  }

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
 <section class="ftco-section bg-light">
 <!-- show toast -->
-<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+<div id="alert-container" style="position: fixed; top: 60px; left: 20px; z-index: 9999;"></div>
 
 <!-- container feature job -->
     <div class="container">
@@ -41,16 +41,36 @@
                                     </div>
                                     <a th:if="${session.user.role.id == 1}" data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
                                 </div> --%>
+
+<%--  
                                 <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
-  	                                <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+ 	                                <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
 	                                    <div>
-	                                        <a onclick="save(${recruitment.id})" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-	                                            <span class="icon-heart"></span>
+	                                        <a onclick="save(${recruitment.id})" class="text-center d-flex justify-content-center align-items-center icon ${principal!=null && sessionScope['save_'+recruitment.id+principal.user.id] ? 'save' : ''} mr-2">
+	                                            <span id="heartIcon${recruitment.id}" class="icon-heart ${principal!=null && sessionScope['save_' + recruitment.id + principal.user.id] ? 'save' : ''} "></span>
 	                                        </a>
 	                                    </div>
 	                                    <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
-	                                </div>
+	                                </div> 
                                 </sec:authorize>
+	                                --%>
+	                                
+ 	                                <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+									    <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+									        <div>
+									        	<a onclick="save(${recruitment.id})"
+												   class="text-center d-flex justify-content-center align-items-center icon 
+												          mr-2">
+												    <span id="heartIcon${recruitment.id}"
+												          class="icon-heart">
+												    </span>
+												</a>
+
+									        </div>
+									        <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
+									    </div>
+									</sec:authorize>
+	                                
                       
                             </div>
                         </div>

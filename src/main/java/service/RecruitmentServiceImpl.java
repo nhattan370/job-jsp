@@ -30,6 +30,12 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	@Override
 	public Recruitment findById(int id) {
 		return recruitmentDAO.findById(id);
+	}
+
+	@Override
+	public Recruitment findByReferenceId(int id) {
+		Recruitment recruitment = recruitmentDAO.findByReferenceId(id);
+		return recruitment;
 	}	
 	
 }

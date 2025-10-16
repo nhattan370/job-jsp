@@ -38,4 +38,10 @@ public class RecruitmentDAOImpl implements RecruitmentDAO{
 		return recruitment;
 	}
 
+	@Override
+	public Recruitment findByReferenceId(int id) {
+		Recruitment recruitment = em.getReference(Recruitment.class, id);
+		return recruitment;
+	}
+
 }

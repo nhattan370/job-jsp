@@ -47,4 +47,5 @@
 	  
 	  <!-- more -->
 	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
+	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/set-user.js"></script>
 	  

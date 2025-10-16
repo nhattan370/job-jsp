@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,14 +18,20 @@ import share.ColorExample;
 public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 
 	private final Logger logger = Logger.getLogger(MyLoginSuccessHandler.class.getName());
-	
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		logger.info(ColorExample.RED+ "My Login Success Handler" +ColorExample.RESET);
+		CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+		String userId = customUserDetails.getUser().getId()+"";
+		
+		Cookie cookie = new Cookie("loginId", userId+"");
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
 		request.getSession().setAttribute("mes", "Đăng nhập thành công!");
 		response.sendRedirect(request.getContextPath()+"/");
-		
 	}
 
 }
+ 

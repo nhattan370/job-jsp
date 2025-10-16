@@ -1,18 +1,32 @@
-/* Áp dụng cho cả hai nút */
-.one-forth a {
+.icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   transition: all 0.25s ease;
-  cursor:pointer;
 }
 
-/* Khi hover vào */
-.one-forth a:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+/* Khi trái tim đã lưu */
+.icon.saved {
+  transform: scale(1.05);
+}
+.job-post-item:hover .icon.saved,
+.job-post-item:focus .icon.saved {
+  background: #e6e6e6 !important;
 }
 
+/* Khi trái tim đang được lưu */
+.icon-heart.saved::before {
+  color: #e63946; 
+  transform: scale(1.2);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Khi hover trái tim */
 .icon:hover .icon-heart {
   animation: pulse 0.4s ease-in-out;
-  color: #e63946;
 }
 
 @keyframes pulse {
@@ -20,6 +34,4 @@
   50% { transform: scale(1.3); }
   100% { transform: scale(1); }
 }
-
-
-
+ 

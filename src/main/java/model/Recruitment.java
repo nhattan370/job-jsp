@@ -54,7 +54,7 @@ public class Recruitment {
     private String type;
 
     @Column
-    private Integer view;
+    private Integer views;
 
     @Column
     private LocalDate deadline;
@@ -73,7 +73,7 @@ public class Recruitment {
 	public Recruitment() {}
 
 	public Recruitment(Integer id, String address, String description, String experience,
-			Integer quantity, String rank, String salary, Integer status, String title, String type, Integer view,
+			Integer quantity, String rank, String salary, Integer status, String title, String type, Integer views,
 			LocalDate deadline, Category category, Company company) {
 		this.id = id;
 		this.address = address;
@@ -85,7 +85,7 @@ public class Recruitment {
 		this.status = status;
 		this.title = title;
 		this.type = type;
-		this.view = view;
+		this.views = views;
 		this.deadline = deadline;
 		this.category = category;
 		this.company = company;
@@ -180,11 +180,11 @@ public class Recruitment {
 	}
 
 	public Integer getView() {
-		return view;
+		return views;
 	}
 
-	public void setView(Integer view) {
-		this.view = view;
+	public void setView(Integer views) {
+		this.views = views;
 	}
 
 	public LocalDate getDeadline() {
@@ -215,7 +215,7 @@ public class Recruitment {
 	public String toString() {
 		return "Recruitment [id=" + id + ", address=" + address + ", createdAt=" + createdAt + ", description="
 				+ description + ", experience=" + experience + ", quantity=" + quantity + ", rank=" + rank + ", salary="
-				+ salary + ", status=" + status + ", title=" + title + ", type=" + type + ", view=" + view
+				+ salary + ", status=" + status + ", title=" + title + ", type=" + type + ", view=" + views
 				+ ", deadline=" + deadline + "]";
 	}
     

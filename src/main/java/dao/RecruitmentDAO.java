@@ -8,4 +8,5 @@ import model.Recruitment;
 public interface RecruitmentDAO {
 	List<RecruitmentDTO> findTwoAndSort();
 	Recruitment findById(int id);
+	Recruitment findByReferenceId(int id);
 }

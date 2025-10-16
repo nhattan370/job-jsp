@@ -6,6 +6,10 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -42,20 +46,21 @@ public class HandleJobUserController {
 
 	@GetMapping("/save-job")
 	@ResponseBody
-	public Map<String, String> saveJob(@RequestParam("idRe") String re,
+	public Map<String, String> saveJob(@RequestParam("idRe") String re, HttpSession session,
 						@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-		User user = customUserDetails.getUser();
-		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(re));
 		Map<String, String> map = new HashMap<String, String>();
-		
+		User user = customUserDetails.getUser();
+		Recruitment recruitment = recruitmentService.findByReferenceId(Integer.parseInt(re));
 		SaveJob saveJob = saveJobService.findByRecruitmentAndUser(recruitment, user);
+		
 		if(saveJob==null) {
 			saveJobService.save(new SaveJob(recruitment,user));
-			map.put("status","save");
+			map.put("status","save");		
 		}else {
 			saveJobService.delete(saveJob);
 			map.put("status","delete");
 		}
+		map.put("key", Integer.parseInt(re)+"_"+ user.getId());
 		return map;
 	}
 }

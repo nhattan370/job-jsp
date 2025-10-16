@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +22,9 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler{
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		logger.info(ColorExample.WHITE+"My Logout Success Handdler"+ColorExample.RESET);
+		Cookie cookie = new Cookie("loginId", "-1");
+		cookie.setPath("/");
+		
 		request.getSession().setAttribute("mes", "Đăng xuất thành công");
 		response.sendRedirect(request.getContextPath()+"/");
 		
