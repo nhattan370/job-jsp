@@ -1,6 +1,5 @@
 const alertContainer = document.getElementById("alert-container");
 let savejobs = JSON.parse(localStorage.getItem("save-job")) || [];
-let loginId = JSON.parse(localStorage.getItem("login-id"))|| "";
 
 function showToast(message1, message2, type){
 	let alertId = "alert-"+Date.now();
@@ -31,7 +30,6 @@ function save(id) {
 
  	$.get("user/save-job", { idRe: idRe })
  		.done(function (data) {
- 			console.log(data);
 			if(data.status==="save"){
 				//Show change icon
 				heartIcon.addClass("saved");
@@ -66,21 +64,6 @@ function save(id) {
  			alert("Đã có lỗi xảy ra");
  		});
  }
- 
- $(document).ready(function(){
- 	savejobs.forEach((item)=>{
-		const [reId, userId] = item.split("_");
-		
- 		let heartIcon = $("#heartIcon"+reId);
- 		const iconWrapper = heartIcon.closest(".icon");
- 		console.log("user id: ", userId);
-		console.log("logerId: ", loginId);
-		if(loginId==userId){
-	 		heartIcon.addClass("saved");
-	 		iconWrapper.addClass("saved");		
-		}
- 	});
- });
 
 
  

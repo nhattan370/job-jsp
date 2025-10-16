@@ -12,4 +12,15 @@ $(document).ready(function(){
 		loginId=cookieUser;
 		localStorage.setItem("login-id",cookieUser);		
 	}
+		savejobs.forEach((item)=>{
+		const [reId, userId] = item.split("_");
+			let heartIcon = $("#heartIcon"+reId);
+			const iconWrapper = heartIcon.closest(".icon");
+			console.log("user id: ", userId);
+			console.log("logerId: ", loginId);
+		if(loginId==userId){
+				heartIcon.addClass("saved");
+				iconWrapper.addClass("saved");		
+		}
+	});
 })

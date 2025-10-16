@@ -24,6 +24,7 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler{
 			throws IOException, ServletException {
 		Cookie cookie = new Cookie("loginId", "-1");
 		cookie.setPath("/");
+		response.addCookie(cookie);
 		
 		request.getSession().setAttribute("mes", "Đăng xuất thành công");
 		response.sendRedirect(request.getContextPath()+"/");
