@@ -18,7 +18,7 @@ import share.ColorExample;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"security", "service", "dao"})
+@ComponentScan(basePackages = {"security", "service", "dao", "cloudinary"})
 public class SecurityConfig implements WebMvcConfigurer{
 	
 	private final Logger log = Logger.getLogger(SecurityConfig.class.getName());

@@ -15,7 +15,6 @@
                     <div class="col-md-12 heading-section ">
                         <span class="subheading">CÔNG VIỆC ĐƯỢC NHIỀU NGƯỜI ỨNG TUYỂN</span>
                         <h2 class="mb-4">Các bài đăng về việc làm nổi bật</h2>
-
                     </div>
                 </div>
                 <div class="row">
@@ -98,7 +97,7 @@
                                                 <div id="loai1${recruitment.id}" style="display:none" class="col-12">
                                                     <label for="fileUpload"
                                                            class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control" id="text${recruitment.id}" ></textarea>
+                                                    <textarea rows="10" cols="3" class="form-control" id="text${recruitment.id}"></textarea>
                                                 </div>
                                                 <div id="loai2${recruitment.id}" style="display:none" class="col-12">
 

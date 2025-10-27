@@ -11,3 +11,5 @@
 *.log
 
 .metadata
+
+!src/main/resources/application.properties

@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@ComponentScan(basePackages = {"dao", "service"})
 @PropertySource("classpath:application.properties")
 public class DatabaseConfig {
 
