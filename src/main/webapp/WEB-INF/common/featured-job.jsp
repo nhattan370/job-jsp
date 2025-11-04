@@ -65,7 +65,7 @@
 												    </span>
 												</a>
 									        </div>
-									        <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
+									        <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2" id="applyBtn${recruitment.id}">Apply Job</a>
 									    </div>
 									</sec:authorize>
                             </div>

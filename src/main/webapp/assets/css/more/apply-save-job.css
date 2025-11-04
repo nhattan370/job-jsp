@@ -35,3 +35,18 @@
   100% { transform: scale(1); }
 }
  
+ 
+.btn-disabled {
+  background-color: #b0b0b0 !important; /* màu xám nhạt */
+  border-color: #b0b0b0 !important;
+  color: #ffffff !important; /* chữ trắng */
+  cursor: not-allowed !important;
+  opacity: 0.7;
+  pointer-events: none; /* không cho click */
+  transition: background-color 0.2s ease;
+}
+
+.btn-disabled:hover {
+  background-color: #b0b0b0 !important; /* không đổi màu khi hover */
+}
+ 

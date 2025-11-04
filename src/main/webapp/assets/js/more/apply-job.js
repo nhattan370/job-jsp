@@ -1,3 +1,5 @@
+let applyJobs = JSON.parse(localStorage.getItem("apply-job"))||[];
+
 function showSwal(title, status="success", buttons=true){
 	swal({
 	    title: title,
@@ -39,12 +41,20 @@ function apply(id){
 						 showSwal('Ứng tuyển thành công!', 'success', true);
 						 $(nameModal).modal('hide');
 						 $('#fileUpload').val("");
+						 // Disable nút Apply Job
+						 let applyBtn = $("#applyBtn" + id);
+						 applyBtn.prop("disabled", true);
+						 applyBtn.addClass("btn-disabled");
+						 applyBtn.text("Applied");
+						 
+						 //Save in localStorage
+						 applyJobs = !applyJobs.includes(data.key) ? [...applyJobs, data.key] : applyJobs;
+						 localStorage.setItem("apply-job",JSON.stringify(applyJobs));
+						 
                      } else if (data.status == "already-save") {
 						 showSwal('Bạn đã ứng tuyển công việc này!', 'error', true);
                          $(nameModal).modal('hide');
                          $('#fileUpload').val("");
-						 
-						 //Xử lí disable nút Apply
                      } else {
 						 showSwal('Bạn cần phải đăng nhập!', 'error', true);
                      }

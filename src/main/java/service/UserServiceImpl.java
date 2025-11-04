@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findByEmail(String email) {
 		User user = userDAO.findByEmail(email).orElse(null);
-		logger.info(ColorExample.CYAN+user.getAddress()+ColorExample.RESET);
 		return user;
 	}
 

@@ -5,16 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import model.ApplyPost;
-import model.Cv;
 import model.Recruitment;
 import model.SaveJob;
 import model.User;
 import security.CustomUserDetails;
 import service.ApplyPostService;
-import service.CvService;
 import service.RecruitmentService;
 import service.SaveJobService;
 import service.UploadCloudinaryService;
@@ -47,17 +38,14 @@ public class HandleJobUserController {
 	private final RecruitmentService recruitmentService;
 	private final UploadCloudinaryService cloudinaryService;
 	private final ApplyPostService applyPostService;
-	private final CvService cvService;
 	
 	@Autowired
 	public HandleJobUserController(SaveJobService saveJobService, UploadCloudinaryService cloudinaryService,
-								   RecruitmentService recruitmentService, ApplyPostService applyPostService,
-								   CvService cvService) {
+								   RecruitmentService recruitmentService, ApplyPostService applyPostService) {
 		this.saveJobService = saveJobService;
 		this.recruitmentService = recruitmentService;
 		this.cloudinaryService = cloudinaryService;
 		this.applyPostService = applyPostService;
-		this.cvService = cvService;
 	}
 
 	@GetMapping("/save-job")
@@ -98,12 +86,12 @@ public class HandleJobUserController {
 			applyPostService.save(new ApplyPost(recruitment, user, url, 1, text));
 			
 			map.put("status", "save");
+			map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
 			
 		}else {
 			map.put("status", "already-save");
 		}
 		
-		map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
 		return map;
 	}
 	
@@ -124,9 +112,9 @@ public class HandleJobUserController {
 		}else {
 			applyPostService.save(new ApplyPost(recruitment, user, user.getCv().getFileName(), 1, text));
 			map.put("status", "save");
+			map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
 		}
 		
-		map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
 		return map;
 	}
 }
