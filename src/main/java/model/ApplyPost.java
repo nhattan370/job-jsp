@@ -10,9 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "applypost")
+@Table(name = "applypost", uniqueConstraints = @UniqueConstraint(columnNames = {"recruitment_id","user_id"}))
 public class ApplyPost {
 
     @Id
@@ -35,6 +36,7 @@ public class ApplyPost {
 
     @Column
     private Integer status;
+    //Đã apply, đã xem, phù hợp, không phù hợp.
 
     @Column(length = 255)
     private String text;

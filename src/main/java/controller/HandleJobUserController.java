@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,13 +22,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import model.ApplyPost;
+import model.Cv;
 import model.Recruitment;
 import model.SaveJob;
 import model.User;
 import security.CustomUserDetails;
+import service.ApplyPostService;
+import service.CvService;
 import service.RecruitmentService;
 import service.SaveJobService;
+import service.UploadCloudinaryService;
 import share.ColorExample;
 
 @Controller
@@ -34,14 +42,22 @@ import share.ColorExample;
 public class HandleJobUserController {
 	
 	private final Logger logger = Logger.getLogger(HandleJobUserController.class.getName());
+	
 	private final SaveJobService saveJobService;
 	private final RecruitmentService recruitmentService;
+	private final UploadCloudinaryService cloudinaryService;
+	private final ApplyPostService applyPostService;
+	private final CvService cvService;
 	
 	@Autowired
-	public HandleJobUserController(SaveJobService saveJobService, 
-								   RecruitmentService recruitmentService) {
+	public HandleJobUserController(SaveJobService saveJobService, UploadCloudinaryService cloudinaryService,
+								   RecruitmentService recruitmentService, ApplyPostService applyPostService,
+								   CvService cvService) {
 		this.saveJobService = saveJobService;
 		this.recruitmentService = recruitmentService;
+		this.cloudinaryService = cloudinaryService;
+		this.applyPostService = applyPostService;
+		this.cvService = cvService;
 	}
 
 	@GetMapping("/save-job")
@@ -61,6 +77,56 @@ public class HandleJobUserController {
 			map.put("status","delete");
 		}
 		map.put("key", Integer.parseInt(re)+"_"+ user.getId());
+		return map;
+	}
+	
+	@PostMapping("/apply-job")
+	@ResponseBody
+	public Map<String, String> applyJob(@RequestParam("file") MultipartFile file,
+										@RequestParam("idRe") String idRe,
+										@RequestParam("text") String text, 
+										@AuthenticationPrincipal CustomUserDetails customUserDetails) throws IOException{
+		Map<String, String> map = new HashMap<String, String>();
+		Recruitment recruitment = recruitmentService.findByReferenceId(Integer.parseInt(idRe));
+		User user = customUserDetails.getUser();
+		ApplyPost applyPost = applyPostService.findByRecruitmentAndUser(recruitment, user);
+		
+		if(applyPost==null) {
+			String url = cloudinaryService.upload(file);
+			
+			//Save applyPost
+			applyPostService.save(new ApplyPost(recruitment, user, url, 1, text));
+			
+			map.put("status", "save");
+			
+		}else {
+			map.put("status", "already-save");
+		}
+		
+		map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
+		return map;
+	}
+	
+	@PostMapping("apply-job1")
+	@ResponseBody
+	public Map<String, String> applyJob1(@RequestParam("idRe") String idRe,
+										 @RequestParam("text") String text,
+										 @AuthenticationPrincipal CustomUserDetails details){
+		Map<String, String> map = new HashMap<String, String>();
+		Recruitment recruitment = recruitmentService.findByReferenceId(Integer.parseInt(idRe));
+		User user = details.getUser();
+		ApplyPost applyPost = applyPostService.findByRecruitmentAndUser(recruitment, user);
+		
+		if(applyPost!=null) {
+			map.put("status", "already-save");
+		}else if(user.getCv()==null) {
+			map.put("status", "no_cv");
+		}else {
+			applyPostService.save(new ApplyPost(recruitment, user, user.getCv().getFileName(), 1, text));
+			map.put("status", "save");
+		}
+		
+		map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
 		return map;
 	}
 }

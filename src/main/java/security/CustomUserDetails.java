@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import enums.UserStatus;
+import model.Cv;
 import model.User;
 
 public class CustomUserDetails implements UserDetails {
@@ -36,6 +37,10 @@ public class CustomUserDetails implements UserDetails {
 	
 	public User getUser() {
 		return user;
+	}
+	
+	public Cv getCv() {
+		return user.getCv();
 	}
 
 	@Override

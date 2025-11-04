@@ -12,7 +12,7 @@ function apply(id){
      var name = "#idRe" +id;
      var nameModal = "#exampleModal" +id;
      var nameFile = "#fileUpload"+id;
-     var nameText = "#text" +id;
+     var nameText = "#text-s" +id;
      var idRe = $(name).val();
      var textvalue = $(nameText).val();
      var fileUpload = $(nameFile).get(0);
@@ -21,31 +21,37 @@ function apply(id){
      formData.append('file', files[0]);
      formData.append('idRe', idRe);
      formData.append('text', textvalue);
+	 console.log(textvalue);
      if(files[0] == null){
 		 showSwal('Bạn cần phải chọn cv!', 'error', true);
      } else {
+		
          $.ajax(
              {
                  type: 'POST',
-                 url: '/user/apply-job/',
+                 url: 'user/apply-job/',
                  contentType: false,
                  processData: false,
                  data: formData,
                  success: function (data) {
-                     if (data == "false") {
-						 showSwal('Bạn cần phải đăng nhập!', 'error', true);
-                     } else if (data == "true") {
+					console.log(data);
+                     if (data.status == "save") {
 						 showSwal('Ứng tuyển thành công!', 'success', true);
-                         $(nameModal).modal('hide');
-                         $('#fileUpload').val("");
-                     } else {
+						 $(nameModal).modal('hide');
+						 $('#fileUpload').val("");
+                     } else if (data.status == "already-save") {
 						 showSwal('Bạn đã ứng tuyển công việc này!', 'error', true);
                          $(nameModal).modal('hide');
                          $('#fileUpload').val("");
+						 
+						 //Xử lí disable nút Apply
+                     } else {
+						 showSwal('Bạn cần phải đăng nhập!', 'error', true);
                      }
                  },
                  error: function (err) {
-                     alert(err);
+					console.log(err);
+                    alert(err);
                  }
              }
          )
@@ -57,7 +63,7 @@ function apply(id){
      var name = "#idRe" +id;
      var nameModal = "#exampleModal" +id;
      var nameFile = "#fileUpload"+id;
-     var nameText = "#text" +id;
+     var nameText = "#text-f" +id;
      var idRe = $(name).val();
      var textvalue = $(nameText).val();
      var formData = new FormData();
@@ -66,29 +72,25 @@ function apply(id){
      $.ajax(
          {
              type: 'POST',
-             url: '/user/apply-job1/',
+             url: 'user/apply-job1/',
              contentType: false,
              processData: false,
              data: formData,
              success: function (data) {
-                 if(data == "false"){
+                 if(data.status == "save"){
+					showSwal('Ứng tuyển thành công!', 'success', true);
+					$(nameModal).modal('hide');
+					$('#fileUpload').val("");
+                 }else if(data.status == "already-save"){
+					showSwal('Bạn đã ứng tuyển công việc này!', 'warning', true);
+					$(nameModal).modal('hide');
+					$('#fileUpload').val("");
+                 }else if(data.status=="no_cv"){
+					showSwal('Vui lòng cập nhật cv', 'warning', true);
+					$(nameModal).modal('hide');
+					$('#fileUpload').val("");
+				 }else{
 					 showSwal('Bạn cần phải đăng nhập!', 'error', true);
-                 }else if(data == "true"){
-                     swal({
-                         title: 'Ứng tuyển thành công!',
-                         /* text: 'Redirecting...', */
-                         icon: 'success',
-                         timer: 3000,
-                         buttons: true,
-                         type: 'success'
-                     })
-					 showSwal('Ứng tuyển thành công!', 'success', true);
-                     $(nameModal).modal('hide');
-                     $('#fileUpload').val("");
-                 }else{
-					 showSwal('Bạn đã ứng tuyển công việc này!', 'error', true);
-                     $(nameModal).modal('hide');
-                     $('#fileUpload').val("");
                  }
              },
              error: function (err) {

@@ -64,13 +64,10 @@
 												          class="icon-heart">
 												    </span>
 												</a>
-
 									        </div>
 									        <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
 									    </div>
 									</sec:authorize>
-	                                
-                      
                             </div>
                         </div>
                         <!-- end -->
@@ -84,7 +81,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="post" action="user/apply-job">
+                                    <form method="post">
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-12">
@@ -97,17 +94,16 @@
                                                 <div id="loai1${recruitment.id}" style="display:none" class="col-12">
                                                     <label for="fileUpload"
                                                            class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control" id="text${recruitment.id}"></textarea>
+                                                    <textarea rows="10" cols="3" class="form-control" id="text-f${recruitment.id}"></textarea>
                                                 </div>
                                                 <div id="loai2${recruitment.id}" style="display:none" class="col-12">
-
                                                     <label for="fileUpload"
                                                            class="col-form-label">Chọn cv:</label>
                                                     <input type="file" class="form-control"
                                                            id="fileUpload${recruitment.id}" name="file" required>
                                                     <label for="fileUpload"
                                                            class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control" id="text${recruitment.id}" ></textarea>
+                                                    <textarea rows="10" cols="3" class="form-control" id="text-s${recruitment.id}"></textarea>
                                                 </div>
 
                                             </div>
