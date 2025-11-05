@@ -8,20 +8,10 @@ function getCookie(name){
 
 $(document).ready(function(){
 	const cookieUser = getCookie("loginId");
-	if(loginId!=cookieUser && cookieUser){
-		loginId=cookieUser;
+	if(loginId!=cookieUser){
+		loginId= cookieUser ? cookieUser : -1;
 		localStorage.setItem("login-id",cookieUser);		
 	}
-	
-	savejobs.forEach((item)=>{
-		const [reId, userId] = item.split("_");
-		let heartIcon = $("#heartIcon"+reId);
-		const iconWrapper = heartIcon.closest(".icon");
-		if(loginId==userId){
-			heartIcon.addClass("saved");
-			iconWrapper.addClass("saved");		
-		}
-	});
 	
 	applyJobs.forEach((item)=>{
 		const [reId, userId] = item.split("_");
@@ -32,4 +22,15 @@ $(document).ready(function(){
 			applyBtn.prop("disabled", true);
 		}
 	})
+	savejobs.forEach((item)=>{
+		const [reId, userId] = item.split("_");
+		console.log(userId)
+		let heartIcon = $("#heartIcon"+reId);
+		const iconWrapper = heartIcon.closest(".icon");
+		if(loginId==userId){
+			heartIcon.addClass("saved");
+			iconWrapper.addClass("saved");		
+		}
+	});
+	
 })

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.Recruitment;
 import model.SaveJob;
@@ -79,11 +80,12 @@ public class HandleJobUserController {
 		User user = customUserDetails.getUser();
 		ApplyPost applyPost = applyPostService.findByRecruitmentAndUser(recruitment, user);
 		
+		logger.info(ColorExample.BLUE+text+ColorExample.RESET);
 		if(applyPost==null) {
 			String url = cloudinaryService.upload(file);
 			
 			//Save applyPost
-			applyPostService.save(new ApplyPost(recruitment, user, url, 1, text));
+			applyPostService.save(new ApplyPost(recruitment, user, url, ApplyPostStatus.PENDING, text));
 			
 			map.put("status", "save");
 			map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
@@ -110,7 +112,7 @@ public class HandleJobUserController {
 		}else if(user.getCv()==null) {
 			map.put("status", "no_cv");
 		}else {
-			applyPostService.save(new ApplyPost(recruitment, user, user.getCv().getFileName(), 1, text));
+			applyPostService.save(new ApplyPost(recruitment, user, user.getCv().getFileName(), ApplyPostStatus.PENDING, text));
 			map.put("status", "save");
 			map.put("key", Integer.parseInt(idRe)+"_"+ user.getId());
 		}

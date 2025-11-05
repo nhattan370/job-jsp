@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
+
 <section class="ftco-section bg-light">
 <!-- show toast -->
 <div id="alert-container" style="position: fixed; top: 60px; left: 20px; z-index: 9999;"></div>
@@ -144,4 +144,4 @@
         </div>
     </div>
 </section>
-<script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script>
+

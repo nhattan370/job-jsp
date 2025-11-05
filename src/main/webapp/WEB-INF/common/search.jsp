@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
  <div class="row">
     <div class="col-md-12 nav-link-wrap">
         <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <a class="nav-link ${param.typeSearch==sessionScope.listType[0] || param.typeSearch==null ? 'active' : ''} mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Tìm công việc</a>
-            <a class="nav-link ${param.typeSearch==sessionScope.listType[1] ? 'active' : ''}" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Tìm ứng cử viên</a>
+            <sec:authorize access="hasAuthority('RECRUITER') || !isAuthenticated()">
+            	<a class="nav-link ${param.typeSearch==sessionScope.listType[1] ? 'active' : ''}" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Tìm ứng cử viên</a>
+            </sec:authorize>
             <a class="nav-link ${param.typeSearch==sessionScope.listType[2] ? 'active' : ''}" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Tìm theo địa điểm</a>
         </div>
     </div>
@@ -16,7 +19,7 @@
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
                                 <div class="form-field">
-                                    <div class="icon"><span class="icon-map-marker"></span></div>
+                                    <!-- <div class="icon"><span class="icon-map-marker"></span></div> -->
                                     <input type="text" name="keySearch" class="form-control" placeholder="Tìm kiếm công việc" value="${param.keySearch}">
                                     <input type="hidden" name="typeSearch" class="form-control" value="${sessionScope.listType[0]}"/>
                                 </div>

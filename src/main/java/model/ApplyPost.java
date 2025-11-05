@@ -3,7 +3,10 @@ package model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import converter.ApplyPostStatusConverter;
+import enums.ApplyPostStatus;
 
 @Entity
 @Table(name = "applypost", uniqueConstraints = @UniqueConstraint(columnNames = {"recruitment_id","user_id"}))
@@ -20,7 +26,7 @@ public class ApplyPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
@@ -35,8 +41,8 @@ public class ApplyPost {
     private String nameCv;
 
     @Column
-    private Integer status;
-    //Đã apply, đã xem, phù hợp, không phù hợp.
+    @Convert(converter = ApplyPostStatusConverter.class)
+    private ApplyPostStatus status;
 
     @Column(length = 255)
     private String text;
@@ -44,7 +50,7 @@ public class ApplyPost {
     public ApplyPost() {
     }
 
-    public ApplyPost(Recruitment recruitment, User user, String nameCv, Integer status, String text) {
+    public ApplyPost(Recruitment recruitment, User user, String nameCv, ApplyPostStatus status, String text) {
         this.recruitment = recruitment;
         this.user = user;
         this.nameCv = nameCv;
@@ -92,11 +98,11 @@ public class ApplyPost {
         this.nameCv = nameCv;
     }
 
-    public Integer getStatus() {
+    public ApplyPostStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(ApplyPostStatus status) {
         this.status = status;
     }
 
