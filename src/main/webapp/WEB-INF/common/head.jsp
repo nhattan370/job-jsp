@@ -23,7 +23,7 @@
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap-grid.css">
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap-reboot.css">
-	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/navbar.css">
+
 	  
 	
 	  <!-- JS -->
@@ -49,4 +49,5 @@
 	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
 	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/set-user.js"></script>
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
+	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/navbar.css">
 	  

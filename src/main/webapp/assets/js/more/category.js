@@ -44,11 +44,6 @@ function renderCategory(){
 	container.innerHTML = text;
 }
 
-/*function getNextCategories(){
-	startIndex+=INCREMENT;
-	if(startIndex>=categories.length) startIndex=0;
-	renderCategory();
-}*/
 
 
 

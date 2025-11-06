@@ -38,17 +38,19 @@
 	            </div>
 	        </div>
 	        
-	        <!--Render in js  -->
-	        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-				<div class="carousel-inner" id="category-container">
-				</div>
-				<button class="prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+	        <!--Render in js  --> 
+			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3500">
+				<div class="carousel-inner" id="category-container"></div>
+			
+				<a class="carousel-control-prev prev" href="#carouselExampleControls" role="button" data-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				</button>
-				<button class="next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next next" href="#carouselExampleControls" role="button" data-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				</button>
-			</div>      
+					<span class="sr-only">Next</span>
+				</a>
+			</div>	
 	        <!--Render in js  -->
 	        
 	    </div>
@@ -105,6 +107,4 @@
 
 </body>
 <script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
-
-
 </html>
