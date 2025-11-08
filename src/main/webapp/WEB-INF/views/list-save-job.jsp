@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head><%@ include file="/WEB-INF/common/head.jsp" %></head>
@@ -8,31 +9,39 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-<div th:if="${success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
-    <script>
-        swal({
-            title: 'Xóa thành công!',
-            /* text: 'Redirecting...', */
-            icon: 'success',
-            timer: 3000,
-            buttons: true,
-            type: 'success'
-        })
-    </script>
-</div>
+<div class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+	<c:if test="${not empty sessionScope.mes}">
+	    <script type="text/javascript">
+	        swal({
+	            title: "<c:out value='${sessionScope.mes}'/>",
+	            text: "Redirecting...", 
+	            icon: "success",
+	            timer: 2000,
+	            buttons: true
+	        });
+	    </script>
+	    <c:remove var="mes" scope="session"/>	
+	</c:if>
+</div> 
 <!-- END nav -->
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
+<div class="hero-wrap hero-wrap-2" style="background-image: url(${pageContext.request.contextPath}/assets/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
             <div class="col-md-12 text-center mb-5">
-                <p class="breadcrumbs mb-0"><span class="mr-3"><a href="/">Trang chủ <i class="ion-ios-arrow-forward"></i></a></span>Công việc <span></span></p>
+                <p class="breadcrumbs mb-0"><span class="mr-3"><a href="${pageContext.request.contextPath}">Trang chủ <i class="ion-ios-arrow-forward"></i></a></span>Công việc <span></span></p>
                 <h1 class="mb-3 bread">Danh sách công việc đã lưu</h1>
             </div>
         </div>
     </div>
-</div>
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
+</div> 
+
+<%--   <jsp:include page="/WEB-INF/common/page-hero.jsp">
+  		<jsp:param value="Danh sách công việc đã lưu" name="title"/>
+  		<jsp:param value="Công việc" name="breadcrumb"/>
+  </jsp:include> --%>
+
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -42,43 +51,73 @@
             </div>
         </div>
     </div>
-</div>
+</div> --%>
 
-<section class="ftco-section bg-light" th:if="${session.user.role.id == 1 }">
+<section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 pr-lg-5">
-                <div th:if="${saveJobList.totalPages > 0}" class="row">
-                    <th:block th:each="saveJob : ${saveJobList.content}">
+            	<c:if test="${saveJobList.size() > 0}">
+                <div class="row">
+                    <c:forEach var="saveJob" items="${saveJobList}">
                         <div class="col-md-12 ">
                             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
                                 <div class="one-third mb-4 mb-md-0">
                                     <div class="job-post-item-header align-items-center">
-                                        <span class="subadge" th:text="${saveJob.recruitment.type}"></span>
-                                        <h2 class="mr-3 text-black" ><a th:text="${saveJob.recruitment.title}" th:href="${'/recruitment/detail/'} +${saveJob.recruitment.id}"></a></h2>
+                                        <span class="subadge">${saveJob.recruitment.type}</span>
+                                        <h2 class="mr-3 text-black" ><a href="user/recruitment-detail/${saveJob.recruitment.id}">${saveJob.recruitment.title}</a></h2>
                                     </div>
                                     <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#" th:text="${saveJob.recruitment.Company.nameCompany}" ></a></div>
-                                        <div><span class="icon-my_location"></span> <span th:text="${saveJob.recruitment.address}"></span></div>
+                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#">${saveJob.recruitment.company.nameCompany}</a></div>
+                                        <div><span class="icon-my_location"></span> <span >${saveJob.recruitment.address}</span></div>
                                     </div>
                                 </div>
-                                <input type="hidden" th:id="${'idRe'}+${saveJob.recruitment.id}" th:value="${saveJob.recruitment.id}">
+                                <input type="hidden" id="idRe${saveJob.recruitment.id}" value="${saveJob.recruitment.id}">
                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
                                     <div>
-                                        <a  th:href="${'/save-job/delete/'}+${saveJob.id}" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
+                                        <a data-toggle="modal" data-target="#deleteModal${saveJob.id}" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
                                             <span class="icon-delete"></span>
                                         </a>
                                     </div>
-                                    <a  data-toggle="modal" th:data-target="${'#exampleModal'}+${saveJob.recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
+                                    <a  data-toggle="modal" data-target="#exampleModal${saveJob.recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
                                 </div>
                             </div>
-                        </div><!-- end -->
+                        </div>
+                        <!-- end -->
+                        
+                        <!-- Modal xác nhận xóa -->
+					    <div class="modal fade" id="deleteModal${saveJob.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel${saveJob.id}" aria-hidden="true">
+					        <div class="modal-dialog modal-dialog-centered" role="document">
+					            <div class="modal-content border-0 shadow">
+					                <div class="modal-header bg-danger text-white">
+					                    <h5 class="modal-title" id="deleteModalLabel${saveJob.id}">Xác nhận xóa</h5>
+					                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					                        <span aria-hidden="true">&times;</span>
+					                    </button>
+					                </div>
+					
+					                <form action="${pageContext.request.contextPath}/user/delete-save-job" method="post">
+					                    <div class="modal-body">
+					                        <input type="hidden" name="id-save-job" value="${saveJob.id}" />
+					                        <p>Bạn có chắc chắn muốn <strong>bỏ lưu</strong> công việc
+					                            <span class="text-primary font-weight-bold">${saveJob.recruitment.title}</span> không?</p>
+					                    </div>
+					                    <div class="modal-footer">
+					                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+					                        <button type="submit" class="btn btn-danger">Đồng ý</button>
+					                    </div>
+					                </form>
+					            </div>
+					        </div>
+					    </div>
+                        
+                        
                         <!-- Modal -->
-                        <div class="modal fade" th:id="${'exampleModal'}+${saveJob.recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<%--                         <div class="modal fade" id="exampleModal${saveJob.recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ứng tuyển: <span th:text="${saveJob.recruitment.title}"></span></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ứng tuyển: <span >${saveJob.recruitment.title}</span></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -87,28 +126,28 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <select th:id="${'choose'}+${saveJob.recruitment.id}" th:onchange="'choosed(' +${saveJob.recruitment.id}+ ')'" class="form-control" aria-label="Default select example">
+                                                    <select id="choose${saveJob.recruitment.id}" onchange="'choosed(' +${saveJob.recruitment.id}+ ')'" class="form-control" aria-label="Default select example">
                                                         <option selected>Chọn phương thức nộp</option>
                                                         <option value="1">Dùng cv đã cập nhật</option>
                                                         <option value="2">Nộp cv mới</option>
                                                     </select>
                                                 </div>
-                                                <div th:id="${'loai1'}+${saveJob.recruitment.id}" style="display:none" class="col-12">
+                                                <div id="loai1${saveJob.recruitment.id}" style="display:none" class="col-12">
                                                     <label for="fileUpload"
                                                            class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control"  th:id="${'text'}+${saveJob.recruitment.id}" >
+                                                    <textarea rows="10" cols="3" class="form-control" id="text${saveJob.recruitment.id}" >
 
                                                     </textarea>
                                                 </div>
-                                                <div th:id="${'loai2'}+${saveJob.recruitment.id}" style="display:none" class="col-12">
+                                                <div id="loai2${saveJob.recruitment.id}" style="display:none" class="col-12">
 
                                                     <label for="fileUpload"
                                                            class="col-form-label">Chọn cv:</label>
                                                     <input type="file" class="form-control"
-                                                           th:id="${'fileUpload'}+${saveJob.recruitment.id}" name="file"   required>
+                                                           id="fileUpload${saveJob.recruitment.id}" name="file" required>
                                                     <label for="fileUpload"
                                                            class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control"  th:id="${'text'}+${saveJob.recruitment.id}" >
+                                                    <textarea rows="10" cols="3" class="form-control" id="text${saveJob.recruitment.id}" >
 
                                                     </textarea>
                                                 </div>
@@ -116,8 +155,8 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                <button type="button" th:id="${'button1'}+${saveJob.recruitment.id}" style="display: none" th:onclick="'apply1(' +${saveJob.recruitment.id}+ ')'" class="btn btn-primary">Nộp</button>
-                                                <button type="button" th:id="${'button2'}+${saveJob.recruitment.id}" style="display: none" th:onclick="'apply(' +${saveJob.recruitment.id}+ ')'" class="btn btn-primary">Nộp</button>
+                                                <button type="button" id="button1${saveJob.recruitment.id}" style="display: none" onclick="apply1(${saveJob.recruitment.id})" class="btn btn-primary">Nộp</button>
+                                                <button type="button" id="button2${saveJob.recruitment.id}" style="display: none" onclick="apply(${saveJob.recruitment.id})" class="btn btn-primary">Nộp</button>
                                             </div>
                                         </div>
                                     </form>
@@ -147,14 +186,23 @@
 
                                 </div>
                             </div>
-                        </div>
-                    </th:block>
+                        </div> --%>
+	                       <jsp:include page="/WEB-INF/common/apply-modal.jsp">
+		                   		<jsp:param value="${saveJob.recruitment.id}" name="id"/>
+		                   		<jsp:param value="${saveJob.recruitment.title}" name="title"/>
+		                   </jsp:include>
+                    </c:forEach>
 
                 </div>
-                <div style="text-align: center" th:if="${saveJobList.totalPages < 1}">
-                    <p style="color:red;">Danh sách trống</p>
-                </div>
-                <div class="row mt-5">
+             </c:if>
+                
+             <c:if test="${saveJobList.size() < 1}">
+	              <div style="text-align: center">
+	                  <p style="color:red;">Danh sách trống</p>
+	              </div>
+             </c:if>
+                
+<%--                 <div class="row mt-5">
                     <div class="col text-center">
                         <div class="block-27">
                             <ul>
@@ -166,13 +214,13 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --%>
+                
             </div>
-
         </div>
     </div>
 </section>
-<script>
+<!-- <script>
     function apply1(id){
         var name = "#idRe" +id;
         var nameModal = "#exampleModal" +id;
@@ -372,7 +420,7 @@
             }
         )
     }
-</script>
+</script> -->
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->

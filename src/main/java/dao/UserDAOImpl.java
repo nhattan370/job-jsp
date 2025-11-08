@@ -28,4 +28,10 @@ public class UserDAOImpl implements UserDAO{
 		}
 	}
 
+	@Override
+	public User update(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

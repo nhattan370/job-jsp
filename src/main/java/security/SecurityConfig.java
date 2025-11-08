@@ -44,6 +44,7 @@ public class SecurityConfig implements WebMvcConfigurer{
 				.antMatchers("/user/**").hasAuthority("USER")
 				.antMatchers("/recruiter/**").hasAuthority("RECRUITER")
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/auth/**").authenticated()
 				.anyRequest().permitAll()
 			)
         .formLogin(form -> form

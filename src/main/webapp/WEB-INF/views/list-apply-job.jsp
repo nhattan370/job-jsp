@@ -8,7 +8,7 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-<div th:if="${success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+<%-- <div th:if="${success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
     <script>
         swal({
             title: 'Xóa thành công!',
@@ -19,7 +19,7 @@
             type: 'success'
         })
     </script>
-</div>
+</div> --%>
 <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
     <div class="overlay"></div>
     <div class="container">
@@ -116,7 +116,7 @@
                 <div style="text-align: center" th:if="${saveJobList.totalPages < 1}">
                     <p style="color:red;">Danh sách trống</p>
                 </div>
-                <div class="row mt-5">
+<%--                 <div class="row mt-5">
                     <div class="col text-center">
                         <div class="block-27">
                             <ul>
@@ -128,13 +128,13 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --%>
             </div>
 
         </div>
     </div>
 </section>
-<script>
+<!-- <script>
     function apply(id){
         var name = "#idRe" +id;
         var nameModal = "#exampleModal" +id;
@@ -255,7 +255,7 @@
             }
         )
     }
-</script>
+</script> -->
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
