@@ -31,7 +31,7 @@ function apply(id){
          $.ajax(
              {
                  type: 'POST',
-                 url: 'user/apply-job/',
+                 url: contextPath + '/user/apply-job/',
                  contentType: false,
                  processData: false,
                  data: formData,

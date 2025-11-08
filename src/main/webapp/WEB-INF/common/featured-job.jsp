@@ -72,7 +72,7 @@
                         </div>
                         <!-- end -->
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal${recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<%--                         <div class="modal fade" id="exampleModal${recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -118,7 +118,12 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --%>
+                        
+                        <jsp:include page="/WEB-INF/common/apply-modal.jsp">
+                        	<jsp:param value="${recruitment.id}" name="id"/>
+                        	<jsp:param value="${recruitment.title}" name="title"/>
+                        </jsp:include>
                     </c:forEach>
 
                 </div>
@@ -145,3 +150,4 @@
     </div>
 </section>
 
+<!-- Thay modal để làm dễ hơn -->

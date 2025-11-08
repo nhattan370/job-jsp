@@ -62,7 +62,7 @@ public class HandleJobUserController {
 			saveJobService.save(new SaveJob(recruitment,user));
 			map.put("status","save");		
 		}else {
-			saveJobService.delete(saveJob);
+			saveJobService.delete(saveJob.getId());
 			map.put("status","delete");
 		}
 		map.put("key", Integer.parseInt(re)+"_"+ user.getId());

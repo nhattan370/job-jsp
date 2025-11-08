@@ -49,4 +49,6 @@
 	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
 	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/set-user.js"></script>
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
+	  <script>const contextPath = "${pageContext.request.contextPath}";</script>
+	  
 	  

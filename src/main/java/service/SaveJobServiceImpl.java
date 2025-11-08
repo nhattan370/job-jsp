@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
@@ -37,8 +38,19 @@ public class SaveJobServiceImpl implements SaveJobService{
 	}
 
 	@Override
-	public void delete(SaveJob saveJob) {
-		dao.delete(saveJob);		
+	public void delete(int id) {
+		dao.delete(id);		
+	}
+
+	@Override
+	public List<SaveJob> findByUser(User user) {
+		return dao.findByUser(user);
+	}
+
+	@Override
+	public SaveJob getReferenceId(int id) {
+		
+		return null;
 	}
 
 }

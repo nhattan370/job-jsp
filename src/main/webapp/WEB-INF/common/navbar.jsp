@@ -47,13 +47,13 @@
 			        <span><sec:authentication property="principal.user.fullName" /></span>
 			    </a>
 			    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="navbarDropdown" style="min-width: 200px;">
-			        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Hồ Sơ</a></li>
+			        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/auth/profile">Hồ Sơ</a></li>
 			        <sec:authorize access="hasAuthority('RECRUITER')">
 			        	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/list-post">Danh sách bài đăng</a></li>
 			        	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/recruitment">Đăng tuyển</a></li>
 			       </sec:authorize> 
 			        <sec:authorize access="hasAuthority('USER')">
-				        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/save-job">Công việc đã lưu</a></li>
+				        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-save-job">Công việc đã lưu</a></li>
 				        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-apply">Công việc đã ứng tuyển</a></li>
 				        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-company">Công ty đã theo dõi</a></li>
 			        </sec:authorize>
@@ -61,8 +61,6 @@
 			        <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
 			    </ul>
 			</li>
-
-	        
         </sec:authorize>
 		
 		<sec:authorize access="!isAuthenticated()">
