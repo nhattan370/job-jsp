@@ -14,7 +14,6 @@ $(document).ready(function(){
 		loginId= cookieUser ? cookieUser : -1;
 		localStorage.setItem("login-id",cookieUser);		
 	}
-	
 	applyjobs.forEach((item)=>{
 		const [reId, userId] = item.split("_");
 		let applyBtn = $("#applyBtn"+reId);

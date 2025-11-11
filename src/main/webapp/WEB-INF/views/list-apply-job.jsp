@@ -79,9 +79,21 @@
 										</button>
                                         
                                     </div>
-                                    
-<%--                                     <p th:if="${applyJob.status == 1}" style="color: #1e7e34;font-weight: bold;margin-top: 10px">Đã duyệt</p>
-                                    <p th:if="${applyJob.status == 0}" style="color: red;font-weight: bold;margin-top: 10px">Đợi duyệt</p> --%>
+	                                    <c:if test="${applyJob.status.name() == 'PENDING'}">
+										    <p style="color: red; font-weight: bold; margin-top: 10px;">Chờ duyệt</p>
+										</c:if>
+										
+										<c:if test="${applyJob.status.name() == 'SUITABLE'}">
+										    <p style="color: #1e7e34; font-weight: bold; margin-top: 10px;">Phù hợp</p>
+										</c:if>
+										
+										<c:if test="${applyJob.status.name() == 'VIEWED'}">
+										    <p style="color: #007bff; font-weight: bold; margin-top: 10px;">Đã xem</p>
+										</c:if>
+										
+										<c:if test="${applyJob.status.name() == 'UNSUITABLE'}">
+										    <p style="color: gray; font-weight: bold; margin-top: 10px;">Không phù hợp</p>
+										</c:if>
                                 </div>
                             </div>
                         </div><!-- end -->
@@ -101,6 +113,7 @@
 					                    <div class="modal-body">
 					                        <p>Bạn có chắc chắn muốn <strong>hủy bỏ ứng tuyển</strong> công việc
 					                        <span class="text-primary font-weight-bold">${applyJob.recruitment.title}</span> không?</p>
+					                        <p> <strong>!!!Lưu ý: </strong>Nếu hủy bỏ ứng tuyển thì bạn sẽ <span class="text-danger font-weight-bold">không thể ứng tuyển công việc này được nữa</span> </p>
 					                    </div>
 					                    <div class="modal-footer">
 					                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>

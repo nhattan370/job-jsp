@@ -5,8 +5,6 @@ function deleteApply(id) {
  		.done(function (data) {
 			if(data.status==="delete"){
 				//delete from localStorage
-				applyjobs = applyjobs.filter(items => items != data.key);
-				localStorage.setItem("apply-job", JSON.stringify(applyjobs));
 				
 				document.activeElement.blur();
 				$("#deleteModal" + id).modal("hide");

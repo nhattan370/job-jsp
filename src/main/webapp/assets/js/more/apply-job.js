@@ -48,8 +48,8 @@ function apply(id){
 						 applyBtn.text("Applied");
 						 
 						 //Save in localStorage
-						 applyJobs = !applyJobs.includes(data.key) ? [...applyJobs, data.key] : applyJobs;
-						 localStorage.setItem("apply-job",JSON.stringify(applyJobs));
+						 applyjobs = !applyjobs.includes(data.key) ? [...applyjobs, data.key] : applyjobs;
+						 localStorage.setItem("apply-job",JSON.stringify(applyjobs));
 						 
                      } else if (data.status == "already-save") {
 						 showSwal('Bạn đã ứng tuyển công việc này!', 'error', true);
