@@ -39,14 +39,13 @@ public class SaveJobDAOImpl implements SaveJobDAO {
 	}
 
 	@Override
-	public void delete(int id) {
-		SaveJob saveJob = entityManager.getReference(SaveJob.class, id);
+	public void delete(SaveJob saveJob) {
 		SaveJob manager = entityManager.contains(saveJob) ? saveJob : entityManager.merge(saveJob);
 		entityManager.remove(manager);
 	}
 
 	@Override
-	public List<SaveJob> findByUser(User user) {
+	public List<SaveJob> findAllByUser(User user) {
 		List<SaveJob> saveJob = entityManager.createQuery("SELECT s FROM SaveJob s WHERE s.user = :u",SaveJob.class)
 									   .setParameter("u", user)
 									   .getResultList();
@@ -57,6 +56,12 @@ public class SaveJobDAOImpl implements SaveJobDAO {
 	public SaveJob getReferenceId(int id) {
 		SaveJob job = entityManager.getReference(SaveJob.class, id);
 		return job;
+	}
+
+	@Override
+	public SaveJob findById(int id) {
+		SaveJob saveJob = entityManager.find(SaveJob.class, id);
+		return saveJob;
 	}
 
 }

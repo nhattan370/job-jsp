@@ -1,4 +1,6 @@
 let loginId = JSON.parse(localStorage.getItem("login-id")) || "";
+let savejobs = JSON.parse(localStorage.getItem("save-job")) || [];
+let applyjobs = JSON.parse(localStorage.getItem("apply-job"))||[];
 
 function getCookie(name){
 	const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -13,7 +15,7 @@ $(document).ready(function(){
 		localStorage.setItem("login-id",cookieUser);		
 	}
 	
-	applyJobs.forEach((item)=>{
+	applyjobs.forEach((item)=>{
 		const [reId, userId] = item.split("_");
 		let applyBtn = $("#applyBtn"+reId);
 		if(loginId==userId){

@@ -9,7 +9,8 @@ import model.User;
 public interface SaveJobService {
 	SaveJob findByRecruitmentAndUser(Recruitment recruitment, User user);
 	SaveJob save(SaveJob saveJob);
-	void delete(int id);
-	List<SaveJob> findByUser(User user);
+	void delete(SaveJob job);
+	List<SaveJob> findAllByUser(User user);
 	SaveJob getReferenceId(int id);
+	SaveJob findById(int id);
 }

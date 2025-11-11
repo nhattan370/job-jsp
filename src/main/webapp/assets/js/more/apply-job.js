@@ -1,6 +1,5 @@
-let applyJobs = JSON.parse(localStorage.getItem("apply-job"))||[];
 
-function showSwal(title, status="success", buttons=true){
+/*function showSwal(title, status="success", buttons=true){
 	swal({
 	    title: title,
 	    text: 'Redirecting...', 
@@ -8,7 +7,7 @@ function showSwal(title, status="success", buttons=true){
 	    timer: 2000,
 	    buttons: buttons
 	})
-}
+}*/
 
 function apply(id){
      var name = "#idRe" +id;
@@ -39,6 +38,7 @@ function apply(id){
 					console.log(data);
                      if (data.status == "save") {
 						 showSwal('Ứng tuyển thành công!', 'success', true);
+						 document.activeElement.blur();
 						 $(nameModal).modal('hide');
 						 $('#fileUpload').val("");
 						 // Disable nút Apply Job

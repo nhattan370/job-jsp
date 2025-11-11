@@ -149,5 +149,3 @@
         </div>
     </div>
 </section>
-
-<!-- Thay modal để làm dễ hơn -->

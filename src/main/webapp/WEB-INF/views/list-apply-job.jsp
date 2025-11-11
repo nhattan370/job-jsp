@@ -20,7 +20,7 @@
         })
     </script>
 </div> --%>
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -30,8 +30,9 @@
             </div>
         </div>
     </div>
-</div>
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
+</div> --%>
+
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -41,59 +42,95 @@
             </div>
         </div>
     </div>
-</div>
+</div> --%>
 
-<section class="ftco-section bg-light" th:if="${session.user.role.id == 1 }">
+   <jsp:include page="/WEB-INF/common/page-hero.jsp">
+  		<jsp:param value="Danh sách công việc đã ứng tuyển" name="title"/>
+  		<jsp:param value="Công việc" name="breadcrumb"/>
+  </jsp:include>
+
+<section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 pr-lg-5">
-                <div th:if="${saveJobList.totalPages > 0}" class="row">
-                    <th:block th:each="saveJob : ${saveJobList.content}">
+            	<c:if test="${applyJobList.size()>0}">
+                <div class="row">
+                    <c:forEach var="applyJob" items="${applyJobList}">
                         <div class="col-md-12 ">
-                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${applyJob.id}">
                                 <div class="one-third mb-4 mb-md-0">
                                     <div class="job-post-item-header align-items-center">
-                                        <span class="subadge" th:text="${saveJob.recruitment.type}"></span>
-                                        <h2 class="mr-3 text-black" ><a th:text="${saveJob.recruitment.title}" th:href="${'/recruitment/detail/'} +${saveJob.recruitment.id}"></a></h2>
+                                        <span class="subadge">${applyJob.recruitment.type}</span>
+                                        <h2 class="mr-3 text-black" ><a th:href="${'/recruitment/detail/'} +${applyJob.recruitment.id}">${applyJob.recruitment.title}</a></h2>
                                     </div>
                                     <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#" th:text="${saveJob.recruitment.Company.nameCompany}" ></a></div>
-                                        <div><span class="icon-my_location"></span> <span th:text="${saveJob.recruitment.address}"></span></div>
+                                        <div class="mr-3"><span class="icon-layers"></span> <a th:href="#">${applyJob.recruitment.company.nameCompany}</a></div>
+                                        <div><span class="icon-my_location"></span> <span>${applyJob.recruitment.address}</span></div>
                                     </div>
                                 </div>
-                                <input type="hidden" th:id="${'idRe'}+${saveJob.recruitment.id}" th:value="${saveJob.recruitment.id}">
+                                <input type="hidden" id="idApply${applyJob.id}" value="${applyJob.id}">
                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
                                     <div>
-                                        <a  th:href="${'/user/delete-apply/'}+${saveJob.id}" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-                                            <span class="icon-delete"></span>
-                                        </a>
+                                        <button type="button"
+										        class="btn btn-outline-danger btn-sm mr-2"
+										        data-toggle="modal"
+										        data-target="#deleteModal${applyJob.id}">
+										    Rút đơn
+										</button>
+                                        
                                     </div>
-                                    <p th:if="${saveJob.status == 1}" style="color: #1e7e34;font-weight: bold;margin-top: 10px">Đã duyệt</p>
-                                    <p th:if="${saveJob.status == 0}" style="color: red;font-weight: bold;margin-top: 10px">Đợi duyệt</p>
+                                    
+<%--                                     <p th:if="${applyJob.status == 1}" style="color: #1e7e34;font-weight: bold;margin-top: 10px">Đã duyệt</p>
+                                    <p th:if="${applyJob.status == 0}" style="color: red;font-weight: bold;margin-top: 10px">Đợi duyệt</p> --%>
                                 </div>
                             </div>
                         </div><!-- end -->
-                        <!-- Modal -->
-                        <div class="modal fade" th:id="${'exampleModal'}+${saveJob.recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        
+   						<!-- Modal xác nhận xóa -->
+					    <div class="modal fade" id="deleteModal${applyJob.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel${applyJob.id}" aria-hidden="true">
+					        <div class="modal-dialog modal-dialog-centered" role="document">
+					            <div class="modal-content border-0 shadow">
+					                <div class="modal-header bg-danger text-white">
+					                    <h5 class="modal-title" id="deleteModalLabel${applyJob.id}">Xác nhận xóa</h5>
+					                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					                        <span aria-hidden="true">&times;</span>
+					                    </button>
+					                </div>
+					
+					                <form>
+					                    <div class="modal-body">
+					                        <p>Bạn có chắc chắn muốn <strong>hủy bỏ ứng tuyển</strong> công việc
+					                        <span class="text-primary font-weight-bold">${applyJob.recruitment.title}</span> không?</p>
+					                    </div>
+					                    <div class="modal-footer">
+					                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+					                        <button type="button" class="btn btn-danger" onclick="deleteApply(${applyJob.id})">Đồng ý</button>
+					                    </div>
+					                </form>
+					            </div>
+					        </div>
+					    </div>
+                        
+<%--                         <div class="modal fade" id="exampleModal${applyJob.recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ứng tuyển: <span th:text="${saveJob.recruitment.title}"></span></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ứng tuyển: <span>${applyJob.recruitment.title}</span></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="post" action="/user/apply-job">
+                                    <form>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <label for="fileUpload"
                                                            class="col-form-label">Chọn cv:</label>
                                                     <input type="file" class="form-control"
-                                                           th:id="${'fileUpload'}+${saveJob.recruitment.id}" name="file"   required>
+                                                           id="fileUpload${applyJob.recruitment.id}" name="file" required>
                                                     <label for="fileUpload"
                                                            class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control"  th:id="${'text'}+${saveJob.recruitment.id}" >
+                                                    <textarea rows="10" cols="3" class="form-control" id="text${applyJob.recruitment.id}" >
 
                                                     </textarea>
                                                 </div>
@@ -101,7 +138,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                <button type="button" th:onclick="'apply(' +${saveJob.recruitment.id}+ ')'" class="btn btn-primary">Nộp</button>
+                                                <button type="button" onclick="'apply(' +${applyJob.recruitment.id}+ ')'" class="btn btn-primary">Nộp</button>
                                             </div>
                                         </div>
                                     </form>
@@ -109,22 +146,24 @@
 
                                 </div>
                             </div>
-                        </div>
-                    </th:block>
-
+                        </div> --%>
+                    </c:forEach>
                 </div>
-                <div style="text-align: center" th:if="${saveJobList.totalPages < 1}">
-                    <p style="color:red;">Danh sách trống</p>
-                </div>
+                </c:if>
+                <c:if test="${applyJobList.size() < 1}">
+	                <div style="text-align: center">
+	                    <p style="color:red;">Danh sách trống</p>
+	                </div>
+                </c:if>
 <%--                 <div class="row mt-5">
                     <div class="col text-center">
                         <div class="block-27">
                             <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{/save-job/get-list(page = ${saveJobList.number - 1})}">&lt;</a></li>
+                                <li th:if="${numberPage>0}"><a th:href="@{/save-job/get-list(page = ${applyJobList.number - 1})}">&lt;</a></li>
                                 <th:block th:each="recruitment,state  : ${recruitmentList}">
                                     <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{/save-job/get-list(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
                                 </th:block>
-                                <li th:if="${numberPage<saveJobList.totalPages - 1}"><a th:href="@{/save-job/get-list(page = ${saveJobList.number + 1})}">&gt;</a></li>
+                                <li th:if="${numberPage<applyJobList.totalPages - 1}"><a th:href="@{/save-job/get-list(page = ${applyJobList.number + 1})}">&gt;</a></li>
                             </ul>
                         </div>
                     </div>

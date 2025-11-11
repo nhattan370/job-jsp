@@ -1,7 +1,5 @@
-const alertContainer = document.getElementById("alert-container");
-let savejobs = JSON.parse(localStorage.getItem("save-job")) || [];
 
-function showToast(message1, message2, type){
+/*function showToast(message1, message2, type){
 	let alertId = "alert-"+Date.now();
 	
 	let alertStatus = "";
@@ -21,14 +19,14 @@ function showToast(message1, message2, type){
 	setTimeout(()=>{
 		$("#"+alertId).alert("close");
 	},3000);
-}
+}*/
  
 function save(id) {
  	let idRe = $("#idRe" + id).val();
 	let heartIcon = $("#heartIcon"+id);
 	const iconWrapper = heartIcon.closest(".icon");
 
- 	$.get("user/save-job", { idRe: idRe })
+ 	$.get(contextPath + '/user/save-job', { idRe: idRe })
  		.done(function (data) {
 			if(data.status==="save"){
 				//Show change icon

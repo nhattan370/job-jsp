@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.Recruitment;
 import model.User;
@@ -35,6 +37,36 @@ public class ApplyPostDAOImpl implements ApplyPostDAO {
 		}catch (NoResultException e) {
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public List<ApplyPost> findAllByUser(User user) {
+		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.user = :u", ApplyPost.class)
+												  .setParameter("u", user)
+												  .getResultList();
+									
+		return applyPosts;
+	}
+
+	@Override
+	public ApplyPost findById(int id) {
+		ApplyPost applyPost = entityManager.find(ApplyPost.class, id);
+		return applyPost;
+	}
+
+	@Override
+	public ApplyPost update(ApplyPost applyPost) {
+		return entityManager.merge(applyPost);
+	}
+
+	@Override
+	public List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus status, Boolean exclude) {
+		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.user=:u AND "
+															+ (exclude ? "a.status <> :s" : "a.status = :s"),ApplyPost.class)
+												  .setParameter("u", user)
+												  .setParameter("s", status)
+												  .getResultList();
+		return applyPosts;
 	}
 
 }

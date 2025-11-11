@@ -46,9 +46,8 @@
 	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	  
 	  <!-- more -->
-	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
-	  <script type="module" src="${pageContext.request.contextPath}/assets/js/more/set-user.js"></script>
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/apply-save-job.css">
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/navbar.css">
 	  <script>const contextPath = "${pageContext.request.contextPath}";</script>
 	  
+	  <div id="alert-container" class="position-fixed" style="top: 80px; right: 10px; z-index: 2000;"></div>

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -51,7 +49,7 @@ public class HandleJobUserController {
 
 	@GetMapping("/save-job")
 	@ResponseBody
-	public Map<String, String> saveJob(@RequestParam("idRe") String re, HttpSession session,
+	public Map<String, String> saveJob(@RequestParam("idRe") String re,
 						@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		Map<String, String> map = new HashMap<String, String>();
 		User user = customUserDetails.getUser();
@@ -62,7 +60,7 @@ public class HandleJobUserController {
 			saveJobService.save(new SaveJob(recruitment,user));
 			map.put("status","save");		
 		}else {
-			saveJobService.delete(saveJob.getId());
+			saveJobService.delete(saveJob);
 			map.put("status","delete");
 		}
 		map.put("key", Integer.parseInt(re)+"_"+ user.getId());

@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+
+import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.Recruitment;
 import model.User;
@@ -7,4 +10,8 @@ import model.User;
 public interface ApplyPostService {
 	ApplyPost save(ApplyPost applyPost);
 	ApplyPost findByRecruitmentAndUser(Recruitment recruitment, User user);
+	List<ApplyPost> findAllByUser(User user);
+	List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus applyPostStatus, Boolean exclude);
+	ApplyPost findById(int id);
+	ApplyPost update(ApplyPost applyPost);
 }

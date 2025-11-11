@@ -9,22 +9,10 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-<div class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
-	<c:if test="${not empty sessionScope.mes}">
-	    <script type="text/javascript">
-	        swal({
-	            title: "<c:out value='${sessionScope.mes}'/>",
-	            text: "Redirecting...", 
-	            icon: "success",
-	            timer: 2000,
-	            buttons: true
-	        });
-	    </script>
-	    <c:remove var="mes" scope="session"/>	
-	</c:if>
-</div> 
+
+
 <!-- END nav -->
-<div class="hero-wrap hero-wrap-2" style="background-image: url(${pageContext.request.contextPath}/assets/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url(${pageContext.request.contextPath}/assets/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -34,12 +22,12 @@
             </div>
         </div>
     </div>
-</div> 
+</div>  --%>
 
-<%--   <jsp:include page="/WEB-INF/common/page-hero.jsp">
+   <jsp:include page="/WEB-INF/common/page-hero.jsp">
   		<jsp:param value="Danh sách công việc đã lưu" name="title"/>
   		<jsp:param value="Công việc" name="breadcrumb"/>
-  </jsp:include> --%>
+  </jsp:include> 
 
 <%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
     <div class="overlay"></div>
@@ -61,7 +49,7 @@
                 <div class="row">
                     <c:forEach var="saveJob" items="${saveJobList}">
                         <div class="col-md-12 ">
-                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${saveJob.id}">
                                 <div class="one-third mb-4 mb-md-0">
                                     <div class="job-post-item-header align-items-center">
                                         <span class="subadge">${saveJob.recruitment.type}</span>
@@ -72,7 +60,7 @@
                                         <div><span class="icon-my_location"></span> <span >${saveJob.recruitment.address}</span></div>
                                     </div>
                                 </div>
-                                <input type="hidden" id="idRe${saveJob.recruitment.id}" value="${saveJob.recruitment.id}">
+                                <input type="hidden" id="idSa${saveJob.id}" value="${saveJob.id}">
                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
                                     <div>
                                         <a data-toggle="modal" data-target="#deleteModal${saveJob.id}" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
@@ -96,15 +84,15 @@
 					                    </button>
 					                </div>
 					
-					                <form action="${pageContext.request.contextPath}/user/delete-save-job" method="post">
+					                <form>
 					                    <div class="modal-body">
-					                        <input type="hidden" name="id-save-job" value="${saveJob.id}" />
 					                        <p>Bạn có chắc chắn muốn <strong>bỏ lưu</strong> công việc
 					                            <span class="text-primary font-weight-bold">${saveJob.recruitment.title}</span> không?</p>
 					                    </div>
+					                    <%-- <input type="hidden" id="idSa${saveJob.recruitment.id}" value="${saveJob.recruitment.id}"> --%>
 					                    <div class="modal-footer">
 					                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-					                        <button type="submit" class="btn btn-danger">Đồng ý</button>
+					                        <button type="button" class="btn btn-danger" onclick="deleteSaveJob(${saveJob.id})">Đồng ý</button>
 					                    </div>
 					                </form>
 					            </div>

@@ -12,7 +12,6 @@ import dao.SaveJobDAO;
 import model.Recruitment;
 import model.SaveJob;
 import model.User;
-import share.ColorExample;
 
 @Service
 @Transactional
@@ -38,19 +37,25 @@ public class SaveJobServiceImpl implements SaveJobService{
 	}
 
 	@Override
-	public void delete(int id) {
-		dao.delete(id);		
+	public void delete(SaveJob saveJob) {
+		dao.delete(saveJob);		
 	}
 
 	@Override
-	public List<SaveJob> findByUser(User user) {
-		return dao.findByUser(user);
+	public List<SaveJob> findAllByUser(User user) {
+		return dao.findAllByUser(user);
 	}
 
 	@Override
 	public SaveJob getReferenceId(int id) {
-		
-		return null;
+		SaveJob saveJob = dao.getReferenceId(id);
+		return saveJob;
+	}
+
+	@Override
+	public SaveJob findById(int id) {
+		SaveJob saveJob = dao.findById(id);
+		return saveJob;
 	}
 
 }
