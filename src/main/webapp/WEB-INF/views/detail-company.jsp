@@ -27,30 +27,30 @@
             <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="d-flex align-items-center">
                     <div class="border p-2 d-inline-block mr-3 rounded">
-                        <img width="100" height="100" th:src="${company.logo}" alt="Image">
+                        <img width="100" height="100" src="${company.logo}" alt="Image">
                     </div>
                     <div>
-                        <h2 th:text="${company.nameCompany}"></h2>
+                        <h2>${company.nameCompany}</h2>
                         <div>
-                            <span class="icon-briefcase mr-2"></span><span th:text="${company.email}" class="ml-0 mr-2 mb-2"></span>
-                            <span  class="icon-room mr-2"></span ><span th:text="${company.address}" class="m-2"></span>
+                            <span class="icon-briefcase mr-2"></span><span class="ml-0 mr-2 mb-2">${company.email}</span>
+                            <span  class="icon-room mr-2"></span ><span class="m-2">${company.address}</span>
 
                         </div>
-                        <input type="hidden" id="idCompany">
+                        <input type="hidden" id="idCompany" value="${company.id}">
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="row">
-                    <div th:if="${session.user}" class="col-6">
-                        <a th:if="${session.user.role.id == 1}" onclick="follow()" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Theo dõi</a>
+                    <div class="col-12">
+                        <a onclick="follow()" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Theo dõi</a>
                     </div>
-                    <div th:unless="${session.user}" class="col-6">
+<%--                     <div th:unless="${session.user}" class="col-6">
                         <a  onclick="follow()" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Theo dõi</a>
-                    </div>
-                    <div class="col-6">
+                    </div> --%>
+<!--                     <div class="col-6">
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -58,8 +58,8 @@
             <div class="col-lg-8">
                 <div class="mb-5">
 
-                    <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Mô tả công việc</h3>
-                    <p th:utext="${company.description}"></p>
+                    <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Mô tả công ty</h3>
+                    <p>${company.description}</p>
                 </div>
 
             </div>
@@ -68,9 +68,9 @@
                     <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Tóm tắt công việc</h3>
                     <ul class="list-unstyled pl-3 mb-0">
 
-                        <li class="mb-2"><strong class="text-black">Email công ty: </strong> <span th:text="${company.email}"></span></li>
-                        <li class="mb-2"><strong class="text-black">Số điện thoại: </strong> <span th:text="${company.phoneNumber}"></span></li>
-                        <li class="mb-2"><strong class="text-black">Đại chỉ: </strong> <span th:text="${company.address}"></span></li>
+                        <li class="mb-2"><strong class="text-black">Email công ty: </strong> <span>${company.email}</span></li>
+                        <li class="mb-2"><strong class="text-black">Số điện thoại: </strong> <span>${company.phoneNumber}</span></li>
+                        <li class="mb-2"><strong class="text-black">Đại chỉ: </strong> <span>${company.address}</span></li>
                     </ul>
                 </div>
 
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <script>
+<!--     <script>
         function follow(){
             var name = "#idCompany";
             var idCompany = $(name).val();
@@ -136,7 +136,7 @@
                 }
             )
         }
-    </script>
+    </script> -->
 </section>
 
 <!-- start footer -->

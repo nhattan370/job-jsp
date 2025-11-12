@@ -49,4 +49,9 @@ public class SearchController {
 		return "redirect:/search";
 	}
 	
+	@GetMapping("/search/test")
+	public String test() {
+		return "detail-company";
+	}
+	
 }

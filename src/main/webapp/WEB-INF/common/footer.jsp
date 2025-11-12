@@ -15,11 +15,9 @@
             <div class="col-md-4 mb-4">
                 <h5 class="font-weight-bold mb-3">Liên kết nhanh</h5>
                 <ul class="list-unstyled">
-                    <li><a href="/" class="footer-link">Trang chủ</a></li>
-                    <li><a href="/recruitment/search" class="footer-link">Công việc</a></li>
-                    <li><a href="/user/search" class="footer-link">Ứng viên</a></li>
-                    <li><a href="/recruitment/post" class="footer-link">Đăng tuyển</a></li>
-                    <li><a href="/auth/login" class="footer-link">Đăng nhập</a></li>
+                    <li><a href="${pageContext.request.contextPath}" class="footer-link">Trang chủ</a></li>
+                    <li><a href="" class="footer-link">Công việc</a></li>
+                    <li><a href="${pageContext.request.contextPath}/search/test" class="footer-link">test</a></li>
                 </ul>
             </div>
 
@@ -42,6 +40,7 @@
         </div>
     </div>
 </footer>
+<script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/more/set-user.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
@@ -52,3 +51,4 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/more/apply-job.js"></script> 
+<script src="${pageContext.request.contextPath}/assets/js/more/follow-company.js"></script>

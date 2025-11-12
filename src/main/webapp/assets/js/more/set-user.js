@@ -1,6 +1,7 @@
-let loginId = JSON.parse(localStorage.getItem("login-id")) || "";
+let loginId =  JSON.parse(localStorage.getItem("login-id")) || "";
 let savejobs = JSON.parse(localStorage.getItem("save-job")) || [];
 let applyjobs = JSON.parse(localStorage.getItem("apply-job"))||[];
+let followCompany = JSON.parse(localStorage.getItem("follow-company"))||[];
 
 function getCookie(name){
 	const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));

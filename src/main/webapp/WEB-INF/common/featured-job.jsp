@@ -4,6 +4,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section class="ftco-section bg-light">
+
+<%@ include file="/WEB-INF/common/url.jspf" %>
 <!-- show toast -->
 <div id="alert-container" style="position: fixed; top: 60px; left: 20px; z-index: 9999;"></div>
 
@@ -24,10 +26,10 @@
                                 <div class="one-third mb-4 mb-md-0">
                                     <div class="job-post-item-header align-items-center">
                                         <span class="subadge">${recruitment.type}</span>
-                                        <h2 class="mr-3 text-black"><a href="recruitment/detail?${recruitment.id}">${recruitment.title}</a></h2>
+                                        <h2 class="mr-3 text-black"><a th:href="recruitment/detail?${recruitment.id}">${recruitment.title}</a></h2>
                                     </div>
                                     <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#">${recruitment.nameCompany}</a></div>
+                                        <div class="mr-3"><span class="icon-layers"></span> <a href="${DETAIL_COMPANY}${recruitment.idCompany}">${recruitment.nameCompany}</a></div>
                                         <div><span class="icon-my_location"></span> <span>${recruitment.address}</span></div>
                                     </div>
                                 </div>
@@ -137,9 +139,9 @@
                 <c:forEach items="${companies}" var="company">
 	                <div class="sidebar-box">
 	                    <div class="">
-	                        <a href="user/detail-company?${company.id}" class="company-wrap"><img src="${company.logo}" class="img-fluid" alt="Colorlib Free Template"></a>
+	                        <a href="${DETAIL_COMPANY}${company.id}" class="company-wrap"><img src="${company.logo}" class="img-fluid" alt="Colorlib Free Template"></a>
 	                        <div class="text p-3">
-	                            <h3><a href="/user/detail-company?${company.id}">${company.nameCompany}</a></h3>
+	                            <h3><a href="${DETAIL_COMPANY}${company.id}">${company.nameCompany}</a></h3>
 	                            <p><span class="number" style="color: black">${company.totalRecruitments}</span> <span>Vị trí ứng tuyển</span></p>
 	                        </div>
 	                    </div>

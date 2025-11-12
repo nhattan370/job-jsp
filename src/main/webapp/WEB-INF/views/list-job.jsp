@@ -14,12 +14,14 @@
   <div class="container">
     <div class="row no-gutters slider-text align-items-end justify-content-start">
       <div class="col-md-12 ftco-animate text-center mb-5">
-        <p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Job Post</span></p>
+        <p class="breadcrumbs mb-0"><span class="mr-3"><a href="#">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Job Post</span></p>
         <h1 class="mb-3 bread">Browse Job</h1>
       </div>
     </div>
   </div>
 </div>
+
+
 <section style="display: block" class="ftco-section">
   <div class="">
     <div class="row justify-content-center mb-5">
@@ -501,13 +503,8 @@
     </div>
   </div>
 </section>
-
-<footer th:replace="public/fragments :: footer" class="ftco-footer ftco-bg-dark ftco-section">
-
-</footer>
-
-
-
-
+	<!-- start footer -->
+	<%@ include file="/WEB-INF/common/footer.jsp" %>
+	<!-- end footer -->
 </body>
 </html>

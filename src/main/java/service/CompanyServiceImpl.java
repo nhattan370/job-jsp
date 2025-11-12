@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dao.CompanyDAO;
 import dto.CompanyHomeDTO;
+import model.Company;
 
 @Service
 public class CompanyServiceImpl implements CompanyService{
@@ -21,6 +22,16 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public List<CompanyHomeDTO> findTwoAndSort() {
 		return companyDAO.findTwoAndSort();
+	}
+
+	@Override
+	public Company findById(int id) {
+		return companyDAO.findById(id);
+	}
+
+	@Override
+	public Company getReference(int id) {
+		return companyDAO.getReference(id);
 	}
 
 }

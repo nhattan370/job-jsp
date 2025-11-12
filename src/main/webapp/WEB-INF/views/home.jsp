@@ -106,5 +106,4 @@
 	<!-- end footer -->
 
 </body>
-<script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
 </html>

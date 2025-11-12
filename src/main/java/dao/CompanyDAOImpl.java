@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import dto.CompanyHomeDTO;
+import model.Company;
 
 @Repository
 public class CompanyDAOImpl implements CompanyDAO{
@@ -27,5 +28,17 @@ public class CompanyDAOImpl implements CompanyDAO{
 				.setMaxResults(2)
 				.getResultList();
 		return list;
+	}
+
+	@Override
+	public Company findById(int id) {
+		Company company = em.find(Company.class, id);
+		return company;
+	}
+
+	@Override
+	public Company getReference(int id) {
+		Company company = em.getReference(Company.class, id);
+		return company;
 	}
 }
