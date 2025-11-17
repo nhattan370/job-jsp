@@ -1,7 +1,7 @@
 let loginId =  JSON.parse(localStorage.getItem("login-id")) || "";
 let savejobs = JSON.parse(localStorage.getItem("save-job")) || [];
 let applyjobs = JSON.parse(localStorage.getItem("apply-job"))||[];
-let followCompany = JSON.parse(localStorage.getItem("follow-company"))||[];
+let followCompanies = JSON.parse(localStorage.getItem("follow-company"))||[];
 
 function getCookie(name){
 	const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -26,13 +26,21 @@ $(document).ready(function(){
 	})
 	savejobs.forEach((item)=>{
 		const [reId, userId] = item.split("_");
-		console.log(userId)
 		let heartIcon = $("#heartIcon"+reId);
 		const iconWrapper = heartIcon.closest(".icon");
 		if(loginId==userId){
 			heartIcon.addClass("saved");
 			iconWrapper.addClass("saved");		
 		}
+	});
+	followCompanies.forEach((item)=>{
+		const [coId, userId] = item.split("_");
+		let heartIcon = $("#heartIcon"+coId);
+		let followText = $("#followText"+coId);
+		if(loginId==userId){
+			heartIcon.removeClass("icon-heart-o").addClass("icon-heart heart-followed");
+			followText.text("Đang theo dõi");	
+		}		
 	});
 	
 })

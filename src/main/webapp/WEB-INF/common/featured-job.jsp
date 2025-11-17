@@ -20,114 +20,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <c:forEach  var="recruitment" items="${recruitments}">
-                        <div class="col-md-12 ">
-                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-                                <div class="one-third mb-4 mb-md-0">
-                                    <div class="job-post-item-header align-items-center">
-                                        <span class="subadge">${recruitment.type}</span>
-                                        <h2 class="mr-3 text-black"><a th:href="recruitment/detail?${recruitment.id}">${recruitment.title}</a></h2>
-                                    </div>
-                                    <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="${DETAIL_COMPANY}${recruitment.idCompany}">${recruitment.nameCompany}</a></div>
-                                        <div><span class="icon-my_location"></span> <span>${recruitment.address}</span></div>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="idRe${recruitment.id}" value="${recruitment.id}">
-<%--                                 <div th:if="${session.user}" class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                    <div th:if="${session.user.role.id == 1}">
-                                        <a onclick="save(${recruitment.id})" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-                                            <span class="icon-heart"></span>
-                                        </a>
-                                    </div>
-                                    <a th:if="${session.user.role.id == 1}" data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
-                                </div> --%>
-
-<%--  
-                                <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
- 	                                <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-	                                    <div>
-	                                        <a onclick="save(${recruitment.id})" class="text-center d-flex justify-content-center align-items-center icon ${principal!=null && sessionScope['save_'+recruitment.id+principal.user.id] ? 'save' : ''} mr-2">
-	                                            <span id="heartIcon${recruitment.id}" class="icon-heart ${principal!=null && sessionScope['save_' + recruitment.id + principal.user.id] ? 'save' : ''} "></span>
-	                                        </a>
-	                                    </div>
-	                                    <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
-	                                </div> 
-                                </sec:authorize>
-	                                --%>
-	                                
- 	                                <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
-									    <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-									        <div>
-									        	<a onclick="save(${recruitment.id})"
-												   class="text-center d-flex justify-content-center align-items-center icon 
-												          mr-2">
-												    <span id="heartIcon${recruitment.id}"
-												          class="icon-heart">
-												    </span>
-												</a>
-									        </div>
-									        <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2" id="applyBtn${recruitment.id}">Apply Job</a>
-									    </div>
-									</sec:authorize>
-                            </div>
-                        </div>
-                        <!-- end -->
-                        <!-- Modal -->
-<%--                         <div class="modal fade" id="exampleModal${recruitment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ứng tuyển: <span>${recruitment.title}</span></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form method="post">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <select id="choose${recruitment.id}" onchange="choosed(${recruitment.id})" class="form-control" aria-label="Default select example">
-                                                        <option selected>Chọn phương thức nộp</option>
-                                                        <option value="1">Dùng cv đã cập nhật</option>
-                                                        <option value="2">Nộp cv mới</option>
-                                                    </select>
-                                                </div>
-                                                <div id="loai1${recruitment.id}" style="display:none" class="col-12">
-                                                    <label for="fileUpload"
-                                                           class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control" id="text-f${recruitment.id}"></textarea>
-                                                </div>
-                                                <div id="loai2${recruitment.id}" style="display:none" class="col-12">
-                                                    <label for="fileUpload"
-                                                           class="col-form-label">Chọn cv:</label>
-                                                    <input type="file" class="form-control"
-                                                           id="fileUpload${recruitment.id}" name="file" required>
-                                                    <label for="fileUpload"
-                                                           class="col-form-label">Giới thiệu:</label>
-                                                    <textarea rows="10" cols="3" class="form-control" id="text-s${recruitment.id}"></textarea>
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                <button type="button" id="button1${recruitment.id}" style="display: none" onclick="apply1(${recruitment.id})" class="btn btn-primary">Nộp</button>
-                                                <button type="button" id="button2${recruitment.id}" style="display: none" onclick="apply(${recruitment.id})" class="btn btn-primary">Nộp</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                        </div> --%>
-                        
-                        <jsp:include page="/WEB-INF/common/apply-modal.jsp">
-                        	<jsp:param value="${recruitment.id}" name="id"/>
-                        	<jsp:param value="${recruitment.title}" name="title"/>
-                        </jsp:include>
-                    </c:forEach>
-
+                   	<c:forEach var="recruitment" items="${recruitments}">
+ 			    		<c:set var="recruitment" value="${recruitment}" scope="request"/> 
+			    		<jsp:include page="/WEB-INF/common/apply-save.jsp">
+			    			<jsp:param name="DETAIL_RECRUITMENT" value="${DETAIL_RECRUITMENT}" />
+        					<jsp:param name="DETAIL_COMPANY" value="${DETAIL_COMPANY}" />
+    					</jsp:include>
+          			</c:forEach>
                 </div>
             </div>
             <div class="col-lg-3 sidebar">

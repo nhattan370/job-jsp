@@ -1,8 +1,9 @@
 
 function follow(){
-           var name = "#idCompany";
-           var idCompany = $(name).val();
-           var formData = new FormData();
+           let idCompany = $("#idCompany").val();
+		   let heartIcon = $("#heartIcon"+idCompany);
+		   let followText = $("#followText"+idCompany);
+           let formData = new FormData();
            formData.append('idCompany', idCompany);
            $.ajax(
                {
@@ -14,19 +15,22 @@ function follow(){
                    success: function (data) {
                        if(data.status == "follow"){
 						
-						//Sửa trái tim
-						//Sửa bên set-user cái trái tim luôn
-						
-						followCompany = !followCompany.includes(data.key) ? [...followCompany, data.key] : followCompany;
-						localStorage.setItem("follow-company", JSON.stringify(followCompany));
+						followCompanies = !followCompanies.includes(data.key) ? [...followCompanies, data.key] : followCompanies;
+						localStorage.setItem("follow-company", JSON.stringify(followCompanies));
 						
 						showToast("Thành công!","Lưu công việc thành công!","success");
+						
+						heartIcon.removeClass("icon-heart-o").addClass("icon-heart heart-followed");
+						followText.text("Đang theo dõi");
                        }else if(data.status == "unfollow"){
 						
-						followCompany = followCompany.filter(items => items != data.key);
-						localStorage.setItem("follow-company", JSON.stringify(followCompany));
+						followCompanies = followCompanies.filter(items => items != data.key);
+						localStorage.setItem("follow-company", JSON.stringify(followCompanies));
 						
 						showToast("Đã bỏ lưu!","Công ty đã được gỡ khỏi danh sách lưu.","warning");
+						
+						heartIcon.removeClass("icon-heart heart-followed").addClass("icon-heart-o");
+						followText.text("Theo dõi");
                        }else{
 						showToast("Có lỗi rồi!","Vui lòng đăng nhập để đảm bảo tránh sai sót!","error");
                        }

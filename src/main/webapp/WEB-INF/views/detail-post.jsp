@@ -22,7 +22,7 @@
     </script>
 </div> --%>
 
-<div class="hero-wrap hero-wrap-2" style="background-image: url('/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+<!-- <div class="hero-wrap hero-wrap-2" style="background-image: url('/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -32,7 +32,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+   <jsp:include page="/WEB-INF/common/page-hero.jsp">
+  		<jsp:param value="Chi tiet công việc" name="title"/>
+  		<jsp:param value="Chi tiết" name="breadcrumb"/>
+  </jsp:include>
 
 <section style="margin-top: 10px" class="site-section">
     <div class="container">
@@ -40,7 +45,7 @@
             <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="d-flex align-items-center">
                     <div class="border p-2 d-inline-block mr-3 rounded">
-                        <img width="100" height="100" th:src="${recruitment.company.logo}" alt="Image">
+                        <img width="100" height="100" src="${recruitment.company.logo}" alt="Image">
                     </div>
                     <div>
                         <h2></h2>
@@ -63,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+<!--             <div class="col-lg-4">
                 <div  class="row">
                     <div class="col-6">
                         <a class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Lưu</a>
@@ -72,14 +77,13 @@
                         <a data-toggle="modal" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-lg-8">
                 <div class="mb-5">
-
                     <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Mô tả công việc</h3>
-                    <p th:utext="${recruitment.description}"></p>
+                    <p>${recruitment.description}</p>
                 </div>
 
             </div>
@@ -87,14 +91,14 @@
                 <div class="bg-light p-3 border rounded mb-4">
                     <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Tóm tắt công việc</h3>
                     <ul class="list-unstyled pl-3 mb-0">
-                       <li class="mb-2"> <strong class="text-black">Ngày tạo: </strong> <span>14/10/2022</span> </li>
-                        <li class="mb-2"><strong class="text-black">Kiểu công việc: </strong> <span>Java</span></li>
-                        <li class="mb-2"><strong class="text-black">Loại công việc: </strong> <span">Java</span></li>
-                        <li class="mb-2"><strong class="text-black">Kinh nghiệm: </strong> <span>2 nan </span></li>
-                        <li class="mb-2"><strong class="text-black">Đại chỉ: </strong> <span> Ha Noi</span></li>
-                        <li class="mb-2"><strong class="text-black">Lương: </strong> <span> 20000 </span></li>
-                        <li class="mb-2"><strong class="text-black">Số lượng: </strong><span>2</span></li>
-                        <li class="mb-2"><strong class="text-black">Hạn nộp cv: </strong><span>15/10/2023</span></li>
+                       <li class="mb-2"> <strong class="text-black">Ngày tạo: </strong> <span>${recruitment.createdAt}</span> </li>
+                        <li class="mb-2"><strong class="text-black">Kiểu công việc: </strong> <span>${recruitment.type}</span></li>
+                        <li class="mb-2"><strong class="text-black">Loại công việc: </strong> <span>${recruitment.category.name}</span></li>
+                        <li class="mb-2"><strong class="text-black">Kinh nghiệm: </strong> <span>${recruitment.experience}</span></li>
+                        <li class="mb-2"><strong class="text-black">Địa chỉ: </strong> <span>${recruitment.address}</span></li>
+                        <li class="mb-2"><strong class="text-black">Lương: </strong> <span>${recruitment.salary}</span></li>
+                        <li class="mb-2"><strong class="text-black">Số lượng: </strong><span>${recruitment.quantity}</span></li>
+                        <li class="mb-2"><strong class="text-black">Hạn nộp cv: </strong><span>${recruitment.deadline}</span></li>
                     </ul>
                 </div>
 
@@ -113,7 +117,7 @@
     </div>
 </section>
 <!-- Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<%-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -148,7 +152,7 @@
 
         </div>
     </div>
-</div>
+</div> --%>
 <section class="site-section" id="next">
     <div class="container">
 
@@ -239,7 +243,8 @@
                 </div>
             </div>
         </div>
-        <th:block  th:each="recruitment : ${listRelated}">
+        
+      <%--   <th:block  th:each="recruitment : ${listRelated}">
             <div th:unless="${applyPosts}" class="col-md-12 ">
                 <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
                     <div class="one-third mb-4 mb-md-0">
@@ -248,7 +253,7 @@
                             <h2 class="mr-3 text-black" ><a th:text="${recruitment.title}" th:href="${'/recruitment/detail/'} +${recruitment.id}"></a></h2>
                         </div>
                         <div class="job-post-item-body d-block d-md-flex">
-                            <div class="mr-3"><span class="icon-layers"></span> <a href="#" th:text="${recruitment.Company.nameCompany}" ></a></div>
+                            <div class="mr-3"><span class="icon-layers"></span> <a href="#" th:text="${recruitment.company.nameCompany}" ></a></div>
                             <div><span class="icon-my_location"></span> <span th:text="${recruitment.address}"></span></div>
                         </div>
                     </div>
@@ -271,10 +276,11 @@
                         <a  data-toggle="modal" th:data-target="${'#exampleModal'}+${recruitment.id}" class="btn btn-primary py-2">Apply Job</a>
                     </div>
                 </div>
-            </div><!-- end -->
+            </div>
         </th:block>
+  --%>
 
-        <script>
+<!--         <script>
 
             function apply(id){
                 var name = "#idRe" +id;
@@ -400,8 +406,8 @@
             }
         </script>
 
-    </div>
-</section>
+    </div>-->
+</section> 
 
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>

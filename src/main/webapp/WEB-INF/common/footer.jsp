@@ -40,7 +40,6 @@
         </div>
     </div>
 </footer>
-<script src="${pageContext.request.contextPath}/assets/js/more/category.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/more/set-user.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/more/swal.js"></script>
@@ -48,6 +47,7 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/more/delete-save-job.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/more/delete-apply.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/more/delete-follow-company.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/more/apply-job.js"></script> 

@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -34,6 +36,16 @@ public class FollowCompanyServiceImpl implements FollowCompanyService {
 	public void delete(FollowCompany followCompany) {
 		dao.delete(followCompany);
 		
+	}
+
+	@Override
+	public List<FollowCompany> findAllByUser(User user) {
+		return dao.findAllByUser(user);
+	}
+
+	@Override
+	public FollowCompany findById(int id) {
+		return dao.findById(id);
 	}
 
 }

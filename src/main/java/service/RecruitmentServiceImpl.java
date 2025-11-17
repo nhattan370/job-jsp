@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import dao.RecruitmentDAO;
 import dto.RecruitmentDTO;
+import model.Company;
 import model.Recruitment;
 
 @Service
@@ -36,6 +37,11 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	public Recruitment findByReferenceId(int id) {
 		Recruitment recruitment = recruitmentDAO.findByReferenceId(id);
 		return recruitment;
+	}
+
+	@Override
+	public List<RecruitmentDTO> findAllByCompany(Company company) {
+		return recruitmentDAO.findAllByCompany(company);
 	}	
 	
 }

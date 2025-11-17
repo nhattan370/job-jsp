@@ -1,0 +1,14 @@
+#heartIcon {
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+/* Hiệu ứng nảy */
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.pop {
+  animation: pop 0.3s ease;
+}

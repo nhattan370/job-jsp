@@ -51,7 +51,7 @@ public class SearchController {
 	
 	@GetMapping("/search/test")
 	public String test() {
-		return "detail-company";
+		return "list-re";
 	}
 	
 }

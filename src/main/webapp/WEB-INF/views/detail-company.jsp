@@ -43,14 +43,11 @@
             <div class="col-lg-4">
                 <div class="row">
                     <div class="col-12">
-                        <a onclick="follow()" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Theo dõi</a>
+                        <a onclick="follow()" class="btn btn-block btn-light btn-md">
+                        	<span class="icon-heart-o mr-2 text-danger" id="heartIcon${company.id}"></span>
+                        	<span id="followText${company.id}">Theo dõi</span>
+                        	</a>
                     </div>
-<%--                     <div th:unless="${session.user}" class="col-6">
-                        <a  onclick="follow()" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Theo dõi</a>
-                    </div> --%>
-<!--                     <div class="col-6">
-
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -87,60 +84,11 @@
             </div>
         </div>
     </div>
-<!--     <script>
-        function follow(){
-            var name = "#idCompany";
-            var idCompany = $(name).val();
-            var formData = new FormData();
-            formData.append('idCompany', idCompany);
-            $.ajax(
-                {
-                    type: 'POST',
-                    url: '/user/follow-company/',
-                    contentType: false,
-                    processData: false,
-                    data: formData,
-                    success: function (data) {
-                        if(data == "false"){
-                            swal({
-                                title: 'Bạn cần phải đăng nhập!',
-                                /* text: 'Redirecting...', */
-                                icon: 'error',
-                                timer: 3000,
-                                buttons: true,
-                                type: 'error'
-                            })
-                        }else if(data == "true"){
-                            swal({
-                                title: 'Theo dõi thành công!',
-                                /* text: 'Redirecting...', */
-                                icon: 'success',
-                                timer: 3000,
-                                buttons: true,
-                                type: 'success'
-                            })
-                        }else{
-                            swal({
-                                title: 'Bạn đã theo dõi công ty này!',
-                                /* text: 'Redirecting...', */
-                                icon: 'error',
-                                timer: 3000,
-                                buttons: true,
-                                type: 'error'
-                            })
-                        }
-                    },
-                    error: function (err) {
-                        alert(err);
-                    }
-                }
-            )
-        }
-    </script> -->
 </section>
 
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
 </body>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/icon-heart.css">
 </html>

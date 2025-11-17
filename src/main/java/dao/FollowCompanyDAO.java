@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import model.Company;
@@ -10,4 +11,6 @@ public interface FollowCompanyDAO {
 	Optional<FollowCompany> findByUserAndCompany(User user, Company company);
 	FollowCompany save(FollowCompany followCompany);
 	void delete(FollowCompany company);
+	List<FollowCompany> findAllByUser(User user);
+	FollowCompany findById(int id);
 }

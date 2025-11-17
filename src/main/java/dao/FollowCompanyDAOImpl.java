@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -38,8 +39,23 @@ public class FollowCompanyDAOImpl implements FollowCompanyDAO{
 	}
 
 	@Override
-	public void delete(FollowCompany company) {
-		entityManager.remove(company);
+	public void delete(FollowCompany followCompany) {
+		FollowCompany fc = entityManager.contains(followCompany) ? followCompany : entityManager.merge(followCompany);
+		entityManager.remove(fc);
+	}
+
+	@Override
+	public List<FollowCompany> findAllByUser(User user) {
+		List<FollowCompany> followCompanies = entityManager.createQuery("SELECT fc FROM FollowCompany fc WHERE fc.user = :u",FollowCompany.class)
+														   .setParameter("u", user)
+														   .getResultList();
+		return followCompanies;
+	}
+
+	@Override
+	public FollowCompany findById(int id) {
+		FollowCompany followCompany = entityManager.find(FollowCompany.class, id);
+		return followCompany;
 	}
 
 }

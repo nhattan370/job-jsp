@@ -5,6 +5,7 @@
 <html lang="en">
 <head><%@ include file="/WEB-INF/common/head.jsp" %></head>
 <body>
+
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
@@ -21,7 +22,7 @@
     </script>
 </div> --%>
 <!-- END nav -->
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -31,9 +32,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> --%>
 
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
+   <jsp:include page="/WEB-INF/common/page-hero.jsp">
+  		<jsp:param value="Danh sách công ty đã theo dõi" name="title"/>
+  		<jsp:param value="Công ty" name="breadcrumb"/>
+  </jsp:include>
+
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -43,60 +49,88 @@
             </div>
         </div>
     </div>
-</div>
+</div> --%>
 
-<section class="ftco-section bg-light" th:if="${session.user.role.id == 1 }">
+<section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 pr-lg-5">
-                <div th:if="${saveJobList.totalPages > 0}" class="row">
-                    <th:block th:each="saveJob : ${saveJobList.content}">
+            	<c:if test="${followCompanies.size() > 0}">
+                <div class="row">
+                	<c:forEach var="follow" items="${followCompanies}">
                         <div class="col-md-12 ">
-                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${follow.id}">
                                 <div class="one-third mb-4 mb-md-0">
                                     <div class="job-post-item-header align-items-center">
-<!--                                        <span class="subadge" th:text="${saveJob.com.type}"></span>-->
-                                        <h2 class="mr-3 text-black" ><a th:text="${saveJob.company.nameCompany}" th:href="${'/user/detail-company/'}+${saveJob.company.id}"></a></h2>
+                                        <h2 class="mr-3 text-black"><a href="${DETAIL_COMPANY}${follow.company.id}">${follow.company.nameCompany}</a></h2>
                                     </div>
                                     <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#" th:text="${saveJob.company.email}" ></a></div>
-                                        <div class="mr-3"><span class="icon-my_location"></span> <span th:text="${saveJob.company.address}"></span></div>
-                                        <div style="margin-left: 10"><span class="icon-my_location"></span> <span th:text="${saveJob.company.phoneNumber}"></span></div>
+                                        <div class="mr-3"><span class="icon-layers"></span> <a>${follow.company.email}</a></div>
+                                        <div class="mr-3"><span class="icon-my_location"></span> <span>${follow.company.address}</span></div>
+                                        <div style="margin-left: 10"><span class="icon-my_location"></span> <span>${follow.company.phoneNumber}</span></div>
                                     </div>
                                 </div>
-                                <input type="hidden" th:id="${'idRe'}+${saveJob.company.id}" th:value="${saveJob.company.id}">
+                                <input type="hidden" id="idFc${follow.id}" value="${follow.id}">
                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0" style="width:370px !important;">
                                     <div>
-                                        <a  th:href="${'/user/delete-follow/'}+${saveJob.id}" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
+                                        <a data-toggle="modal" data-target="#deleteModal${follow.id}" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
                                             <span class="icon-delete"></span>
                                         </a>
                                     </div>
-                                    <a th:href="${'/user/detail-company/'}+${saveJob.company.id}" class="btn btn-primary py-2">Chi tiết</a>
-                                    <a th:href="${'/user/company-post/'}+${saveJob.company.id}" class="btn btn-warning py-2 ml-1">Danh sách bài đăng</a>
+                                    <a href="${DETAIL_COMPANY}${follow.company.id}" class="btn btn-primary py-2">Chi tiết</a>
+                                    <a href="${LIST_POST}${follow.company.id}" class="btn btn-warning py-2 ml-1">Danh sách bài đăng</a>
                                 </div>
                             </div>
-                        </div><!-- end -->
-                    </th:block>
-
+                        </div>
+                        <!-- end -->
+                        <!-- Modal xác nhận xóa -->
+					    <div class="modal fade" id="deleteModal${follow.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel${follow.id}" aria-hidden="true">
+					        <div class="modal-dialog modal-dialog-centered" role="document">
+					            <div class="modal-content border-0 shadow">
+					                <div class="modal-header bg-danger text-white">
+					                    <h5 class="modal-title" id="deleteModalLabel${follow.id}">Xác nhận xóa</h5>
+					                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					                        <span aria-hidden="true">&times;</span>
+					                    </button>
+					                </div>
+					
+					                <form>
+					                    <div class="modal-body">
+					                        <p>Bạn có chắc chắn muốn <strong>bỏ theo dõi</strong> công ty
+					                            <span class="text-primary font-weight-bold">${follow.company.nameCompany}</span> không?</p>
+					                    </div>
+					                    <div class="modal-footer">
+					                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+					                        <button type="button" class="btn btn-danger" onclick="deleteFollowCompany(${follow.id})">Đồng ý</button>
+					                    </div>
+					                </form>
+					            </div>
+					        </div>
+					    </div>
+					</c:forEach>
                 </div>
-                <div style="text-align: center" th:if="${saveJobList.totalPages < 1}">
-                    <p style="color:red;">Danh sách trống</p>
-                </div>
-                <div class="row mt-5">
+               </c:if>
+               
+               <c:if test="${followCompanies.size() < 1}">
+	                <div style="text-align: center">
+	                    <p style="color:red;">Danh sách trống</p>
+	                </div>
+                </c:if>
+<%--                 <div class="row mt-5">
                     <div class="col text-center">
                         <div class="block-27">
                             <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{/save-job/get-list(page = ${saveJobList.number - 1})}">&lt;</a></li>
+                                <li th:if="${numberPage>0}"><a th:href="@{/save-job/get-list(page = ${followCompanies.number - 1})}">&lt;</a></li>
                                 <th:block th:each="recruitment,state  : ${recruitmentList}">
                                     <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{/save-job/get-list(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
                                 </th:block>
-                                <li th:if="${numberPage<saveJobList.totalPages - 1}"><a th:href="@{/save-job/get-list(page = ${saveJobList.number + 1})}">&gt;</a></li>
+                                <li th:if="${numberPage<followCompanies.totalPages - 1}"><a th:href="@{/save-job/get-list(page = ${followCompanies.number + 1})}">&gt;</a></li>
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --%>
+          
             </div>
-
         </div>
     </div>
 </section>

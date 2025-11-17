@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import dto.RecruitmentDTO;
+import model.Company;
 import model.Recruitment;
 import share.ColorExample;
 
@@ -42,6 +43,16 @@ public class RecruitmentDAOImpl implements RecruitmentDAO{
 	public Recruitment findByReferenceId(int id) {
 		Recruitment recruitment = em.getReference(Recruitment.class, id);
 		return recruitment;
+	}
+
+	@Override
+	public List<RecruitmentDTO> findAllByCompany(Company company) {
+		List<RecruitmentDTO> recruitments = em.createQuery("SELECT new dto.RecruitmentDTO("
+														+" r.company.id, r.company.nameCompany, r.id, r.title, r.type, r.address)"
+														+" FROM Recruitment r WHERE r.company=:c",RecruitmentDTO.class)
+										   .setParameter("c", company)
+										   .getResultList();
+		return recruitments;
 	}
 
 }

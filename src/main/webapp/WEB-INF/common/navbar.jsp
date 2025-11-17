@@ -59,7 +59,7 @@
 					    <sec:authorize access="hasAuthority('USER')">
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-save-job">Công việc đã lưu</a>
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-apply">Công việc đã ứng tuyển</a>
-			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-company">Công ty đã theo dõi</a>
+			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-follow-company">Công ty đã theo dõi</a>
 			            </sec:authorize>
 					
 			            <hr class="dropdown-divider">

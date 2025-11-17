@@ -2,4 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="DETAIL_COMPANY" value="${pageContext.request.contextPath}/detail-company?id="/>
+<!-- Use a lot of time -->
+<c:set var="DETAIL_COMPANY" value="${pageContext.request.contextPath}/detail-company?idCompany="/>
+<c:set var="LIST_POST" value="${pageContext.request.contextPath}/company-post?idCompany="/>
+<c:set var="DETAIL_RECRUITMENT" value="${pageContext.request.contextPath}/detail-recruitment?idRe="/>
+
+<!-- Use one time -->
+<%-- <c:set var="DELETE_FOLLOW_COMPANY" value="${pageContext.request.contextPath}/user/delete-follow?id="/> --%>
