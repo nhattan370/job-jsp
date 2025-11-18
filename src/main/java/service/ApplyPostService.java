@@ -14,4 +14,5 @@ public interface ApplyPostService {
 	List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus applyPostStatus, Boolean exclude);
 	ApplyPost findById(int id);
 	ApplyPost update(ApplyPost applyPost);
+	List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter);
 }

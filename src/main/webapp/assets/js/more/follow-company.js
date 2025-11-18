@@ -18,7 +18,7 @@ function follow(){
 						followCompanies = !followCompanies.includes(data.key) ? [...followCompanies, data.key] : followCompanies;
 						localStorage.setItem("follow-company", JSON.stringify(followCompanies));
 						
-						showToast("Thành công!","Lưu công việc thành công!","success");
+						showToast("Thành công!","Lưu công ty thành công!","success");
 						
 						heartIcon.removeClass("icon-heart-o").addClass("icon-heart heart-followed");
 						followText.text("Đang theo dõi");

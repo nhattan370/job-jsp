@@ -14,20 +14,16 @@
             </div>
         </div>
         <input type="hidden" id="idRe${recruitment.id}" value="${recruitment.id}">
-          <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
-<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-    <div>
-    	<a onclick="save(${recruitment.id})"
-class="text-center d-flex justify-content-center align-items-center icon 
-       mr-2">
- <span id="heartIcon${recruitment.id}"
-          class="icon-heart">
-    </span>
-</a>
-     </div>
-     <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2" id="applyBtn${recruitment.id}">Apply Job</a>
-</div>
-</sec:authorize>
+        <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+			<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+	    		<div>
+	    			<a onclick="save(${recruitment.id})" class="text-center d-flex justify-content-center align-items-center icon mr-2">
+	 					<span id="heartIcon${recruitment.id}" class="icon-heart"></span>
+					</a>
+	     		</div>
+	     		<a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2" id="applyBtn${recruitment.id}">Apply Job</a>
+			</div>
+		</sec:authorize>
     </div>
 </div>
 <!-- end -->

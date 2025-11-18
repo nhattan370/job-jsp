@@ -11,4 +11,5 @@ public interface RecruitmentService {
 	Recruitment findById(int id);
 	Recruitment findByReferenceId(int id);
 	List<RecruitmentDTO> findAllByCompany(Company company);
+	List<RecruitmentDTO> findAll();
 }

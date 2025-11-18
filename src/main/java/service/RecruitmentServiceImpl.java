@@ -42,6 +42,11 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	@Override
 	public List<RecruitmentDTO> findAllByCompany(Company company) {
 		return recruitmentDAO.findAllByCompany(company);
+	}
+
+	@Override
+	public List<RecruitmentDTO> findAll() {
+		return recruitmentDAO.findAll();
 	}	
 	
 }

@@ -28,9 +28,16 @@ $(document).ready(function(){
 		const [reId, userId] = item.split("_");
 		let heartIcon = $("#heartIcon"+reId);
 		const iconWrapper = heartIcon.closest(".icon");
+		let followText = $("#followText"+reId);
 		if(loginId==userId){
-			heartIcon.addClass("saved");
-			iconWrapper.addClass("saved");		
+			if(heartIcon&&iconWrapper){
+				heartIcon.addClass("saved");
+				iconWrapper.addClass("saved");		
+			}
+			if(heartIcon&&followText){
+				heartIcon.removeClass("icon-heart-o").addClass("icon-heart heart-followed");
+				followText.text("Đã lưu");
+			}
 		}
 	});
 	followCompanies.forEach((item)=>{

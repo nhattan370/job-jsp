@@ -1,7 +1,5 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,6 +56,12 @@ public class ApplyPostServiceImpl implements ApplyPostService {
 	@Override
 	public List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus applyPostStatus, Boolean exclude) {
 		List<ApplyPost> applyPosts = dao.findAllByUserAndStatus(user, applyPostStatus, exclude);
+		return applyPosts;
+	}
+
+	@Override
+	public List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter) {
+		List<ApplyPost> applyPosts = dao.findByRecruitmentAndRecruiter(recruitment, recruiter);
 		return applyPosts;
 	}
 	

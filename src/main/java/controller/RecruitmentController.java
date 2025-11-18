@@ -3,14 +3,21 @@ package controller;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dto.ApplyPostDTO;
 import dto.RecruitmentDTO;
+import enums.RoleUser;
+import model.ApplyPost;
 import model.Company;
 import model.Recruitment;
+import model.User;
+import security.CustomUserDetails;
+import service.ApplyPostService;
 import service.CompanyService;
 import service.RecruitmentService;
 import share.ColorExample;
@@ -20,11 +27,13 @@ public class RecruitmentController {
 	
 	private final RecruitmentService recruitmentService;
 	private final CompanyService companyService;
+	private final ApplyPostService applyPostService;
 	private Logger logger = Logger.getLogger(RecruitmentController.class.getName());
 	
-	public RecruitmentController(RecruitmentService recruitmentService, CompanyService companyService) {
+	public RecruitmentController(RecruitmentService recruitmentService, CompanyService companyService, ApplyPostService applyPostService) {
 		this.recruitmentService = recruitmentService;
 		this.companyService = companyService;
+		this.applyPostService = applyPostService;
 	}
 	
 	@GetMapping("/company-post")
@@ -39,8 +48,17 @@ public class RecruitmentController {
 	}
 	
 	@GetMapping("/detail-recruitment")
-	public String getDetailRecruitment(Model model, @RequestParam("idRe") String idRe) {
+	public String getDetailRecruitment(Model model, @AuthenticationPrincipal CustomUserDetails details,
+										@RequestParam("idRe") String idRe) {
 		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(idRe));
+		
+		if(details==null || details.getUser().getRole().getRoleName()==RoleUser.USER) {
+			List<RecruitmentDTO> recruitments = recruitmentService.findAll();
+			model.addAttribute("recruitments",recruitments);
+		}else if(details.getUser().getRole().getRoleName()==RoleUser.RECRUITER && details.getUser()==recruitment.getCompany().getUser()) {
+			List<ApplyPost> applyPosts = applyPostService.findByRecruitmentAndRecruiter(recruitment, details.getUser());
+			model.addAttribute("applyPosts",applyPosts);
+		}
 		
 		model.addAttribute(recruitment);
 		return "detail-post";

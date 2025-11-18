@@ -69,4 +69,13 @@ public class ApplyPostDAOImpl implements ApplyPostDAO {
 		return applyPosts;
 	}
 
+	@Override
+	public List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter) {
+		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment =: r AND a.recruitment.company.user = :u",ApplyPost.class)
+												  .setParameter("r", recruitment)
+												  .setParameter("u", recruiter)
+												  .getResultList();
+		return applyPosts;
+	}
+
 }

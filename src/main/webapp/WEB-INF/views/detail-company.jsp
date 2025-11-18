@@ -46,7 +46,7 @@
                         <a onclick="follow()" class="btn btn-block btn-light btn-md">
                         	<span class="icon-heart-o mr-2 text-danger" id="heartIcon${company.id}"></span>
                         	<span id="followText${company.id}">Theo dõi</span>
-                        	</a>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -15,4 +15,5 @@ public interface ApplyPostDAO {
 	ApplyPost findById(int id);
 	ApplyPost update(ApplyPost applyPost);
 	List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus status, Boolean exclude);
+	List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter);
 }
