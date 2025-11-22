@@ -7,5 +7,7 @@
 <c:set var="LIST_POST" value="${pageContext.request.contextPath}/company-post?idCompany="/>
 <c:set var="DETAIL_RECRUITMENT" value="${pageContext.request.contextPath}/detail-recruitment?idRe="/>
 
+<!-- Recruiter -->
+<c:set var="HANDLE_CV" value="${pageContext.request.contextPath}/recruiter/handleCV?idApply="/>
 <!-- Use one time -->
 <%-- <c:set var="DELETE_FOLLOW_COMPANY" value="${pageContext.request.contextPath}/user/delete-follow?id="/> --%>

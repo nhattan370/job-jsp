@@ -13,6 +13,7 @@
 	<div class="login-container">
 	    <h2>Login</h2>
 	    <form action="verify-login" method="post">
+	    	<input type="hidden" name="redirect" value="${param.redirect}">
 	        <div class="form-group">
 	            <label for="email">Email</label>
 	            <input type="email" id="email" name="email" required>

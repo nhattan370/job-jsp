@@ -53,4 +53,4 @@
 	  
 	  <%@ include file="/WEB-INF/common/url.jspf" %>
 	  
-	  <div id="alert-container" class="position-fixed" style="top: 80px; right: 10px; z-index: 2000;"></div>
+	  <div id="alert-container" class="position-fixed" style="top: 80px; left: 10px; z-index: 2000;"></div>

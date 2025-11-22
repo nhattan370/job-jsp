@@ -1,8 +1,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>      
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>            
+    pageEncoding="UTF-8"%>    
+<%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>        
 <div class="col-md-12 ">
     <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+    
         <div class="one-third mb-4 mb-md-0">
             <div class="job-post-item-header align-items-center">
                 <span class="subadge">${recruitment.type}</span>
@@ -13,15 +15,14 @@
                 <div><span class="icon-my_location"></span> <span>${recruitment.address}</span></div>
             </div>
         </div>
+        
         <input type="hidden" id="idRe${recruitment.id}" value="${recruitment.id}">
         <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
 			<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
 	    		<div>
-	    			<a onclick="save(${recruitment.id})" class="text-center d-flex justify-content-center align-items-center icon mr-2">
-	 					<span id="heartIcon${recruitment.id}" class="icon-heart"></span>
-					</a>
+	    			<comp:saveButton id="${recruitment.id}"/>
 	     		</div>
-	     		<a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-primary py-2" id="applyBtn${recruitment.id}">Apply Job</a>
+	     		<comp:applyButton id="${recruitment.id}"/>
 			</div>
 		</sec:authorize>
     </div>
@@ -29,7 +30,4 @@
 <!-- end -->
 
 <!-- Modal -->
-<jsp:include page="/WEB-INF/common/apply-modal.jsp">
-	<jsp:param value="${recruitment.id}" name="id"/>
-	<jsp:param value="${recruitment.title}" name="title"/>
-</jsp:include>
+<comp:applyModal id="${recruitment.id}" title="${recruitment.title}"/>

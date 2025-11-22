@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>   
 <!DOCTYPE html>
 <html lang="en">
 <head><%@ include file="/WEB-INF/common/head.jsp" %></head>
@@ -9,17 +10,12 @@
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
 
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row no-gutters slider-text align-items-end justify-content-start">
-      <div class="col-md-12 text-center mb-5">
-        <p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Trang chủ <i class="ion-ios-arrow-forward"></i></a></span> Cập nhập<span></span></p>
-        <h1 class="mb-3 bread">Cập nhật bài tuyển dụng</h1>
-      </div>
-    </div>
-  </div>
-</div>
+  	<c:import url="/WEB-INF/common/page-hero.jsp">
+    	<c:param name="title" value="Cập nhật bài tuyển dụng" />
+    	<c:param name="breadcrumb" value="Cập nhật" />
+	</c:import>
+	<comp:pageHero title="Cập nhật bài tuyển dụng" breadcrumb="Cập nhật"/>
+
 <div th:if="${success}" class="toast" data-delay="2500" style="position:fixed; top: 100PX; left: 10PX;z-index: 2000;width: 300px">
   <div class="toast-header" style="background-color: #1c7430">
     <strong class="mr-auto" style="color: white">Thông báo</strong>

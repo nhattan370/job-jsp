@@ -1,50 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>   
 <!DOCTYPE html>
 <html lang="en">
 <head><%@ include file="/WEB-INF/common/head.jsp" %></head>
 <body>
-<nav class="header_menu" class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container-fluid px-md-4	">
-        <a class="navbar-brand" href="/">Work CV</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span> Menu
-        </button>
-    
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="/" class="nav-link">Trang chủ</a></li>
-            <li class="'nav-item"><a href="/" class="nav-link">Công việc</a></li>
-            <li class="nav-item"><a href="/" class="nav-link">Ứng cử viên</a></li>
-    <!--        <li class="nav-item"><a href="blog.html" class="nav-link">Công ty</a></li>-->
-    <!-- 
-            <li th:if="${session.user}" class="nav-item"><a th:href="@{'/user/profile/'+${session.user.id}}" th:text="${session.user.fullName}" class="nav-link" ></a> -->
-    
-              <ul class="dropdown">
-                <li><a href="/">Hồ Sơ</a></li>
-    <!--            <li><a href="service-single.html">Đổi mật khẩu</a></li>-->
-                <li ><a href="/save-job/get-list" >Công việc đã lưu</a></li>
-                <li ><a href="/user/list-post" >Danh sách bài đăng</a></li>
-                <li ><a href="/user/get-list-apply" >Công việc đã ứng tuyển</a></li>
-                <li ><a href="/user/get-list-company" >Công ty đã theo dõi</a></li>
-    <!--            <li th:if="${session.user.role.id == 2}"><a href="/auth/logout" >Ứng cử viên tiềm năng</a></li>-->
-                <li><a href="/auth/logout" >Đăng xuất</a></li>
-    
-              </ul>
-            </li>
-    
-              <li></li>
-    
-              <li class="nav-item cta mr-md-1"><a href="/recruitment/post" class="nav-link">Đăng tuyển</a></li>
-            <li class="nav-item cta cta-colored"><a href="/auth/login" class="nav-link">Đăng nhập</a></li>
-    
-          </ul>
-        </div>
-      </div>
-</nav>
+<%@ include file="/WEB-INF/common/navbar.jsp" %>
 
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
+	<comp:pageHero title="Danh sách công việc của công ty: <span>${company.nameCompany}</span>" breadcrumb="Công việc"/>
+
+<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -54,18 +20,7 @@
       </div>
     </div>
   </div>
-</div>
-<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 2 }">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row no-gutters slider-text align-items-end justify-content-start">
-      <div class="col-md-12 text-center mb-5">
-
-        <h1 class="mb-3 bread">Không tìm thấy trang yêu cầu</h1>
-      </div>
-    </div>
-  </div>
-</div>
+</div> --%>
 
 <section class="ftco-section bg-light" th:if="${session.user.role.id == 1 }">
   <div class="container">

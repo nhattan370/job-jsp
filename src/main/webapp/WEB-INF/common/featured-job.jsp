@@ -7,7 +7,7 @@
 
 <%@ include file="/WEB-INF/common/url.jspf" %>
 <!-- show toast -->
-<div id="alert-container" style="position: fixed; top: 60px; left: 20px; z-index: 9999;"></div>
+<!-- <div id="alert-container" style="position: fixed; top: 60px; left: 20px; z-index: 9999;"></div> -->
 
 <!-- container feature job -->
     <div class="container">

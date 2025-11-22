@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
 import share.ColorExample;
@@ -30,7 +32,8 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 		response.addCookie(cookie);
 		
 		request.getSession().setAttribute("mes", "Đăng nhập thành công!");
-		response.sendRedirect(request.getContextPath()+"/");
+		
+	    response.sendRedirect(request.getContextPath() + "/");
 	}
 
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>   
 <!DOCTYPE html>
 <html lang="en">
 <head><%@ include file="/WEB-INF/common/head.jsp" %></head>
@@ -9,11 +10,7 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-
-   <jsp:include page="/WEB-INF/common/page-hero.jsp">
-  		<jsp:param value="Chi tiết công việc" name="title"/>
-  		<jsp:param value="Chi tiết" name="breadcrumb"/>
-  </jsp:include>
+  <comp:pageHero title="Chi tiết công việc" breadcrumb="Chi tiết"/>
 
 <section style="margin-top: 10px" class="site-section">
     <div class="container">
@@ -87,11 +84,7 @@
         </div>
     </div>
 </section>
-<!-- Modal -->
-	<jsp:include page="/WEB-INF/common/apply-modal.jsp">
-		<jsp:param value="${recruitment.id}" name="id"/>
-		<jsp:param value="${recruitment.title}" name="title"/>
-	</jsp:include>
+	<comp:applyModal id="${recruitment.id}" title="${recruitment.title}"/>
 
 <section class="site-section" id="next">
     <div class="container">
@@ -103,31 +96,18 @@
             </div>
         </div>
         
-        <sec:authorize access="hasAuthority('RECRUITER') || !isAuthenticated()">
+        <sec:authorize access="hasAuthority('RECRUITER')">
         	<c:if test="${applyPosts!=null}">
 	        	<div class="row">
 		            <div class="col-lg-12 pr-lg-4">
 		                <div class="row">
 		                    <c:if test="${applyPosts.size() > 0}"> 
 			                    <c:forEach var="applyPost" items="${applyPosts}">
-			                        <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
-			                            <div class="team d-md-flex p-4 bg-white">
-			                                <IMG class="img" src="${applyPost.user.image != null ? applyPost.user.image : 'https://st.quantrimang.com/photos/image/072015/22/avatar.jpg'}"></IMG>
-			                                <div class="text pl-md-4">
-			                                    <H5 class="location mb-0">${applyPost.user.fullName}</H5>
-			                                    <p style="display: block;color: black">${applyPost.user.address}</p>
-			                                    <span class="position" style="display: block;color: black">${applyPost.user.email}</span>
-			                                    <p class="mb-4" style="width: 700px">${applyPost.user.description}.</p>
-			                                    <div class="row">
-			                                        <p><a href="#" th:if="${applyPost.nameCv != null}" class="btn btn-primary" th:href="${'http://localhost:8080/resources/uploads/'} +${applyPost.nameCv}" >Xem cv</a></p>
-<%-- 			                                        <p th:if="${applyPost.status == 0}" style="margin-left: 10px"><a class="btn btn-outline-primary" th:href="${'/user/approve/'} +${applyPost.user.id} +${'/'} +${recruitment.id}" >Duyệt</a></p>
-			                                        <p th:if="${applyPost.status == 1}" style="margin-left: 10px;margin-top: 15px"><span style="color: #1e7e34;font-weight: bold" >Đã duyệt</span></p> --%>
-			                                    </div>
-			
-			                                </div>
-			                            </div>
-			                        </div>
-			                      </c:forEach>
+			                    	<c:set var="applyPost" value="${applyPost}" scope="request"/>
+				    				<jsp:include page="/WEB-INF/common/candidate-application-card.jsp">
+				    					<jsp:param name="HANDLE_CV" value="${HANDLE_CV}"/>
+	    							</jsp:include>
+			                    </c:forEach>
 		                    </c:if>
 		                    <c:if test="${applyPosts.size()<1}">
 		                        <p>Chưa có ứng cử viên nào ứng tuyển</p>

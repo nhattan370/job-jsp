@@ -1,7 +1,6 @@
 const alertContainer = document.getElementById("alert-container");
 function showToast(message1, message2, type){
 	let alertId = "alert-"+Date.now();
-	
 	let alertStatus = "";
 	if(type==="warning") alertStatus="alert-warning";
 	if(type==="error") alertStatus="alert-danger";
