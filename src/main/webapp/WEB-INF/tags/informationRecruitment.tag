@@ -1,15 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ tag language="java" body-content="scriptless" %>
 
-<%-- <%@ attribute name="idRe" required="true" %>
-<%@ attribute name="idCo" required="true" %>
-<%@ attribute name="type" required="true" %>
-<%@ attribute name="title" required="true" %>
-<%@ attribute name="nameCompany" required="true" %>
-<%@ attribute name="address" required="true" %>
-<%@ attribute name="DETAIL_RECRUITMENT" required="true" %>
-<%@ attribute name="DETAIL_COMPANY" required="true" %> --%>
-
 <%@ attribute name="re" type="java.lang.Object" required="true" %>
 <%@ attribute name="isDto" type="java.lang.Boolean" required="true" %>
 <%@ attribute name="DETAIL_RECRUITMENT" required="true" %>

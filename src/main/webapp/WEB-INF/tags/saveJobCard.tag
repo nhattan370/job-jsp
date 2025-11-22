@@ -1,42 +1,35 @@
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ tag language="java" body-content="scriptless" %>
 
-<%-- <%@ attribute name="idSa" required="true" %>
-<%@ attribute name="idRe" required="true" %>
-<%@ attribute name="idCo" required="true" %>
-<%@ attribute name="type" required="true" %>
-<%@ attribute name="title" required="true" %>
-<%@ attribute name="nameCompany" required="true" %>
-<%@ attribute name="address" required="true" %>
-<%@ attribute name="DETAIL_RECRUITMENT" required="true" %>
-<%@ attribute name="DETAIL_COMPANY" required="true" %> --%>
 <%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %> 
 <%@ attribute name="sa" type="java.lang.Object" required="true" %>
 <%@ attribute name="DETAIL_RECRUITMENT" required="true" %>
 <%@ attribute name="DETAIL_COMPANY" required="true" %>
 
-<div class="col-md-12 ">
-    <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${idSa}"> 
+<comp:wrapperCard id="${sa.id}">
+<%-- <div class="col-md-12 ">
+    <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${sa.id}">  --%>
          <comp:informationRecruitment 
-	    					isDto="<%= Boolean.FALSE %>"
-	    					re="${sa.recruitment}"
-	    					DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"
-	    					DETAIL_COMPANY="${DETAIL_COMPANY}"
-	    				/>
+ 					isDto="<%= Boolean.FALSE %>"
+ 					re="${sa.recruitment}"
+ 					DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"
+ 					DETAIL_COMPANY="${DETAIL_COMPANY}"
+	    />
          
-         <input type="hidden" id="idSa${idSa}" value="${idSa}">
-         <input type="hidden" id="idRe${idRe}" value="${idRe}">
+         <input type="hidden" id="idSa${sa.id}" value="${sa.id}">
+         <input type="hidden" id="idRe${sa.recruitment.id}" value="${sa.recruitment.id}">
          <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-             <div><comp:deleteButton id="${idSa}"/></div>
-             <comp:applyButton id="${idRe}"/>
+             <div><comp:deleteButton id="${sa.id}"/></div>
+             <comp:applyButton id="${sa.recruitment.id}"/>
          </div>
-    </div>
-</div>
+<!--     </div>
+</div> -->
+</comp:wrapperCard>
 <!-- Modal xác nhận xóa -->
 <comp:modalDelete     
-	id="${idSa}"
+	id="${sa.id}"
     idHidden="idSa"
-    title="${title}"
-    onConfirm="deleteSaveJob(${idSa})"/>
+    title="${sa.recruitment.title}"
+    onConfirm="deleteSaveJob(${sa.id})"/>
 
-<comp:applyModal id="${idRe}" title="${title}"/>
+<comp:applyModal id="${sa.recruitment.id}" title="${sa.recruitment.title}"/>

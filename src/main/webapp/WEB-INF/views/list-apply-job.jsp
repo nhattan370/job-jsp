@@ -19,58 +19,9 @@
             	<c:if test="${applyJobList.size()>0}">
                 <div class="row">
                     <c:forEach var="applyJob" items="${applyJobList}">
-                        <div class="col-md-12 ">
-                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${applyJob.id}">
-                                <div class="one-third mb-4 mb-md-0">
-                                    <div class="job-post-item-header align-items-center">
-                                        <span class="subadge">${applyJob.recruitment.type}</span>
-                                        <h2 class="mr-3 text-black" ><a href="${DETAIL_RECRUITMENT}${applyJob.recruitment.id}">${applyJob.recruitment.title}</a></h2>
-                                    </div>
-                                    <div class="job-post-item-body d-block d-md-flex">
-                                        <div class="mr-3"><span class="icon-layers"></span> <a href="${DETAIL_COMPANY}${applyJob.recruitment.company.id}">${applyJob.recruitment.company.nameCompany}</a></div>
-                                        <div><span class="icon-my_location"></span> <span>${applyJob.recruitment.address}</span></div>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="idApply${applyJob.id}" value="${applyJob.id}">
-                                <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                    <div>
-                                        <button type="button"
-										        class="btn btn-outline-danger btn-sm mr-2"
-										        data-toggle="modal"
-										        data-target="#deleteModal${applyJob.id}">
-										    Rút đơn
-										</button>
-                                        
-                                    </div>
-	                                    <c:if test="${applyJob.status.name() == 'PENDING'}">
-										    <p style="color: red; font-weight: bold; margin-top: 10px;">Chờ duyệt</p>
-										</c:if>
-										
-										<c:if test="${applyJob.status.name() == 'SUITABLE'}">
-										    <p style="color: #1e7e34; font-weight: bold; margin-top: 10px;">Phù hợp</p>
-										</c:if>
-										
-										<c:if test="${applyJob.status.name() == 'VIEWED'}">
-										    <p style="color: #007bff; font-weight: bold; margin-top: 10px;">Đã xem</p>
-										</c:if>
-										
-										<c:if test="${applyJob.status.name() == 'UNSUITABLE'}">
-										    <p style="color: gray; font-weight: bold; margin-top: 10px;">Không phù hợp</p>
-										</c:if>
-										<c:if test="${applyJob.status.name() == 'WITHDRAWN'}">
-										    <p style="color: red; font-weight: bold; margin-top: 10px;">Đã rút đơn</p>
-										</c:if>
-                                </div>
-                            </div>
-                        </div><!-- end -->
-                        
-   						<!-- Modal xác nhận xóa -->
-					    <comp:modalDelete
-						    id="${applyJob.id}"
-						    idHidden="idApply"
-						    title="${applyJob.recruitment.title}"
-						    onConfirm="deleteApply(${applyJob.id})"
-						/>
+                        <comp:applyJobCard ap="${applyJob}" 
+                        				   DETAIL_COMPANY="${DETAIL_COMPANY}" 
+                        				   DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"/>
 					    
                     </c:forEach>
                 </div>

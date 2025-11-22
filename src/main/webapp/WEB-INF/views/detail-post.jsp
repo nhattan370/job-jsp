@@ -123,11 +123,10 @@
         	<c:if test="${recruitments!=null}">
         		<c:if test="${recruitments.size()>0}">
 		        	<c:forEach var="recruitment" items= "${recruitments}">
-		        	 	<c:set var="recruitment" value="${recruitment}" scope="request"/> 
-				    	<jsp:include page="/WEB-INF/common/apply-save.jsp">
-				    		<jsp:param name="DETAIL_RECRUITMENT" value="${DETAIL_RECRUITMENT}" />
-	        				<jsp:param name="DETAIL_COMPANY" value="${DETAIL_COMPANY}" />
-	    				</jsp:include>
+	    				<comp:applySave 
+    						re="${recruitment}" 
+    						DETAIL_COMPANY="${DETAIL_COMPANY}" 
+    						DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"/>
 		        	</c:forEach>
 	        	</c:if>
 	        	<c:if test="${recruitments.size()<1}">

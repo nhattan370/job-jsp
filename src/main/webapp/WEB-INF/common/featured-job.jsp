@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "comp" tagdir="/WEB-INF/tags" %>
 
 <section class="ftco-section bg-light">
 
@@ -21,11 +22,10 @@
                 </div>
                 <div class="row">
                    	<c:forEach var="recruitment" items="${recruitments}">
- 			    		<c:set var="recruitment" value="${recruitment}" scope="request"/> 
-			    		<jsp:include page="/WEB-INF/common/apply-save.jsp">
-			    			<jsp:param name="DETAIL_RECRUITMENT" value="${DETAIL_RECRUITMENT}" />
-        					<jsp:param name="DETAIL_COMPANY" value="${DETAIL_COMPANY}" />
-    					</jsp:include>
+    					<comp:applySave 
+    						re="${recruitment}" 
+    						DETAIL_COMPANY="${DETAIL_COMPANY}" 
+    						DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"/>
           			</c:forEach>
                 </div>
             </div>
