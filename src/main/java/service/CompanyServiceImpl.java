@@ -34,4 +34,10 @@ public class CompanyServiceImpl implements CompanyService{
 		return companyDAO.getReference(id);
 	}
 
+	@Override
+	public Company findByEmail(String email) {
+		return companyDAO.findByEmail(email).orElse(null);
+		
+	}
+
 }

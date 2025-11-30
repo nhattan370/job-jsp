@@ -51,13 +51,16 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
     
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private Cv cv; 
+    
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    private Company company;
 
 	public User() {}
 
 	public User(Integer id, String address, String description, String email, String fullName, String image,
-			String password, String phoneNumber, UserStatus status, Role role) {
+			String password, String phoneNumber, UserStatus status, Role role, Company company) {
 		this.id = id;
 		this.address = address;
 		this.description = description;
@@ -68,6 +71,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.status = status;
 		this.role = role;
+		this.company = company;
 	}
 
 	public Integer getId() {
@@ -156,6 +160,14 @@ public class User {
 
 	public void setCv(Cv cv) {
 		this.cv = cv;
+	}
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override

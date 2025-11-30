@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-import customValidator.UniqueEmail;
+import customValidator.UniqueEmailUser;
 
 public class UserDTO {
 
@@ -14,7 +14,7 @@ public class UserDTO {
     private String description;
 
     @Email(message="Email phải đúng định dạng")
-    @UniqueEmail(message="Email đã được sử dụng, vui lòng dùng email khác")
+    @UniqueEmailUser(message="Email đã được sử dụng, vui lòng dùng email khác")
     private String email;
 
     @NotBlank(message="Tên không được để trống")

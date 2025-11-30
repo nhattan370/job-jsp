@@ -10,8 +10,8 @@ import javax.validation.Payload;
 
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueEmailValidator.class)
-public @interface UniqueEmail {
+@Constraint(validatedBy = UniqueEmailCompanyValidator.class)
+public @interface UniqueEmailCompany {
 
     String message() default "Email đã tồn tại";
 
@@ -19,4 +19,3 @@ public @interface UniqueEmail {
 
     Class<? extends Payload>[] payload() default {};
 }
-

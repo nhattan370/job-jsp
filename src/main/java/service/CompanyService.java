@@ -9,4 +9,5 @@ public interface CompanyService {
 	List<CompanyHomeDTO> findTwoAndSort();
 	Company findById(int id);
 	Company getReference(int id);
+	Company findByEmail(String email);
 }

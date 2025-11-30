@@ -41,7 +41,12 @@
 				  </button>
 			  
 				  <div class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="dropdownMenuButton" style="min-width: 200px;">
-					    <a class="dropdown-item" href="${pageContext.request.contextPath}/auth/profile-user">Hồ Sơ</a>
+				  		<sec:authorize access="isAuthenticated()">
+						    <a class="dropdown-item" href="${pageContext.request.contextPath}/auth/profile-user">Hồ Sơ Cá Nhân</a>
+					    </sec:authorize>
+					    <sec:authorize access="hasAuthority('RECRUITER')">
+						    <a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/profile-company">Hồ Sơ Công Ty</a>
+					    </sec:authorize>
 			    		<sec:authorize access="hasAuthority('RECRUITER')">
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/list-post">Danh sách bài đăng</a>
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/recruitment">Đăng tuyển</a>

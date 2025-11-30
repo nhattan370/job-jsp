@@ -98,7 +98,7 @@ public class UpdateProfileController {
 		return "profile-user";
 	}
 	
-	@PostMapping("/user/update-user")
+	@PostMapping("/auth/update-user")
 	public String updateProfile(@Valid @ModelAttribute("userDto") UserDTO userDTO, BindingResult result, Model model,
 								@AuthenticationPrincipal CustomUserDetails details, RedirectAttributes redirectAttributes) {
 		User user = details.getUser();

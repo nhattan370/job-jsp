@@ -13,7 +13,7 @@ import security.CustomUserDetails;
 import service.UserService;
 
 @Component
-public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
+public class UniqueEmailUserValidator implements ConstraintValidator<UniqueEmailUser, String> {
 
     @Autowired
     private UserService userService;

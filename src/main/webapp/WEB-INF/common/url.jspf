@@ -9,8 +9,9 @@
 
 <!-- Recruiter -->
 <c:set var="HANDLE_CV" value="${pageContext.request.contextPath}/recruiter/handleCV?idApply="/>
+<c:set var="UPDATE_COMPANY" value="${pageContext.request.contextPath}/recruiter/update-company"/>
+<c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/recruiter/confirm-account"/>
 
 <!-- Use one time -->
 <c:set var="LIST_RECRUITMENT_BY_CATEGORY" value="${pageContext.request.contextPath}/recruitments-by-category?idCa="/>
-<c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/recruiter/confirm-account"/>
-<c:set var="UPDATE_USER" value="${pageContext.request.contextPath}/user/update-user"/>
+<c:set var="UPDATE_USER" value="${pageContext.request.contextPath}/auth/update-user"/>
