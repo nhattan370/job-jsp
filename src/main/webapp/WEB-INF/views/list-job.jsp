@@ -9,11 +9,6 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-
-  	<c:import url="/WEB-INF/common/page-hero.jsp">
-    	<c:param name="title" value="Browse Job" />
-    	<c:param name="breadcrumb" value="Job Post" />
-	</c:import>
 	<comp:pageHero title="Browse Job" breadcrumb="Job Post"/>
 
 <section style="display: block" class="ftco-section">
@@ -25,43 +20,26 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 ">
-        <ul class="category text-center">
-          <li><a href="#">Web Development <br><span class="number">354</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Graphic Designer <br><span class="number">143</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Multimedia <br><span class="number">100</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Advertising <br><span class="number">90</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        </ul>
-      </div>
-      <div class="col-md-3 ">
-        <ul class="category text-center">
-          <li><a href="#">Education &amp; Training <br><span class="number">100</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">English <br><span class="number">200</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Social Media <br><span class="number">300</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Writing <br><span class="number">150</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        </ul>
-      </div>
-      <div class="col-md-3 ">
-        <ul class="category text-center">
-          <li><a href="#">PHP Programming <br><span class="number">400</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Project Management <br><span class="number">100</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Finance Management <br><span class="number">222</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Office &amp; Admin <br><span class="number">123</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        </ul>
-      </div>
-      <div class="col-md-3 ">
-        <ul class="category text-center">
-          <li><a href="#">Web Designer <br><span class="number">324</span> <span>Open position</span></span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Customer Service <br><span class="number">564</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Marketing &amp; Sales <br><span class="number">234</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-          <li><a href="#">Software Development <br><span class="number">425</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        </ul>
-      </div>
+<!--           <li><a href="#">PHP Programming <br><span class="number">400</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li> -->
+      <c:forEach var="cat" items="${categories}">
+      		<div class="col-md-3">
+			    <ul class="category text-center">
+			        <li>
+			        	<a style="text-decoration: none !important;" href="${LIST_RECRUITMENT_BY_CATEGORY}${cat.id}">
+							${cat.name}<br>
+			        		<span class="number">${cat.numberChoose}</span> 
+			        		<span>Vị trí</span>
+			        		<i class="ion-ios-arrow-forward"></i>
+			        	</a>
+			        </li>
+			    </ul>
+			</div>
+      </c:forEach>
     </div>
   </div>
 </section>
 
-<section class="ftco-section ftco-no-pb bg-light">
+<!-- <section class="ftco-section ftco-no-pb bg-light">
   <div class="container">
     <div class="row justify-content-center mb-4">
       <div class="col-md-7 text-center heading-section ">
@@ -183,9 +161,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="ftco-section bg-light">
+<!-- <section class="ftco-section bg-light">
   <div class="container">
     <div class="row">
       <div class="col-lg-9 pr-lg-4">
@@ -212,7 +190,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -236,7 +214,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -260,7 +238,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -284,7 +262,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -308,7 +286,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -332,7 +310,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -356,7 +334,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -380,7 +358,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
 
           <div class="col-md-12 ftco-animate">
             <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
@@ -404,7 +382,7 @@
                 <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>end
         </div>
         <div class="row mt-5">
           <div class="col text-center">
@@ -473,9 +451,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="ftco-section-parallax">
+<!-- <section class="ftco-section-parallax">
   <div class="parallax-img d-flex align-items-center">
     <div class="container">
       <div class="row d-flex justify-content-center">
@@ -496,7 +474,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 	<!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 	<!-- end footer -->

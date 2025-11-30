@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>   
@@ -10,7 +10,7 @@
 
 	<comp:pageHero title="Danh sách công việc của công ty: <span>${company.nameCompany}</span>" breadcrumb="Công việc"/>
 
-<%-- <div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
+<div class="hero-wrap hero-wrap-2" style="background-image: url('user/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" th:if="${session.user.role.id == 1 }">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-</div> --%>
+</div>
 
 <section class="ftco-section bg-light" th:if="${session.user.role.id == 1 }">
   <div class="container">
@@ -133,7 +133,7 @@
     </div>
   </div>
 </section>
-<script>
+<!-- <script>
   function apply1(id){
     var name = "#idRe" +id;
     var nameModal = "#exampleModal" +id;
@@ -334,9 +334,9 @@
             }
     )
   }
-</script>
+</script> -->
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
 </body>
-</html>
+</html> --%>

@@ -9,5 +9,8 @@
 
 <!-- Recruiter -->
 <c:set var="HANDLE_CV" value="${pageContext.request.contextPath}/recruiter/handleCV?idApply="/>
+
 <!-- Use one time -->
-<%-- <c:set var="DELETE_FOLLOW_COMPANY" value="${pageContext.request.contextPath}/user/delete-follow?id="/> --%>
+<c:set var="LIST_RECRUITMENT_BY_CATEGORY" value="${pageContext.request.contextPath}/recruitments-by-category?idCa="/>
+<c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/recruiter/confirm-account"/>
+<c:set var="UPDATE_USER" value="${pageContext.request.contextPath}/user/update-user"/>

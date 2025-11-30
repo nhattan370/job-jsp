@@ -8,11 +8,6 @@
 <body>
 <%@ include file="/WEB-INF/common/navbar.jsp" %>
 
-<c:import url="/WEB-INF/common/page-hero.jsp">
-  	<c:param name="title" value="Danh sách bài đăng" />
-  	<c:param name="breadcrumb" value="Danh sách" />
-</c:import>
-
 <comp:pageHero title="Danh sách bài đăng" breadcrumb="Danh sách"/>
 
 <%-- <div th:if="${success}" class="toast" data-delay="2500" style="position:fixed; top: 100PX; left: 10PX;z-index: 2000;width: 300px">

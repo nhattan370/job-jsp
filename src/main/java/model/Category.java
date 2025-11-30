@@ -1,10 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,8 @@ public class Category {
 	private String name;
 	@Column(name="number_choose")
 	private Integer numberChoose;
+    @OneToMany(mappedBy = "category")
+    private List<Recruitment> recruitments;
 	
 	public Category() {}
 	
@@ -24,6 +30,7 @@ public class Category {
 		this.id = id;
 		this.name = name;
 		this.numberChoose = numberChoose;
+		this.recruitments = new ArrayList<Recruitment>();
 	}
 
 	public Integer getId() {
@@ -48,6 +55,14 @@ public class Category {
 
 	public void setNumberChoose(Integer numberChoose) {
 		this.numberChoose = numberChoose;
+	}
+
+	public List<Recruitment> getRecruitments() {
+		return recruitments;
+	}
+
+	public void setRecruitments(List<Recruitment> recruitments) {
+		this.recruitments = recruitments;
 	}
 
 	@Override

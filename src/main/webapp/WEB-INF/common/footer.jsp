@@ -52,3 +52,5 @@
 <script src="${pageContext.request.contextPath}/assets/js/more/save-job.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/more/apply-job.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/more/follow-company.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/more/upload-avatar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/more/upload-cv.js"></script>

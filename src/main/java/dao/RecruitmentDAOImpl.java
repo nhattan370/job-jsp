@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import dto.RecruitmentDTO;
+import model.Category;
 import model.Company;
 import model.Recruitment;
 import share.ColorExample;
@@ -63,6 +64,17 @@ public class RecruitmentDAOImpl implements RecruitmentDAO{
 										                + "LEFT JOIN c.recruitments r "
 										                + "LEFT JOIN r.applyPosts a ",RecruitmentDTO.class)
 										   .getResultList();
+		return recruitments;
+	}
+
+	@Override
+	public List<RecruitmentDTO> findAllByCategory(Category category) {
+		List<RecruitmentDTO> recruitments = em.createQuery("SELECT new dto.RecruitmentDTO("
+														   		+" r.company.id, r.company.nameCompany, r.id, r.title, r.type, r.address)"
+														   		+" FROM Recruitment r WHERE r.category=:c"
+														   		,RecruitmentDTO.class)
+														  		.setParameter("c", category)
+														  		.getResultList();
 		return recruitments;
 	}
 

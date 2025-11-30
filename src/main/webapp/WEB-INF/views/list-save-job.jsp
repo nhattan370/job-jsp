@@ -25,7 +25,6 @@
 	    						sa="${saveJob}"
 	    				/>
                     </c:forEach>
-
                 </div>
              </c:if>
                 

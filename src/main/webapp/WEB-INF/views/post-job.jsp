@@ -9,11 +9,6 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-
-  	<c:import url="/WEB-INF/common/page-hero.jsp">
-    	<c:param name="title" value="Đăng bài tuyển dụng" />
-    	<c:param name="breadcrumb" value="Đăng bài" />
-	</c:import>
 	<comp:pageHero title="Đăng bài tuyển dụng" breadcrumb="Đăng bài"/>
 
 <%-- <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section" th:if="${session.user.role.id == 2 }">

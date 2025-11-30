@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -50,7 +51,7 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
     
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Cv cv; 
 
 	public User() {}

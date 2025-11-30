@@ -3,6 +3,14 @@ let savejobs = JSON.parse(localStorage.getItem("save-job")) || [];
 let applyjobs = JSON.parse(localStorage.getItem("apply-job"))||[];
 let followCompanies = JSON.parse(localStorage.getItem("follow-company"))||[];
 
+function showLoading() {
+    $('#globalLoadingOverlay').css('display', 'flex');
+}
+
+function hideLoading() {
+    $('#globalLoadingOverlay').hide();
+}
+
 function getCookie(name){
 	const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
 	if (match) return match[2];

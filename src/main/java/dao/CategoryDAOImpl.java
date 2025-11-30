@@ -23,4 +23,10 @@ public class CategoryDAOImpl implements CategoryDAO{
 		return em.createQuery("SELECT c FROM Category c",Category.class).getResultList();
 	}
 
+	@Override
+	public Category getReferenceId(int id) {
+		Category category = em.getReference(Category.class, id);
+		return category;
+	}
+
 }

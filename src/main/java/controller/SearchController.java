@@ -36,7 +36,6 @@ public class SearchController {
 		return "result-search";
 	}
 	
-	
 	//Search recruitment with address or title
 	@PostMapping({"/search/search-job", "/recruiter/search"})
 	public String searchJob(RedirectAttributes redirectAttributes,
@@ -51,7 +50,7 @@ public class SearchController {
 	
 	@GetMapping("/search/test")
 	public String test() {
-		return "list-re";
+		return "post-company";
 	}
 	
 }

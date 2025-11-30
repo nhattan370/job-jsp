@@ -91,11 +91,10 @@ public class HandleJobUserController {
 		}else {
 			map.put("status", "already-save");
 		}
-		
 		return map;
 	}
 	
-	@PostMapping("apply-job1")
+	@PostMapping("/apply-job1")
 	@ResponseBody
 	public Map<String, String> applyJob1(@RequestParam("idRe") String idRe,
 										 @RequestParam("text") String text,

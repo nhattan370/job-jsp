@@ -35,13 +35,10 @@
 	            <div class="col-lg-4">
 	                <div class="row">
 	                    <div class="col-6">
-	                        <a onclick="save(${recruitment.id})" class="btn btn-block btn-light btn-md">
-	                        	<span class="icon-heart-o mr-2 text-danger" id="heartIcon${recruitment.id}"></span>
-                        		<span id="followText${recruitment.id}">Lưu</span>
-                        	</a>
+                        	<comp:saveButton id="${recruitment.id}" type="button"></comp:saveButton>
 	                    </div>
 	                    <div class="col-6">
-	                        <a data-toggle="modal" data-target="#exampleModal${recruitment.id}" class="btn btn-block btn-primary btn-md" id="applyBtn${recruitment.id}">Ứng tuyển</a>
+	                        <comp:applyButton attr="btn-block btn-md" id="${recruitment.id}"></comp:applyButton>
 	                    </div>
 	                </div>
 	            </div>
@@ -103,10 +100,7 @@
 		                <div class="row">
 		                    <c:if test="${applyPosts.size() > 0}"> 
 			                    <c:forEach var="applyPost" items="${applyPosts}">
-			                    	<c:set var="applyPost" value="${applyPost}" scope="request"/>
-				    				<jsp:include page="/WEB-INF/common/candidate-application-card.jsp">
-				    					<jsp:param name="HANDLE_CV" value="${HANDLE_CV}"/>
-	    							</jsp:include>
+	    							<comp:candidateApplicationCard ap="${applyPost}" HANDLE_CV="${HANDLE_CV}"/>
 			                    </c:forEach>
 		                    </c:if>
 		                    <c:if test="${applyPosts.size()<1}">
@@ -119,7 +113,7 @@
           </sec:authorize>
       </div>
         
-        <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+        <sec:authorize access="hasAuthority('USER')">
         	<c:if test="${recruitments!=null}">
         		<c:if test="${recruitments.size()>0}">
 		        	<c:forEach var="recruitment" items= "${recruitments}">

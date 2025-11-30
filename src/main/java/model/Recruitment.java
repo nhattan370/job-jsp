@@ -68,7 +68,7 @@ public class Recruitment {
     private Company company;
     
     @OneToMany(mappedBy = "recruitment")
-    private List<ApplyPost> applyPosts = new ArrayList<ApplyPost>();
+    private List<ApplyPost> applyPosts;
 
 	public Recruitment() {}
 
@@ -89,6 +89,7 @@ public class Recruitment {
 		this.deadline = deadline;
 		this.category = category;
 		this.company = company;
+		this.applyPosts = new ArrayList<ApplyPost>();
 	}
 
 	public Integer getId() {

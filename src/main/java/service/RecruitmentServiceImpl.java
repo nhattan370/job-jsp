@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import dao.RecruitmentDAO;
 import dto.RecruitmentDTO;
+import model.Category;
 import model.Company;
 import model.Recruitment;
 
@@ -47,6 +48,11 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	@Override
 	public List<RecruitmentDTO> findAll() {
 		return recruitmentDAO.findAll();
+	}
+
+	@Override
+	public List<RecruitmentDTO> findAllByCayegory(Category category) {
+		return recruitmentDAO.findAllByCategory(category);
 	}	
 	
 }

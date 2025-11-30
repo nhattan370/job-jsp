@@ -9,7 +9,7 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-<div th:if="${success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+<%-- <div th:if="${success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
   <script>
     swal({
       title: 'Ứng cử viên này chưa cập nhật cv!',
@@ -20,7 +20,7 @@
       type: 'error'
     })
   </script>
-</div>
+</div> --%>
 	<comp:pageHero title="Danh sách ứng cử viên" breadcrumb="Công việc"/>
 
 <section class="ftco-section bg-light">
@@ -66,7 +66,7 @@
     </div>
   </div>
 </section>
-<script>
+<!-- <script>
   function save(id){
     var name = "#idRe" +id;
     var idRe = $(name).val();
@@ -189,7 +189,7 @@
     }
 
   }
-</script>
+</script> -->
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->

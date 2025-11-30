@@ -27,7 +27,7 @@ function renderCategory(){
 			<div class="col-md-3">
 			    <ul class="category text-center">
 			        <li>
-			        	<a style="text-decoration: none !important;" href="/recruitment/category/${cat.id}">
+			        	<a style="text-decoration: none !important;" href="recruitments-by-category?idCa=${cat.id}">
 							<p>${cat.name}</p>
 			        		<span class="number">${cat.numberChoose}</span> 
 			        		<span>Vị trí</span>

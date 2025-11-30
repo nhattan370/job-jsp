@@ -23,7 +23,6 @@
                         <div>
                             <span class="icon-briefcase mr-2"></span><span class="ml-0 mr-2 mb-2">${company.email}</span>
                             <span  class="icon-room mr-2"></span ><span class="m-2">${company.address}</span>
-
                         </div>
                         <input type="hidden" id="idCompany" value="${company.id}">
                     </div>

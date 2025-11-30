@@ -9,27 +9,23 @@
 <%@ attribute name="DETAIL_COMPANY" required="true" %>
 
 <comp:wrapperCard id="${re.id}">
-<!-- <div class="col-md-12 ">
-    <div class="job-post-item p-4 d-block d-lg-flex align-items-center"> -->
         <comp:informationRecruitment 
         			isDto="<%= Boolean.TRUE %>" 
         			re="${re}" 
         			DETAIL_COMPANY="${DETAIL_COMPANY}" 
         			DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"
         />
-        
         <input type="hidden" id="idRe${re.id}" value="${re.id}">
         <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
 			<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
 	    		<div>
 	    			<comp:saveButton id="${re.id}"/>
 	     		</div>
-	     		<comp:applyButton id="${re.id}"/>
+	     		<comp:applyButton id="${re.id}" attr="py-2"/>
 			</div>
 		</sec:authorize>
-<!--     </div>
-</div> -->
 </comp:wrapperCard>
+<jsp:include page="/WEB-INF/common/loading-overlay.jsp"></jsp:include>
 
 <!-- Modal -->
-<comp:applyModal id="${recruitment.id}" title="${recruitment.title}"/>
+<comp:applyModal id="${re.id}" title="${re.title}"/>

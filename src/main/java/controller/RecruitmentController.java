@@ -9,15 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import dto.ApplyPostDTO;
 import dto.RecruitmentDTO;
 import enums.RoleUser;
 import model.ApplyPost;
+import model.Category;
 import model.Company;
 import model.Recruitment;
-import model.User;
 import security.CustomUserDetails;
 import service.ApplyPostService;
+import service.CategoryService;
 import service.CompanyService;
 import service.RecruitmentService;
 import share.ColorExample;
@@ -28,12 +28,15 @@ public class RecruitmentController {
 	private final RecruitmentService recruitmentService;
 	private final CompanyService companyService;
 	private final ApplyPostService applyPostService;
+	private final CategoryService categoryService;
 	private Logger logger = Logger.getLogger(RecruitmentController.class.getName());
 	
-	public RecruitmentController(RecruitmentService recruitmentService, CompanyService companyService, ApplyPostService applyPostService) {
+	public RecruitmentController(RecruitmentService recruitmentService, CompanyService companyService, 
+								 ApplyPostService applyPostService, CategoryService categoryService) {
 		this.recruitmentService = recruitmentService;
 		this.companyService = companyService;
 		this.applyPostService = applyPostService;
+		this.categoryService = categoryService;
 	}
 	
 	@GetMapping("/company-post")
@@ -62,5 +65,21 @@ public class RecruitmentController {
 		
 		model.addAttribute(recruitment);
 		return "detail-post";
+	}
+	
+	@GetMapping("/job-show")
+	public String getListJob(Model model) {
+		List<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
+		return "list-job";
+	}
+	
+	@GetMapping("/recruitments-by-category")
+	public String getListRecruitmentByCategory(Model model, @RequestParam("idCa") String id) {
+		Category category = categoryService.getReferenceId(Integer.parseInt(id));
+		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCayegory(category);
+		
+		model.addAttribute("recruitments",recruitments);
+		return "list-re";
 	}
 }

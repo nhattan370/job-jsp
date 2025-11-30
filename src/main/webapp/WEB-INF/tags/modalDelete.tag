@@ -32,6 +32,10 @@
 						<span class="text-primary font-weight-bold">${title}</span> không?</p>
 						<p> <strong>!!!Lưu ý: </strong>Nếu hủy bỏ ứng tuyển thì bạn sẽ <span class="text-danger font-weight-bold">không thể ứng tuyển công việc này được nữa</span> </p>
 					</c:if>
+					<c:if test="${idHidden=='idCv'}">
+						Cv : <span id="cvXoa" ></span>
+						<c:if test="${Cv != null}">${Cv.fileName}</c:if>
+					</c:if>
 	            </div>
 					 <input type="hidden" id="${idHidden}${id}" value="${id}"/>
 	
@@ -43,3 +47,4 @@
         </div>
     </div>
 </div>
+
