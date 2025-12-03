@@ -140,30 +140,9 @@
     </div>
 </div>
 
-        
-<!--         <div class="row align-items-center mb-5">
-            <div class="col-lg-4 ml-auto">
-                <div class="row">
-                     <div class="col-6">
-                        <a href="#" class="btn btn-block btn-light btn-md"></a>
-                    </div> 
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-block btn-primary btn-md">Đăng tuyển</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </form:form>
     </div>
 </section>
-<!-- <script>
-    ClassicEditor.create(document.querySelector('#editorN')).then(eidt => {
-        console.log("da" + eidt);
-    })
-        .catch(error => {
-            console.error(error);
-        });
-</script> -->
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
