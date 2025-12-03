@@ -37,7 +37,7 @@ public class SearchController {
 	}
 	
 	//Search recruitment with address or title
-	@PostMapping({"/search/search-job", "/recruiter/search"})
+	@PostMapping({"/search/search-job", "/recruiter/search-applicant"})
 	public String searchJob(RedirectAttributes redirectAttributes,
 						 @RequestParam("keySearch") String keySearch, 
 						 @RequestParam("typeSearch") String typeSearch) {	

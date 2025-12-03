@@ -37,12 +37,12 @@
             </div>
 
             <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[1] ? 'show active' : ''}" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="${pageContext.request.contextPath}/recruiter/search" method="post" class="search-job" onsubmit="handleEmpty(event)">
+                <form action="${pageContext.request.contextPath}/recruiter/search-applicant" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
                                 <div class="form-field">
-                                    <div class="icon"><span class="icon-map-marker"></span></div>
+                                    <!-- <div class="icon"><span class="icon-map-marker"></span></div> -->
                                     <input type="text" name="keySearch" class="form-control" placeholder="Tìm kiếm ứng cử viên" value="${param.keySearch}">
                                     <input type="hidden" name="typeSearch" class="form-control" value="${sessionScope.listType[1]}"/>
                                 </div>
@@ -64,7 +64,7 @@
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
                                 <div class="form-field">
-                                    <div class="icon"><span class="icon-map-marker"></span></div>
+                                    <!-- <div class="icon"><span class="icon-map-marker"></span></div> -->
                                     <input type="text" name="keySearch" class="form-control" placeholder="Tìm kiếm theo địa điểm" value="${param.keySearch}">
                                     <input type="hidden" name="typeSearch" class="form-control" value="${sessionScope.listType[2]}"/>
                                 </div>

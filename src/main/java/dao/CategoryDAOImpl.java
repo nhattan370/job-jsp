@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class CategoryDAOImpl implements CategoryDAO{
 	public Category getReferenceId(int id) {
 		Category category = em.getReference(Category.class, id);
 		return category;
+	}
+
+	@Override
+	public Category findById(int id) {
+
+		return em.find(Category.class, id);
 	}
 
 }

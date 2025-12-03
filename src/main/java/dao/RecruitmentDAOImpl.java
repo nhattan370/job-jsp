@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ import model.Recruitment;
 import share.ColorExample;
 
 @Repository
+@Transactional
 public class RecruitmentDAOImpl implements RecruitmentDAO{
 	
 	@PersistenceContext
@@ -76,6 +78,17 @@ public class RecruitmentDAOImpl implements RecruitmentDAO{
 														  		.setParameter("c", category)
 														  		.getResultList();
 		return recruitments;
+	}
+
+	@Override
+	public Recruitment save(Recruitment recruitment) {
+		em.persist(recruitment);
+		return recruitment;
+	}
+
+	@Override
+	public Recruitment update(Recruitment recruitment) {
+		return em.merge(recruitment);
 	}
 
 }

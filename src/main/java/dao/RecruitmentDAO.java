@@ -14,4 +14,6 @@ public interface RecruitmentDAO {
 	List<RecruitmentDTO> findAllByCompany(Company company);
 	List<RecruitmentDTO> findAllByCategory(Category category);
 	List<RecruitmentDTO> findAll();
+	Recruitment save(Recruitment recruitment);
+	Recruitment update(Recruitment recruitment);
 }

@@ -23,4 +23,9 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category getReferenceId(int id) {
 		return categoryDAO.getReferenceId(id);
 	}
+
+	@Override
+	public Category findById(int id) {
+		return categoryDAO.findById(id);
+	}
 }

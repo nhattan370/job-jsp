@@ -32,15 +32,15 @@ import share.ColorExample;
 
 @Controller
 @RequestMapping("/recruiter")
-public class RecruiterController {
+public class RecruiterUploadController {
 	
 	private CompanyService companyService;
 	private UserService userService;
 	private UploadCloudinaryService cloudinaryService;
-	private Logger logger = Logger.getLogger(RecruiterController.class.getName());
+	private Logger logger = Logger.getLogger(RecruiterUploadController.class.getName());
 	
 	@Autowired
-	public RecruiterController(CompanyService companyService, UserService userService, UploadCloudinaryService cloudinaryService) {
+	public RecruiterUploadController(CompanyService companyService, UserService userService, UploadCloudinaryService cloudinaryService) {
 		this.companyService = companyService;
 		this.userService = userService;
 		this.cloudinaryService = cloudinaryService;
@@ -102,4 +102,5 @@ public class RecruiterController {
 		}
 		return map;
 	}
+	
 }

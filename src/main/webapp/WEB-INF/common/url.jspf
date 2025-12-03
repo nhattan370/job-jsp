@@ -11,6 +11,10 @@
 <c:set var="HANDLE_CV" value="${pageContext.request.contextPath}/recruiter/handleCV?idApply="/>
 <c:set var="UPDATE_COMPANY" value="${pageContext.request.contextPath}/recruiter/update-company"/>
 <c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/recruiter/confirm-account"/>
+<c:set var="POST" value="${pageContext.request.contextPath}/recruiter/show-post/"/>
+<c:set var="LIST_APPLICANT" value="${pageContext.request.contextPath}/recruiter/applicants"/>
+<c:set var="ADD_POST" value="${pageContext.request.contextPath}/recruiter/handle-post"/>
+<c:set var="LIST_POST" value="${pageContext.request.contextPath}/recruiter/list-post"/>
 
 <!-- Use one time -->
 <c:set var="LIST_RECRUITMENT_BY_CATEGORY" value="${pageContext.request.contextPath}/recruitments-by-category?idCa="/>

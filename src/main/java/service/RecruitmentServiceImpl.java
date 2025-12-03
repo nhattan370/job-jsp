@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,25 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	@Override
 	public List<RecruitmentDTO> findAllByCayegory(Category category) {
 		return recruitmentDAO.findAllByCategory(category);
+	}
+
+	@Override
+	public Recruitment save(Recruitment recruitment) {
+		return recruitmentDAO.save(recruitment);
+	}
+
+	@Override
+	public Recruitment update(Recruitment recruitment) {
+		return recruitmentDAO.update(recruitment);
+	}
+
+	@Override
+	public Recruitment saveOrUpdate(Integer id, RecruitmentDTO recruitmentDTO, Company company) {
+		Recruitment recruitment = (id==null) ? new Recruitment() : recruitmentDAO.findByReferenceId(id);
+		BeanUtils.copyProperties(recruitmentDTO, recruitment);
+		if(id==null) recruitment.setCompany(company);
+		recruitmentDAO.save(recruitment);
+		return recruitment;
 	}	
 	
 }

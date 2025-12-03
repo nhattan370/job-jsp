@@ -20,13 +20,13 @@
 
 		<sec:authorize access="hasAuthority('RECRUITER')">
 	        <li class="nav-item">
-	          <a class="nav-link" href="${pageContext.request.contextPath}/recruiter/applicant">Ứng cử viên</a>
+	          <a class="nav-link" href="${LIST_APPLICANT}">Ứng cử viên</a>
 	        </li>
 		</sec:authorize>
         
-        <sec:authorize access="!isAuthenticated() || hasAuthority('RECRUITER')">
+        <sec:authorize access="hasAuthority('RECRUITER')">
 	        <li class="nav-item">
-	          <a class="nav-link btn btn-outline-primary me-2" href="${pageContext.request.contextPath}/recruiter/recruitment">Đăng tuyển</a>
+	          <a class="nav-link btn btn-outline-primary me-2" href="${POST}">Đăng tuyển</a>
 	        </li>
         </sec:authorize>
 
@@ -48,8 +48,8 @@
 						    <a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/profile-company">Hồ Sơ Công Ty</a>
 					    </sec:authorize>
 			    		<sec:authorize access="hasAuthority('RECRUITER')">
-			                <a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/list-post">Danh sách bài đăng</a>
-			                <a class="dropdown-item" href="${pageContext.request.contextPath}/recruiter/recruitment">Đăng tuyển</a>
+			                <a class="dropdown-item" href="${LIST_POST}">Danh sách bài đăng</a>
+			                <a class="dropdown-item" href="${POST}">Đăng tuyển</a>
 			            </sec:authorize>
 			            
 					    <sec:authorize access="hasAuthority('USER')">
