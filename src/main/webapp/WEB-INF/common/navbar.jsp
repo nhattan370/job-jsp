@@ -14,7 +14,7 @@
 
 		<sec:authorize access="!isAuthenticated() || hasAuthority('USER')">
 	        <li class="nav-item">
-	          <a class="nav-link" href="${pageContext.request.contextPath}/job-show">Công việc</a>
+	          <a class="nav-link" href="${JOB}">Công việc</a>
 	        </li>
 		</sec:authorize>
 

@@ -55,14 +55,14 @@ public class RecruitmentController {
 										@RequestParam("idRe") String idRe) {
 		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(idRe));
 		
-		if(details==null || details.getUser().getRole().getRoleName()==RoleUser.USER) {
+		if(details==null || details.getUser().getRole().getRoleName().equals(RoleUser.USER)) {
 			List<RecruitmentDTO> recruitments = recruitmentService.findAll();
 			model.addAttribute("recruitments",recruitments);
-		}else if(details.getUser().getRole().getRoleName()==RoleUser.RECRUITER && details.getUser()==recruitment.getCompany().getUser()) {
+		}else if(details.getUser().getRole().getRoleName().equals(RoleUser.RECRUITER) && details.getUser().getId().equals(recruitment.getCompany().getUser().getId())) {
 			List<ApplyPost> applyPosts = applyPostService.findByRecruitmentAndRecruiter(recruitment, details.getUser());
 			model.addAttribute("applyPosts",applyPosts);
+			logger.info(ColorExample.BLUE+"Đã có applyPost"+ColorExample.RESET);
 		}
-		
 		model.addAttribute(recruitment);
 		return "detail-post";
 	}

@@ -12,6 +12,7 @@ import dao.ApplyPostDAO;
 import enums.ApplyPostStatus;
 import enums.RoleUser;
 import model.ApplyPost;
+import model.Company;
 import model.Recruitment;
 import model.User;
 
@@ -63,6 +64,11 @@ public class ApplyPostServiceImpl implements ApplyPostService {
 	public List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter) {
 		List<ApplyPost> applyPosts = dao.findByRecruitmentAndRecruiter(recruitment, recruiter);
 		return applyPosts;
+	}
+
+	@Override
+	public List<ApplyPost> findAllByCompany(Company company) {
+		return dao.findAllByCompany(company);
 	}
 	
 }

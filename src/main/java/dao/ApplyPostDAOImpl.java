@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import enums.ApplyPostStatus;
 import model.ApplyPost;
+import model.Company;
 import model.Recruitment;
 import model.User;
 
@@ -74,6 +75,14 @@ public class ApplyPostDAOImpl implements ApplyPostDAO {
 		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment =: r AND a.recruitment.company.user = :u",ApplyPost.class)
 												  .setParameter("r", recruitment)
 												  .setParameter("u", recruiter)
+												  .getResultList();
+		return applyPosts;
+	}
+
+	@Override
+	public List<ApplyPost> findAllByCompany(Company company) {
+		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment.company= :c",ApplyPost.class)
+												  .setParameter("c", company)
 												  .getResultList();
 		return applyPosts;
 	}

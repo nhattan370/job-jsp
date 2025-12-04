@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import enums.ApplyPostStatus;
 import model.ApplyPost;
+import model.Company;
 import model.Recruitment;
 import model.User;
 
@@ -16,4 +17,5 @@ public interface ApplyPostDAO {
 	ApplyPost update(ApplyPost applyPost);
 	List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus status, Boolean exclude);
 	List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter);
+	List<ApplyPost> findAllByCompany(Company company);
 }

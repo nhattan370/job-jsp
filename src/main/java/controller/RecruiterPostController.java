@@ -77,12 +77,6 @@ public class RecruiterPostController {
 		return "redirect:/recruiter/show-post?id="+recruitment.getId();
 	}
 	
-	@GetMapping("/applicants")
-	public String showApplicants(Model model) {
-		return "";
-	}
-	
-	
 	@GetMapping("/list-post")
 	public String listPost(Model model) {
 		return "";

@@ -4,6 +4,7 @@ import java.util.List;
 
 import enums.ApplyPostStatus;
 import model.ApplyPost;
+import model.Company;
 import model.Recruitment;
 import model.User;
 
@@ -15,4 +16,5 @@ public interface ApplyPostService {
 	ApplyPost findById(int id);
 	ApplyPost update(ApplyPost applyPost);
 	List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter);
+	List<ApplyPost> findAllByCompany(Company company);
 }

@@ -9,18 +9,20 @@
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
 <!-- end nav -->
-<%-- <div th:if="${success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
-  <script>
-    swal({
-      title: 'Ứng cử viên này chưa cập nhật cv!',
-      /* text: 'Redirecting...', */
-      icon: 'error',
-      timer: 3000,
-      buttons: true,
-      type: 'error'
-    })
-  </script>
-</div> --%>
+<c:if test="${not empty mes}">
+	<div class="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+	  <script>
+	    swal({
+	      title: 'Ứng cử viên này chưa cập nhật cv!',
+	      /* text: 'Redirecting...', */
+	      icon: 'error',
+	      timer: 3000,
+	      buttons: true,
+	      type: 'error'
+	    })
+	  </script>
+	</div>
+</c:if>
 	<comp:pageHero title="Danh sách ứng cử viên" breadcrumb="Công việc"/>
 
 <section class="ftco-section bg-light">
@@ -28,27 +30,32 @@
     <div class="row">
       <div class="col-lg-12 pr-lg-5">
         <div class="row">
-          <th:block th:each="applyPost : ${list.content}">
+          <c:forEach var="applyPost" items= "${applyPosts}">
             <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
               <div class="team d-md-flex p-4 bg-white">
-                <IMG style="margin-top: 10px" class="img" th:src="${applyPost.image != null ? applyPost.image : 'https://st.quantrimang.com/photos/image/072015/22/avatar.jpg'}"></IMG>
+                <IMG style="margin-top: 10px" class="img" src="${applyPost.user.image}"
+                onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/images/user.png';"></IMG>
                 <div class="text pl-md-4">
-                  <H5 class="location mb-0" th:text="${applyPost.fullName}"></H5>
-                  <p style="display: block;color: black" th:text="${applyPost.address}"></p>
-                  <span class="position" style="display: block;color: black" th:text="${applyPost.email}"></span>
-                  <p class="mb-4" style="width: 700px" th:utext="${applyPost.description}">.</p>
-                  <div th:if="${applyPost.cv != null}" style="margin-left: 1px" class="row">
-                    <p><a th:href="${'/user/getCv/'}+${applyPost.id}"  class="btn btn-primary">Xem cv</a></p>
-                  </div>
+                  <H5 class="location mb-0">${applyPost.user.fullName}</H5>
+                  <p style="display: block;color: black">${applyPost.user.address}</p>
+                  <span class="position" style="display: block;color: black">${applyPost.user.email}</span>
+                  <p class="mb-4" style="width: 700px" >${applyPost.text}.</p>
+                  <c:if test="${applyPost.nameCv != null}">
+	                  <div style="margin-left: 1px; display: flex; gap: 5px" class="row">
+	                    <comp:applyStatus ap="${applyPost}" HANDLE_CV="${HANDLE_CV}"/>
+	                  </div>
+                  </c:if>
                 </div>
               </div>
             </div>
-          </th:block>
-          <div  style="text-align: center" th:if="${list.totalPages == 0}">
-            <p style="color: red">Không có kết quả nào</p>
-          </div>
+          </c:forEach>
+          <c:if test="${applyPosts.size() == 0}">
+	          <div  style="text-align: center">
+	            <p style="color: red">Không có kết quả nào</p>
+	          </div>
+          </c:if>
         </div>
-        <div class="row mt-5">
+<%--         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
@@ -60,136 +67,12 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div> --%>
       </div>
 
     </div>
   </div>
 </section>
-<!-- <script>
-  function save(id){
-    var name = "#idRe" +id;
-    var idRe = $(name).val();
-    var formData = new FormData();
-    formData.append('idRe', idRe);
-    $.ajax(
-            {
-              type: 'POST',
-              url: '/save-job/save/',
-              contentType: false,
-              processData: false,
-              data: formData,
-              success: function (data) {
-                console.log(data);
-                if(data == "false"){
-                  swal({
-                    title: 'Bạn cần phải đăng nhập!',
-                    /* text: 'Redirecting...', */
-                    icon: 'error',
-                    timer: 3000,
-                    buttons: true,
-                    type: 'error'
-                  })
-                }else if(data == "true"){
-                  swal({
-                    title: 'Lưu thành công!',
-                    /* text: 'Redirecting...', */
-                    icon: 'success',
-                    timer: 3000,
-                    buttons: true,
-                    type: 'success'
-                  })
-                }else{
-                  swal({
-                    title: 'Bạn đã lưu bài này rồi!',
-                    /* text: 'Redirecting...', */
-                    icon: 'error',
-                    timer: 3000,
-                    buttons: true,
-                    type: 'error'
-                  })
-                }
-              },
-              error: function (err) {
-                alert(err);
-              }
-            }
-    )
-  }
-
-  function apply(id){
-    var name = "#idRe" +id;
-    var nameModal = "#exampleModal" +id;
-    var nameFile = "#fileUpload"+id;
-    var nameText = "#text" +id;
-    var idRe = $(name).val();
-    var textvalue = $(nameText).val();
-    var fileUpload = $(nameFile).get(0);
-    var files = fileUpload.files;
-    var formData = new FormData();
-    formData.append('file', files[0]);
-    formData.append('idRe', idRe);
-    formData.append('text', textvalue);
-    if(files[0] == null){
-      swal({
-        title: 'Bạn cần phải chọn cv!',
-        /* text: 'Redirecting...', */
-        icon: 'error',
-        timer: 3000,
-        buttons: true,
-        type: 'error'
-      })
-    } else {
-      $.ajax(
-              {
-                type: 'POST',
-                url: '/user/apply-job/',
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (data) {
-                  if(data == "false"){
-                    swal({
-                      title: 'Bạn cần phải đăng nhập!',
-                      /* text: 'Redirecting...', */
-                      icon: 'error',
-                      timer: 3000,
-                      buttons: true,
-                      type: 'error'
-                    })
-                  }else if(data == "true"){
-                    swal({
-                      title: 'Ứng tuyển thành công!',
-                      /* text: 'Redirecting...', */
-                      icon: 'success',
-                      timer: 3000,
-                      buttons: true,
-                      type: 'success'
-                    })
-                    $(nameModal).modal('hide');
-                    $('#fileUpload').val("");
-                  }else{
-                    swal({
-                      title: 'Bạn đã ứng tuyển công việc này!',
-                      /* text: 'Redirecting...', */
-                      icon: 'error',
-                      timer: 3000,
-                      buttons: true,
-                      type: 'error'
-                    })
-                    $(nameModal).modal('hide');
-                    $('#fileUpload').val("");
-                  }
-                },
-                error: function (err) {
-                  alert(err);
-                }
-              }
-      )
-    }
-
-  }
-</script> -->
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
