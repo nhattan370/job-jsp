@@ -36,6 +36,10 @@
 						Cv : <span id="cvXoa" ></span>
 						<c:if test="${Cv != null}">${Cv.fileName}</c:if>
 					</c:if>
+					<c:if test="${idHidden=='idRe'}">
+						<p>Bạn có chắc chắn muốn <strong>xóa</strong> bài đăng
+						<span class="text-primary font-weight-bold">${title}</span> không?</p>
+					</c:if>
 	            </div>
 					 <input type="hidden" id="${idHidden}${id}" value="${id}"/>
 	

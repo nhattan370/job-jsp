@@ -29,7 +29,6 @@
     <div class="container">
     <form:form action="${ADD_POST}" method="post" modelAttribute="reDTO">
 
-    
 		<div class="row mb-5">
 		    <div class="col-12">
 		        <div class="text-center py-3 border-bottom">
@@ -139,7 +138,6 @@
         </div>
     </div>
 </div>
-
     </form:form>
     </div>
 </section>

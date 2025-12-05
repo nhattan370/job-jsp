@@ -55,3 +55,5 @@
 <script src="${pageContext.request.contextPath}/assets/js/more/upload-avatar.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/more/upload-cv.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/more/upload-logo.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/more/review-cv.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/more/delete-recruitment.js"></script>

@@ -5,6 +5,7 @@
 
 <%@ attribute name="ap" type="model.ApplyPost" required="true" %>
 <%@ attribute name="HANDLE_CV" required="true" %>
+<%@ attribute name="SHOW_CV" required="true" %>
 
 <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
     <div class="team d-md-flex p-4 bg-white">
@@ -17,7 +18,7 @@
             <p class="mb-4" style="width: 700px">${ap.text}.</p>
             <div class="row">
             	<c:if test="${ap.nameCv != null}">		                                    	
-	            	<comp:applyStatus HANDLE_CV="${HANDLE_CV}" ap="${ap}"/>
+	            	<comp:applyStatus HANDLE_CV="${HANDLE_CV}" ap="${ap}" SHOW_CV="${SHOW_CV}"/>
             	</c:if>
             </div>
         </div>

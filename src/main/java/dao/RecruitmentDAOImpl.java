@@ -62,9 +62,8 @@ public class RecruitmentDAOImpl implements RecruitmentDAO{
 	public List<RecruitmentDTO> findAll() {
 		List<RecruitmentDTO> recruitments = em.createQuery("SELECT new dto.RecruitmentDTO( "
 										                + "c.id, c.nameCompany, r.id, r.title, r.type, r.address) "
-										                + "FROM Company c "
-										                + "LEFT JOIN c.recruitments r "
-										                + "LEFT JOIN r.applyPosts a ",RecruitmentDTO.class)
+										                + "FROM Recruitment r "
+										                + "JOIN r.company c",RecruitmentDTO.class)
 										   .getResultList();
 		return recruitments;
 	}

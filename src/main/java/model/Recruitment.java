@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +17,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
+import enums.RecruitmentStatus;
+
 @Entity
 @Table(name="recruitment")
+@Where(clause = "status = 'NORMAL'")
 public class Recruitment {
 
     @Id
@@ -45,7 +52,8 @@ public class Recruitment {
     private String salary;
 
     @Column
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private RecruitmentStatus status;
 
     @Column(length = 255)
     private String title;
@@ -73,7 +81,7 @@ public class Recruitment {
 	public Recruitment() {}
 
 	public Recruitment(Integer id, String address, String description, String experience,
-			Integer quantity, String rank, String salary, Integer status, String title, String type, Integer views,
+			Integer quantity, String rank, String salary, RecruitmentStatus status, String title, String type, Integer views,
 			LocalDate deadline, Category category, Company company) {
 		this.id = id;
 		this.address = address;
@@ -156,11 +164,11 @@ public class Recruitment {
 		this.salary = salary;
 	}
 
-	public Integer getStatus() {
+	public RecruitmentStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(RecruitmentStatus status) {
 		this.status = status;
 	}
 

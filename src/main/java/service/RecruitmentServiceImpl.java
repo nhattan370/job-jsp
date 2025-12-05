@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import dao.RecruitmentDAO;
 import dto.RecruitmentDTO;
+import enums.RecruitmentStatus;
 import model.Category;
 import model.Company;
 import model.Recruitment;
@@ -52,7 +53,7 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	}
 
 	@Override
-	public List<RecruitmentDTO> findAllByCayegory(Category category) {
+	public List<RecruitmentDTO> findAllByCategory(Category category) {
 		return recruitmentDAO.findAllByCategory(category);
 	}
 
@@ -70,6 +71,7 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	public Recruitment saveOrUpdate(Integer id, RecruitmentDTO recruitmentDTO, Company company) {
 		Recruitment recruitment = (id==null) ? new Recruitment() : recruitmentDAO.findByReferenceId(id);
 		BeanUtils.copyProperties(recruitmentDTO, recruitment);
+		recruitment.setStatus(RecruitmentStatus.NORMAL);
 		if(id==null) recruitment.setCompany(company);
 		recruitmentDAO.save(recruitment);
 		return recruitment;

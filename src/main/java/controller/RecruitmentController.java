@@ -61,7 +61,6 @@ public class RecruitmentController {
 		}else if(details.getUser().getRole().getRoleName().equals(RoleUser.RECRUITER) && details.getUser().getId().equals(recruitment.getCompany().getUser().getId())) {
 			List<ApplyPost> applyPosts = applyPostService.findByRecruitmentAndRecruiter(recruitment, details.getUser());
 			model.addAttribute("applyPosts",applyPosts);
-			logger.info(ColorExample.BLUE+"Đã có applyPost"+ColorExample.RESET);
 		}
 		model.addAttribute(recruitment);
 		return "detail-post";
@@ -77,7 +76,7 @@ public class RecruitmentController {
 	@GetMapping("/recruitments-by-category")
 	public String getListRecruitmentByCategory(Model model, @RequestParam("idCa") String id) {
 		Category category = categoryService.getReferenceId(Integer.parseInt(id));
-		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCayegory(category);
+		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCategory(category);
 		
 		model.addAttribute("recruitments",recruitments);
 		return "list-re";

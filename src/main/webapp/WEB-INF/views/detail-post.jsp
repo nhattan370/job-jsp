@@ -100,7 +100,7 @@
 		                <div class="row">
 		                    <c:if test="${applyPosts.size() > 0}"> 
 			                    <c:forEach var="applyPost" items="${applyPosts}">
-	    							<comp:candidateApplicationCard ap="${applyPost}" HANDLE_CV="${HANDLE_CV}"/>
+	    							<comp:candidateApplicationCard ap="${applyPost}" HANDLE_CV="${HANDLE_CV}" SHOW_CV="${SHOW_CV}"/>
 			                    </c:forEach>
 		                    </c:if>
 		                    <c:if test="${applyPosts.size()<1}">
@@ -113,7 +113,7 @@
           </sec:authorize>
       </div>
         
-        <sec:authorize access="hasAuthority('USER')">
+        <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
         	<c:if test="${recruitments!=null}">
         		<c:if test="${recruitments.size()>0}">
 		        	<c:forEach var="recruitment" items= "${recruitments}">

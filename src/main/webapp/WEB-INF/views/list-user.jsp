@@ -42,7 +42,7 @@
                   <p class="mb-4" style="width: 700px" >${applyPost.text}.</p>
                   <c:if test="${applyPost.nameCv != null}">
 	                  <div style="margin-left: 1px; display: flex; gap: 5px" class="row">
-	                    <comp:applyStatus ap="${applyPost}" HANDLE_CV="${HANDLE_CV}"/>
+	                    <comp:applyStatus ap="${applyPost}" HANDLE_CV="${HANDLE_CV}" SHOW_CV="${SHOW_CV}"/>
 	                  </div>
                   </c:if>
                 </div>

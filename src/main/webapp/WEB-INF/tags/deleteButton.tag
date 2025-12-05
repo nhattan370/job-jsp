@@ -3,9 +3,11 @@
 
 <%@ attribute name="id" required="true" %>
 <%@ attribute name="type" required="false" %>
+<%@ attribute name="title" required="false" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="displayType" value="${empty type ? 'icon' : type}" />
+<c:set var="displayTitle" value="${empty title ? 'Rút đơn' : title}" />
 
 <c:choose>
     <c:when test="${displayType == 'button'}">
@@ -13,7 +15,7 @@
                 class="btn btn-outline-danger btn-sm mr-2"
                 data-toggle="modal"
                 data-target="#deleteModal${id}">
-            Rút đơn
+            ${displayTitle}
         </button>
     </c:when>
 
