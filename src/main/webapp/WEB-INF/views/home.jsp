@@ -25,6 +25,18 @@
 	    </script>
 	    <c:remove var="mes" scope="session"/>	
 	</c:if>
+	
+	<c:if test="${not empty mes}">
+	    <script type="text/javascript">
+	        swal({
+	            title: "${mes}",
+	            text: "Redirecting...", 
+	            icon: "${status}",
+	            timer: 2000,
+	            buttons: true
+	        });
+	    </script>
+	</c:if>
 
 <!-- general interface -->
 	<%@include file="/WEB-INF/common/general.jsp" %>

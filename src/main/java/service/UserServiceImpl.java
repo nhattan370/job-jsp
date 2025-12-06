@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService{
 		return userDAO.update(user);
 	}
 
+	@Override
+	public void save(User user) {
+		userDAO.save(user);
+	}
+
 }

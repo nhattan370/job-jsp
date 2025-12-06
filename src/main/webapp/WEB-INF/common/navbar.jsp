@@ -65,7 +65,7 @@
 		</sec:authorize>
 		<sec:authorize access="!isAuthenticated()">
 	        <li class="nav-item">
-	          <a class="nav-link btn btn-primary text-white" href="${pageContext.request.contextPath}/login">Đăng nhập</a>
+	          <a class="nav-link btn btn-primary text-white" href="${LOGIN}">Đăng nhập</a>
 	        </li>
 		</sec:authorize>
 

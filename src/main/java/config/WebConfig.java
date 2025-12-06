@@ -14,18 +14,26 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import converter.StringToCategoryConverter;
+import converter.StringToRoleConverter;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"controller","converter"})
 public class WebConfig implements WebMvcConfigurer {
 	
-    @Autowired
-    private StringToCategoryConverter stringToCategoryConverter;
+    private final StringToRoleConverter stringToRoleConverter;
+    private final StringToCategoryConverter stringToCategoryConverter;
 
-    @Override
+    @Autowired
+    public WebConfig(StringToRoleConverter stringToRoleConverter, StringToCategoryConverter stringToCategoryConverter) {
+		this.stringToRoleConverter = stringToRoleConverter;
+		this.stringToCategoryConverter = stringToCategoryConverter;
+	}
+
+	@Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(stringToCategoryConverter);
+        registry.addConverter(stringToRoleConverter);
     }
     
     @Bean

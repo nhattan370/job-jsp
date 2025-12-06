@@ -55,7 +55,7 @@ public class RecruitmentController {
 										@RequestParam("idRe") String idRe) {
 		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(idRe));
 		
-		if(details==null || details.getUser().getRole().getRoleName().equals(RoleUser.USER)) {
+		if(details==null || details.getUser().getRole().getRoleName().equals(RoleUser.APPLICANT)) {
 			List<RecruitmentDTO> recruitments = recruitmentService.findAll();
 			model.addAttribute("recruitments",recruitments);
 		}else if(details.getUser().getRole().getRoleName().equals(RoleUser.RECRUITER) && details.getUser().getId().equals(recruitment.getCompany().getUser().getId())) {

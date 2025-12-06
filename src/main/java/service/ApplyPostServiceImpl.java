@@ -40,7 +40,7 @@ public class ApplyPostServiceImpl implements ApplyPostService {
 
 	@Override
 	public List<ApplyPost> findAllByUser(User user) {
-		return user.getRole().getRoleName()==RoleUser.USER ? dao.findAllByUser(user) : Collections.emptyList();
+		return user.getRole().getRoleName()==RoleUser.APPLICANT ? dao.findAllByUser(user) : Collections.emptyList();
 	}
 
 	@Override

@@ -21,3 +21,6 @@
 <!-- Use one time -->
 <c:set var="LIST_RECRUITMENT_BY_CATEGORY" value="${pageContext.request.contextPath}/recruitments-by-category?idCa="/>
 <c:set var="UPDATE_USER" value="${pageContext.request.contextPath}/auth/update-user"/>
+<c:set var="LOGIN" value="${pageContext.request.contextPath}/login"/>
+<c:set var="REGISTER" value="${pageContext.request.contextPath}/register"/>
+<c:set var="SHOW_REGISTER_PAGE" value="${pageContext.request.contextPath}/show-register"/>

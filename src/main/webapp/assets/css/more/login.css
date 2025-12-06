@@ -129,3 +129,18 @@ h2 {
     transform: scale(1.05);
     box-shadow: 0px 5px 12px rgba(0,0,0,0.3);
 }
+.register-link {
+    margin-top: 25px;        
+    font-size: 1.05rem;      
+    color: #6c757d;          
+}
+
+.register-link a {
+    color: #007bff;          
+    text-decoration: none;
+    font-weight: 600;        
+}
+
+.register-link a:hover {
+    text-decoration: underline; 
+}
