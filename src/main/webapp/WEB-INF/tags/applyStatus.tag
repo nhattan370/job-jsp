@@ -9,7 +9,7 @@
 <%@ attribute name="ap" type="model.ApplyPost" required="true" %>
 <%@ attribute name="HANDLE_CV" required="true" %>
 <%@ attribute name="SHOW_CV" required="true" %>
-<sec:authorize access="hasAuthority('USER')">
+<sec:authorize access="hasAuthority('APPLICANT')">
 	<c:if test="${ap.status.name() == 'PENDING'}">
 	   	<p style="color: red; font-weight: bold; margin-top: 10px;">Chờ duyệt</p>
 	</c:if>

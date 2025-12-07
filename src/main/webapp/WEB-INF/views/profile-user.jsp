@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row justify-content-center">
 			<div class="col-lg-8">
-				<sec:authorize access="hasAuthority('USER')">
+				<sec:authorize access="hasAuthority('APPLICANT')">
 			     <div class="d-flex justify-content-between align-items-center mb-3">
 					<div class="small text-danger">
 						Chỉ hỗ trợ định dạng <strong>PDF</strong> (tối đa 5MB) đối với <strong>CV</strong>

@@ -16,7 +16,7 @@
         			DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"
         />
         <input type="hidden" id="idRe${re.id}" value="${re.id}">
-        <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+        <sec:authorize access="hasAuthority('APPLICANT') || !isAuthenticated()">
 			<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
 	    		<div>
 	    			<comp:saveButton id="${re.id}"/>

@@ -12,7 +12,7 @@
           <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}">Trang chủ</a>
         </li>
 
-		<sec:authorize access="!isAuthenticated() || hasAuthority('USER')">
+		<sec:authorize access="!isAuthenticated() || hasAuthority('APPLICANT')">
 	        <li class="nav-item">
 	          <a class="nav-link" href="${JOB}">Công việc</a>
 	        </li>
@@ -52,7 +52,7 @@
 			                <a class="dropdown-item" href="${POST}">Đăng tuyển</a>
 			            </sec:authorize>
 			            
-					    <sec:authorize access="hasAuthority('USER')">
+					    <sec:authorize access="hasAuthority('APPLICANT')">
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-save-job">Công việc đã lưu</a>
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-apply">Công việc đã ứng tuyển</a>
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-follow-company">Công ty đã theo dõi</a>

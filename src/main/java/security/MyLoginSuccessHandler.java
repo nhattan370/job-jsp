@@ -14,6 +14,9 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
+import enums.RoleUser;
+import enums.UserStatus;
+import model.User;
 import share.ColorExample;
 
 @Component
@@ -25,15 +28,31 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-		String userId = customUserDetails.getUser().getId()+"";
+		User user = customUserDetails.getUser();
 		
-		Cookie cookie = new Cookie("loginId", userId+"");
-		cookie.setPath("/");
-		response.addCookie(cookie);
 		
-		request.getSession().setAttribute("mes", "Đăng nhập thành công!");
+		authentication.getAuthorities().forEach(a -> {
+		    System.out.println("SEC AUTHORITY = " + a.getAuthority());
+		});
+
 		
-	    response.sendRedirect(request.getContextPath() + "/");
+		//Redirect page depend on status
+		if(user.getRole().getRoleName().equals(RoleUser.RECRUITER_PENDING)) {
+			response.sendRedirect(request.getContextPath() + "/re-pending/show-verified-page");
+		}else if(!user.getStatus().equals(UserStatus.ACTIVE)) {
+			response.sendRedirect(request.getContextPath() + "/account-status");
+		}else {
+			//Set cookie
+			Cookie cookie = new Cookie("loginId", user.getId()+"");
+			cookie.setPath("/");
+			cookie.setHttpOnly(true);
+			response.addCookie(cookie);
+			
+			//Show swal
+			request.getSession().setAttribute("mes", "Đăng nhập thành công!");
+			response.sendRedirect(request.getContextPath() + "/");			
+		}
+		
 	}
 
 }

@@ -25,14 +25,17 @@ public class SecurityConfig implements WebMvcConfigurer{
 	private final CustomUserDetailsService customUserDetailsService;
 	private final MyLogoutSuccessHandler myLogoutSuccessHandler;
 	private final MyLoginSuccessHandler myLoginSuccessHandler;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	public SecurityConfig(CustomUserDetailsService customUserDetailsService,
 						  MyLogoutSuccessHandler myLogoutSuccessHandler, 
-						  MyLoginSuccessHandler myLoginSuccessHandler) {
+						  MyLoginSuccessHandler myLoginSuccessHandler,
+						  PasswordEncoder passwordEncoder) {
 		this.customUserDetailsService = customUserDetailsService;
 		this.myLogoutSuccessHandler = myLogoutSuccessHandler;
 		this.myLoginSuccessHandler = myLoginSuccessHandler;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Bean
@@ -41,9 +44,10 @@ public class SecurityConfig implements WebMvcConfigurer{
 		http
 		.csrf(csrf -> csrf.disable()) //Chỉnh lại chỗ này
 		.authorizeHttpRequests(auth -> auth
-				.antMatchers("/user/**").hasAuthority("USER")
+				.antMatchers("/user/**").hasAuthority("APPLICANT")
 				.antMatchers("/recruiter/**").hasAuthority("RECRUITER")
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/re-pending").hasAuthority("RECRUITER_PENDING")
 				.antMatchers("/auth/**").authenticated()
 				.anyRequest().permitAll()
 			)
@@ -62,14 +66,14 @@ public class SecurityConfig implements WebMvcConfigurer{
 		return http.build();
 	}
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 	
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder);
     }
 
 }

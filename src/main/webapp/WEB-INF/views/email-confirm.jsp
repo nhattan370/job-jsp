@@ -8,7 +8,19 @@
 	<%@ include file="/WEB-INF/common/head.jsp" %>
 </head>
 <body>
-	<sec:authorize access="hasAuthority('RECRUITER')">
+  	<c:if test="${not empty mes}">
+	    <script type="text/javascript">
+	        swal({
+	            title: "${mes}",
+	            text: "Redirecting...", 
+	            icon: "${status}",
+	            timer: 2000,
+	            buttons: true
+	        });
+	    </script>
+	</c:if>
+	<sec:authorize access="hasAuthority('RECRUITER_PENDING')">
+	hello
 		<div class="container-fluid" style="text-align: center">
 		    <c:if test="${sessionScope.comfirm_await=='unsuccessful'}">
 			    <p style="font-size: 20px; font-weight: bold; color: #333; margin-top: 10px">
@@ -90,48 +102,48 @@
 		            </p>
 		        </div>
 		    </c:if>
-		    
-		    <c:if test="${empty sessionScope.confirm_await}">
-		    	<div style="width: 600px; height: 400px; border-radius: 5px;
-		        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px; margin: 20px auto; padding: 15px;">
-		
-		            <p style="line-height: 35px; font-size: 16px">
-		                Xin chào,
-		                <span style="font-weight: bold; color:#333;">
-		                    ${userInformation.fullName}
-		                </span>.
-		                <br>
-		                Bạn đã 
-		                <span style="font-weight: bold; color:#27ae60;">xác thực thành công</span>.
-		                <br>Hãy đến <span style="font-weight: bold">trang chủ</span> và trải nghiệm dịch vụ thôi nào
-		                <br>Cảm ơn bạn!!!
-		            </p>
-		            
-		            <p style="text-align:center; margin-top:30px;">
-			            <a href="${pageContext.request.contextPath}"
-			               style="display:inline-block; padding:10px 20px; background-color:#27ae60;
-			                      color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
-			                Mở trang chủ
-			            </a>
-			        </p>
-		
-		            <p style="margin-top: 15px;">
-		                Mọi thắc mắc vui lòng liên hệ bộ phận 
-		                <span style="font-weight: bold; color:#333;">CSKH của WorkCV</span>:
-		            </p>
-		
-		            <p>
-		                - Điện thoại:
-		                <span style="color:#5f80ec; font-weight: bold;">(024) 6680 5588</span><br>
-		                - Email:
-		                <a style="color:#5f80ec; font-weight: bold;">hotro@workcv.vn</a>
-		            </p>
-		        </div>
-		    </c:if>
 		</div>
-		<!-- start footer -->
-		<%@ include file="/WEB-INF/common/footer.jsp" %>
-		<!-- end footer -->
 	</sec:authorize>
+	
+    <sec:authorize access="hasAuthority('RECRUITER')">
+   	<div style="width: 600px; height: 400px; border-radius: 5px;
+       box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px; margin: 20px auto; padding: 15px;">
+
+           <p style="line-height: 35px; font-size: 16px">
+               Xin chào,
+               <span style="font-weight: bold; color:#333;">
+                   ${userInformation.fullName}
+               </span>.
+               <br>
+               Bạn đã 
+               <span style="font-weight: bold; color:#27ae60;">xác thực thành công</span>.
+               <br>Hãy đến <span style="font-weight: bold">trang chủ</span> và trải nghiệm dịch vụ thôi nào
+               <br>Cảm ơn bạn!!!
+           </p>
+           
+           <p style="text-align:center; margin-top:30px;">
+            <a href="${pageContext.request.contextPath}"
+               style="display:inline-block; padding:10px 20px; background-color:#27ae60;
+                      color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
+                Mở trang chủ
+            </a>
+        </p>
+
+           <p style="margin-top: 15px;">
+               Mọi thắc mắc vui lòng liên hệ bộ phận 
+               <span style="font-weight: bold; color:#333;">CSKH của WorkCV</span>:
+           </p>
+
+           <p>
+               - Điện thoại:
+               <span style="color:#5f80ec; font-weight: bold;">(024) 6680 5588</span><br>
+               - Email:
+               <a style="color:#5f80ec; font-weight: bold;">hotro@workcv.vn</a>
+           </p>
+       </div>
+   </sec:authorize>
+<!-- start footer -->
+<%@ include file="/WEB-INF/common/footer.jsp" %>
+<!-- end footer -->
 </body>
 </html>

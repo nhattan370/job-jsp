@@ -3,7 +3,8 @@ package enums;
 public enum RoleUser {
 	APPLICANT("Ứng viên"),
 	ADMIN("Quản trị viên"),
-	RECRUITER("Nhà tuyển dụng");
+	RECRUITER("Nhà tuyển dụng"),
+	RECRUITER_PENDING("Chưa xác thực");
 	
 	private final String label;
 	

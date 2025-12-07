@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.RoleDAO;
+import enums.RoleUser;
 import model.Role;
 
 @Service
@@ -25,6 +26,11 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public Role findById(Integer id) {
 		return roleDAO.findById(id);
+	}
+
+	@Override
+	public Role findByRoleName(RoleUser roleUser) {
+		return roleDAO.findByRoleName(roleUser).orElseThrow(() -> new IllegalArgumentException("Role không tồn tại: " + roleUser));
 	}
 	
 }

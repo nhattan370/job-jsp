@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/common/url.jspf" %>
+<%@ include file="/WEB-INF/common/head.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/login.css">
 </head>
 <body>
+  	<c:if test="${not empty mes}">
+	    <script type="text/javascript">
+	        swal({
+	            title: "${mes}",
+	            text: "Redirecting...", 
+	            icon: "${status}",
+	            timer: 2000,
+	            buttons: true
+	        });
+	    </script>
+	</c:if>
 	<div class="login-container">
 	    <h2>Login</h2>
 	    <form action="verify-login" method="post">

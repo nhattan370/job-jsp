@@ -3,16 +3,23 @@ package customValidator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import dto.UserDTO;
+import dto.UserRegisterDTO;
 
-public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, UserDTO> {
+public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, UserRegisterDTO> {
 
     @Override
-    public boolean isValid(UserDTO userDTO, ConstraintValidatorContext context) {
-        if (userDTO.getPassword() == null || userDTO.getConfirmPassword() == null) {
+    public boolean isValid(UserRegisterDTO userRegisterDTO, ConstraintValidatorContext context) {
+        if (userRegisterDTO.getPassword() == null || userRegisterDTO.getConfirmPassword() == null) {
             return false;
         }
-        return userDTO.getPassword().equals(userDTO.getConfirmPassword());
+        boolean isValid = userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword());
+        if (!isValid) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                   .addPropertyNode("confirmPassword")
+                   .addConstraintViolation();
+        }
+        return isValid;
     }
 }
 

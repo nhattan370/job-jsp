@@ -26,7 +26,7 @@
 	    <c:remove var="mes" scope="session"/>	
 	</c:if>
 	
-	<c:if test="${not empty mes}">
+		<c:if test="${not empty mes}">
 	    <script type="text/javascript">
 	        swal({
 	            title: "${mes}",
@@ -35,7 +35,7 @@
 	            timer: 2000,
 	            buttons: true
 	        });
-	    </script>
+	    </script>	
 	</c:if>
 
 <!-- general interface -->

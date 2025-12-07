@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+            <sec:authorize access="hasAuthority('APPLICANT') || !isAuthenticated()">
 	            <div class="col-lg-4">
 	                <div class="row">
 	                    <div class="col-6">
@@ -88,7 +88,7 @@
 
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-            	<sec:authorize access="hasAuthority('USER') || !isAuthenticated()"><h2 class="section-title mb-2">Những công việc liên quan</h2></sec:authorize>
+            	<sec:authorize access="hasAuthority('APPLICANT') || !isAuthenticated()"><h2 class="section-title mb-2">Những công việc liên quan</h2></sec:authorize>
             	<sec:authorize access="hasAuthority('RECRUITER')"><h2 class="section-title mb-2">Danh sách ứng viên ứng tuyển</h2></sec:authorize>
             </div>
         </div>
@@ -113,7 +113,7 @@
           </sec:authorize>
       </div>
         
-        <sec:authorize access="hasAuthority('USER') || !isAuthenticated()">
+        <sec:authorize access="hasAuthority('APPLICANT') || !isAuthenticated()">
         	<c:if test="${recruitments!=null}">
         		<c:if test="${recruitments.size()>0}">
 		        	<c:forEach var="recruitment" items= "${recruitments}">

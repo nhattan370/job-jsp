@@ -1,10 +1,16 @@
 package controller.AuthController;
 
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,30 +19,42 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
-
-import dto.UserDTO;
+import dto.UserRegisterDTO;
 import enums.RoleUser;
 import enums.UserStatus;
+import model.Role;
 import model.User;
+import security.CustomUserDetails;
+import service.LoginService;
 import service.RoleService;
 import service.UserService;
+import share.ColorExample;
 
 @Controller
 public class LoginController {
 	
 	private final RoleService roleService;
 	private final UserService userService;
+
+	private final LoginService loginService;
+	private Logger logger = Logger.getLogger(LoginController.class.getName());
 	
 	@Autowired
-	public LoginController(RoleService roleService, UserService userService) {
+	public LoginController(RoleService roleService, UserService userService,
+						   LoginService loginService) {
 		this.roleService = roleService;
 		this.userService = userService;
+		this.loginService = loginService;
 	}
 	
 	@GetMapping("/test-account")
 	public String testAccount() {
 		return "login-register/test-account";
+	}
+	
+	@GetMapping("/account-status")
+	public String accountStatus() {
+		return "login-register/account-status";
 	}
 	
 	@GetMapping("/login")
@@ -46,42 +64,31 @@ public class LoginController {
 	
 	@GetMapping("/show-register")
 	public String showRegister(Model model) {
-		model.addAttribute("userDTO", new UserDTO());
+		model.addAttribute("userDTO", new UserRegisterDTO());
 		model.addAttribute("roles", roleService.findAll());
 		return "login-register/register";
 	}
 	
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult bindingResult,
+	public String register(@Valid @ModelAttribute("userDTO") UserRegisterDTO userRegisterDTO, BindingResult bindingResult,
 						   RedirectAttributes redirectAttributes, Model model) {
-		User user = new User();
-		String urlSuccess="";
-		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("roles", roleService.findAll());
-			redirectAttributes.addFlashAttribute("mes", "Có lỗi rồi");
-			redirectAttributes.addFlashAttribute("status", "error");
-			return "register";
-		}
-		if(userDTO.getRole() != null &&userDTO.getRole().getRoleName().equals(RoleUser.ADMIN)) {
-			throw new IllegalArgumentException("Bạn không có quyền chọn ADMIN");
+			model.addAttribute("mes", "Có lỗi rồi");
+			model.addAttribute("status", "error");
+			return "login-register/register";
 		}
 		
-		BeanUtils.copyProperties(userDTO, user);
+		//save user's information into database
+		User user = userService.userRegister(userRegisterDTO);
 		
-		if(userDTO.getRole().getRoleName().equals(RoleUser.APPLICANT)) {
-			user.setStatus(UserStatus.ACTIVE);
-			urlSuccess="redirect:/";
-		}
-		else if(userDTO.getRole().getRoleName().equals(RoleUser.RECRUITER)) {
-			user.setStatus(UserStatus.DISABLED);
-			urlSuccess="redirect:/recruiter/show-verified-page";
-		}
-		
-		userService.save(user);
+		//Login automation after registration
+		loginService.loginAuto(user);
 		
 		redirectAttributes.addFlashAttribute("mes", "Đăng kí thành công");
 		redirectAttributes.addFlashAttribute("status","success");
-		return urlSuccess;
+		if(user.getRole().getRoleName().equals(RoleUser.RECRUITER_PENDING)) return "redirect:/re-pending/show-verified-page";
+		return "redirect:/";
 	}
+	
 }

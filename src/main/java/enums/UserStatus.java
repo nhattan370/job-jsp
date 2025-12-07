@@ -4,7 +4,8 @@ public enum UserStatus {
     ACTIVE("active"),    
     LOCKED("locked"),
     EXPIRED("expired"),
-    DISABLED("disable");
+    DISABLED("disable"),
+    PENDING("pending");
 
     private final String status;
 
