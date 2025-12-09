@@ -1,4 +1,4 @@
-<%@ tag description="Email confirmation component" pageEncoding="UTF-8"%>
+<%-- <%@ tag description="Email confirmation component" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>   
 <%@ tag language="java" body-content="scriptless" %>
@@ -103,4 +103,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> --%>

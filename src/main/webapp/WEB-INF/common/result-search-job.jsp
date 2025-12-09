@@ -4,9 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="comp" tagdir="/WEB-INF/tags" %>   
 <section class="ftco-section bg-light">
-
-	<!-- show toast -->
-	<!-- <div id="alert-container" style="position: fixed; top: 60px; left: 20px; z-index: 9999;"></div> -->
 	
     <div class="container">
         <h4 style="margin-top: -20px">Kết quả tìm kiếm cho : ${param.keySearch}</h4>

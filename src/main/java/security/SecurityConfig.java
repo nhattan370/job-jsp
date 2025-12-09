@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import enums.RoleUser;
 import share.ColorExample;
 
 @Configuration
@@ -44,20 +45,21 @@ public class SecurityConfig implements WebMvcConfigurer{
 		http
 		.csrf(csrf -> csrf.disable()) //Chỉnh lại chỗ này
 		.authorizeHttpRequests(auth -> auth
-				.antMatchers("/user/**").hasAuthority("APPLICANT")
-				.antMatchers("/recruiter/**").hasAuthority("RECRUITER")
-				.antMatchers("/admin/**").hasAuthority("ADMIN")
-				.antMatchers("/re-pending").hasAuthority("RECRUITER_PENDING")
-				.antMatchers("/auth/**").authenticated()
+				.antMatchers("/user/**").hasAuthority(RoleUser.APPLICANT.name())
+				.antMatchers("/recruiter/**").hasAuthority(RoleUser.RECRUITER.name())
+				.antMatchers("/admin/**").hasAuthority(RoleUser.ADMIN.name())
+				.antMatchers("/re-pending").hasAuthority(RoleUser.RECRUITER_PENDING.name())
+				.antMatchers("/auth/**").hasAnyAuthority(RoleUser.ADMIN.name(),RoleUser.APPLICANT.name(),RoleUser.RECRUITER.name())
+//				.antMatchers("/auth/**").authenticated()
 				.anyRequest().permitAll()
 			)
         .formLogin(form -> form
                 .loginPage("/login")
-                .loginProcessingUrl("/verify-login") // URL mà form sẽ submit
+                .loginProcessingUrl("/verify-login")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .successHandler(myLoginSuccessHandler)
-                .failureUrl("/login?error=true")     //Tham số khi login thất bại
+                .failureUrl("/login?error=true")
                 .permitAll()
             )
 		.logout(logout -> logout
@@ -65,11 +67,6 @@ public class SecurityConfig implements WebMvcConfigurer{
 				.permitAll());
 		return http.build();
 	}
-	
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
 	
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

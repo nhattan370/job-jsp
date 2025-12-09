@@ -5,7 +5,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
-<head><%@ include file="/WEB-INF/common/head.jsp" %></head>
+<head>
+	<%@ include file="/WEB-INF/common/head.jsp" %>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
 <body>
 <!-- start nav -->
 	<%@ include file="/WEB-INF/common/navbar.jsp" %>
@@ -27,7 +30,7 @@
 </c:if>
 <section class="site-section">
     <div class="container">
-    <form:form action="${ADD_POST}" method="post" modelAttribute="reDTO">
+    <form:form action="${HANDLE_POST}" method="post" modelAttribute="reDTO">
 
 		<div class="row mb-5">
 		    <div class="col-12">
@@ -81,7 +84,7 @@
             </div>
 
             <!-- Category -->
-            <div class="form-group">
+<%--             <div class="form-group">
                 <label for="category">Danh mục công việc</label>
                 <form:select class="form-control" path="category">
                     <form:option selected="true" disabled="true" value="">Chọn danh mục công việc</form:option>
@@ -90,7 +93,18 @@
                     </c:forEach>
                 </form:select>
                 <small class="text-danger"><form:errors path="category"/></small>
-            </div>
+            </div> --%>
+            
+            <div class="form-group">
+			    <label for="category">Danh mục công việc</label>
+			
+			    <form:select id="category" class="form-control" path="category">
+			        <form:option value="">Tìm danh mục...</form:option>
+			    </form:select>
+			
+			    <small class="text-danger"><form:errors path="category"/></small>
+			</div>
+            
 
             <!-- Số người -->
             <div class="form-group">
@@ -144,5 +158,8 @@
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/more/search-select.js"></script> 
 </body>
 </html>

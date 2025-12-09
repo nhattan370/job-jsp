@@ -7,8 +7,6 @@
 <%@ attribute name="DETAIL_COMPANY" required="true" %>
 
 <comp:wrapperCard id="${ap.id}">
-<%-- <div class="col-md-12 ">
-    <div class="job-post-item p-4 d-block d-lg-flex align-items-center" id="job-item-${ap.id}"> --%>
          <comp:informationRecruitment isDto="<%= Boolean.FALSE %>" 
          							  re="${ap.recruitment}" 
          							  DETAIL_COMPANY="${DETAIL_COMPANY}" 
@@ -18,10 +16,8 @@
               <div>
                   <comp:deleteButton id="${ap.id}" type="button"></comp:deleteButton>             
               </div>
-              <comp:applyStatus status="${ap.status}"/>
+              <comp:applyStatus ap="ap"/>
     </div>
-<!--   </div>
-</div> -->
 </comp:wrapperCard>
                
 <!-- Modal xác nhận xóa -->

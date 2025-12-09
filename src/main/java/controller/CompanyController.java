@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Company;
 import model.FollowCompany;
 import model.User;
+import path.ApplicantPath;
+import path.PublicPath;
 import security.CustomUserDetails;
 import service.CompanyService;
 import service.FollowCompanyService;
@@ -35,14 +37,14 @@ public class CompanyController {
 		this.followCompanyService = followCompanyService;
 	}
 	
-	@GetMapping("/detail-company")
+	@GetMapping(PublicPath.DETAIL_COMPANY)
 	public String showDetailCompany(Model model, @RequestParam("idCompany") String id) {
 		Company company = companyService.findById(Integer.parseInt(id));
 		model.addAttribute(company);
 		return "detail-company";
 	}
 	
-	@GetMapping("/user/list-follow-company")
+	@GetMapping(ApplicantPath.LIST_FOLLOW_COMPANY)
 	public String getListFollowCompany(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		User user = customUserDetails.getUser();
 		List<FollowCompany> followCompanies = followCompanyService.findAllByUser(user);
@@ -52,7 +54,7 @@ public class CompanyController {
 		return "list-follow-company";
 	}
 	
-	@PostMapping("/user/follow-company")
+	@PostMapping(ApplicantPath.FOLLOW_COMAPNY)
 	@ResponseBody
 	public Map<String, String> followCompany(@RequestParam("idCompany") String idCompany,
 											 @AuthenticationPrincipal CustomUserDetails details){
@@ -72,7 +74,7 @@ public class CompanyController {
 		return map;
 	}
 	
-	@PostMapping("/user/delete-follow-company")
+	@PostMapping(ApplicantPath.DELETE_FOLLOW_COMPANY)
 	@ResponseBody
 	public Map<String, String> deleteFollowCompany(@RequestParam("idFc") String idFc){
 		Map<String, String> map = new HashMap<String, String>();

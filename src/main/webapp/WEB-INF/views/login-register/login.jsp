@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/eye-icon.css">
 </head>
 <body>
   	<c:if test="${not empty mes}">
@@ -34,12 +35,17 @@
 	            </c:if>
 	        </div>
 	        <div class="form-group">
-	            <label for="password">Password</label>
-	            <input type="password" id="password" name="password" required>
-	            <c:if test="${param.error}">
-	            	<small style = "color:red"> Email or password is wrong</small>            
-	            </c:if>
-	        </div>
+			    <label for="password">Password</label>
+			    <div class="password-wrapper">
+				    <input type="password" id="password" name="password" required>
+				    <span id="togglePassword" class="ion-ios-eye-off toggle-password"></span>
+			    </div>
+			
+			    <c:if test="${param.error}">
+			        <small style="color:red"> Email or password is wrong</small>
+			    </c:if>
+			</div>
+
 	        <div class="form-group">
 	            <button type="submit">Login</button>
 	        </div>
@@ -57,4 +63,5 @@
 	    </form>
 	</div>
 </body>
+<script src="${pageContext.request.contextPath}/assets/js/more/icon-password.js"></script>
 </html>

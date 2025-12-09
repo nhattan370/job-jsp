@@ -25,12 +25,12 @@ import dto.RecruitmentDTO;
 import enums.RecruitmentStatus;
 import model.Company;
 import model.Recruitment;
+import path.RecruiterPath;
 import security.CustomUserDetails;
 import service.CategoryService;
 import service.RecruitmentService;
 
 @Controller
-@RequestMapping("/recruiter")
 public class RecruiterPostController {
 	
 	private final CategoryService categoryService;
@@ -43,7 +43,7 @@ public class RecruiterPostController {
 		this.recruitmentService = recruitmentService;
 	}
 	
-	@GetMapping("/show-post")
+	@GetMapping(RecruiterPath.SHOW_POST)
 	public String showPost(Model model, @RequestParam(required = false, name="id") Integer id) {
 		Recruitment recruitment = (id==null) ? new Recruitment() : recruitmentService.findById(id);
 		RecruitmentDTO recruitmentDTO = new RecruitmentDTO();
@@ -54,7 +54,7 @@ public class RecruiterPostController {
 		return "post-job";
 	}
 	
-	@PostMapping("/handle-post")
+	@PostMapping(RecruiterPath.HANDLE_POST)
 	public String addOrEditPost(@Valid @ModelAttribute("reDTO") RecruitmentDTO recruitmentDTO, 
 								BindingResult bindingResult,
 							    Model model,RedirectAttributes redirectAttributes, 
@@ -73,10 +73,10 @@ public class RecruiterPostController {
 		Recruitment recruitment = recruitmentService.saveOrUpdate(id, recruitmentDTO, company);
 		redirectAttributes.addFlashAttribute("mes", (id==null) ? "Tạo mới thành công" : "Cập nhật thành công");
 		redirectAttributes.addFlashAttribute("status","success");
-		return "redirect:/recruiter/show-post?id="+recruitment.getId();
+		return "redirect:"+RecruiterPath.SHOW_POST+"?id="+recruitment.getId();
 	}
 	
-	@GetMapping("/list-post")
+	@GetMapping(RecruiterPath.LIST_POST)
 	public String listPost(Model model, @AuthenticationPrincipal CustomUserDetails details) {
 		Company company = details.getUser().getCompany();
 		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCompany(company);
@@ -85,7 +85,7 @@ public class RecruiterPostController {
 		return "post-list";
 	}
 	
-	@PostMapping("/delete-recruitment")
+	@PostMapping(RecruiterPath.DELETE_RECRUITMENT)
 	@ResponseBody
 	public Map<String, Object> deleteRecruitment(@RequestParam("idRe") Integer idRe){
 		Map<String, Object> map = new HashMap<String, Object>();

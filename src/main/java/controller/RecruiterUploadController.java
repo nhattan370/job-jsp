@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dto.CompanyDTO;
 import model.Company;
 import model.User;
+import path.RecruiterPath;
 import security.CustomUserDetails;
 import service.CompanyService;
 import service.UploadCloudinaryService;
@@ -31,7 +32,6 @@ import service.UserService;
 import share.ColorExample;
 
 @Controller
-@RequestMapping("/recruiter")
 public class RecruiterUploadController {
 	
 	private CompanyService companyService;
@@ -46,7 +46,7 @@ public class RecruiterUploadController {
 		this.cloudinaryService = cloudinaryService;
 	}
 	
-	@GetMapping("/profile-company")
+	@GetMapping(RecruiterPath.PROFILE_COMPANY)
 	public String showProfilePage(Model model, @AuthenticationPrincipal CustomUserDetails details) {
 		Company company = details.getUser().getCompany();
 		CompanyDTO companyDTO = new CompanyDTO(company.getId(), company.getEmail(), company.getNameCompany(), company.getAddress(), company.getPhoneNumber(), company.getDescription());
@@ -55,7 +55,7 @@ public class RecruiterUploadController {
 		return "profile-company";
 	}
 	
-	@PostMapping("/update-company")
+	@PostMapping(RecruiterPath.UPDATE_COMPANY)
 	public String updateCompany(@Valid @ModelAttribute("companyDTO") CompanyDTO companyDTO, BindingResult bindingResult, Model model,
 								RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUserDetails details) {
 		User user = details.getUser();
@@ -72,7 +72,7 @@ public class RecruiterUploadController {
 			
 			redirectAttributes.addFlashAttribute("mes", "Cập nhật thành công");
 			redirectAttributes.addFlashAttribute("status","success");
-			return "redirect:/recruiter/profile-company";
+			return "redirect:"+ RecruiterPath.PROFILE_COMPANY;
 		}else {
 			model.addAttribute("mes", "Lỗi Cập nhật");
 			model.addAttribute("status", "error");
@@ -80,7 +80,7 @@ public class RecruiterUploadController {
 		}
 	}
 	
-	@PostMapping("/upload-logo")
+	@PostMapping(RecruiterPath.UPLOAD_LOGO)
 	@ResponseBody
 	public Map<String, String> uploadLogo(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal CustomUserDetails details){
 		Map<String, String> map = new HashMap<String, String>();

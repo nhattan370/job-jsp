@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dto.UserDTO;
 import model.Cv;
 import model.User;
+import path.AuthPath;
 import security.CustomUserDetails;
 import service.UploadCloudinaryService;
 import service.UserService;
@@ -41,7 +42,7 @@ public class UpdateProfileController {
 		this.userService = userService;
 	}
 	
-	@PostMapping("/auth/upload-avatar")
+	@PostMapping(AuthPath.UPLOAD_AVATAR)
 	@ResponseBody
 	public Map<String, String> showProfile(@AuthenticationPrincipal CustomUserDetails details, 
 							  			   @RequestParam("file") MultipartFile file) {
@@ -61,7 +62,7 @@ public class UpdateProfileController {
 		return map;
 	}
 	
-	@PostMapping("/user/upload-cv")
+	@PostMapping(AuthPath.UPLOAD_CV)
 	@ResponseBody
 	public Map<String, String> uploadCv(@AuthenticationPrincipal CustomUserDetails details,
 										@RequestParam("file") MultipartFile file){
@@ -88,7 +89,7 @@ public class UpdateProfileController {
 	}
 	
 	
-	@GetMapping("/auth/profile-user")
+	@GetMapping(AuthPath.PROFILE_USER)
 	public String showProfile(@AuthenticationPrincipal CustomUserDetails details, Model model) {
 		User user = details.getUser();
 		model.addAttribute("userInformation", user);
@@ -98,7 +99,7 @@ public class UpdateProfileController {
 		return "profile-user";
 	}
 	
-	@PostMapping("/auth/update-user")
+	@PostMapping(AuthPath.UPDATE_USER)
 	public String updateProfile(@Valid @ModelAttribute("userDto") UserDTO userDTO, BindingResult result, Model model,
 								@AuthenticationPrincipal CustomUserDetails details, RedirectAttributes redirectAttributes) {
 		User user = details.getUser();
@@ -113,7 +114,7 @@ public class UpdateProfileController {
 			userService.update(user);
 			redirectAttributes.addFlashAttribute("mes", "Cập nhật thành công");
 			redirectAttributes.addFlashAttribute("status", "success");
-			return "redirect:/auth/profile-user";
+			return "redirect:"+AuthPath.PROFILE_USER;
 		}else {
 		    model.addAttribute("mes", "Lỗi cập nhật");
 		    model.addAttribute("status", "error");

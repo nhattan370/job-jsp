@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import path.PublicPath;
+import path.RecruiterPath;
 import service.SearchService;
 
 @Controller
@@ -25,7 +27,7 @@ public class SearchController {
 		this.searchService = searchService;
 	}
 	
-	@GetMapping("/search")
+	@GetMapping(PublicPath.SEARCH)
 	public String showSearchPage(Model model, 
 								 @RequestParam("keySearch") String keySearch,
 								 @RequestParam("typeSearch") String typeSearch) {
@@ -37,7 +39,7 @@ public class SearchController {
 	}
 	
 	//Search recruitment with address or title
-	@PostMapping({"/search/search-job", "/recruiter/search-applicant"})
+	@PostMapping({PublicPath.SEARCH_JOB, RecruiterPath.SEARCH_APPLICANT})
 	public String searchJob(RedirectAttributes redirectAttributes,
 						 @RequestParam("keySearch") String keySearch, 
 						 @RequestParam("typeSearch") String typeSearch) {	
@@ -45,7 +47,7 @@ public class SearchController {
 		redirectAttributes.addAttribute("keySearch", keySearch);
 		redirectAttributes.addAttribute("typeSearch", typeSearch);
 		
-		return "redirect:/search";
+		return "redirect:"+PublicPath.SEARCH;
 	}
 	
 	@GetMapping("/search/test")

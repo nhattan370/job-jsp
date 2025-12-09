@@ -8,4 +8,5 @@ public interface CategoryService {
 	List<Category> findAll();
 	Category getReferenceId(int id);
 	Category findById(int id);
+	List<Category> findAllByName(String name);
 }

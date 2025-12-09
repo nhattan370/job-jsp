@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/eye-icon.css">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,8 +47,12 @@
         <!-- Password -->
         <div class="form-group">
             <label for="password">Mật khẩu</label>
-            <form:input id="password" type="password" path="password" class="form-control" placeholder="Mật khẩu"/>
+	            <div class="password-wrapper">
+		            <form:input id="password" type="password" path="password" class="form-control" placeholder="Mật khẩu"/>
+					<span id="togglePassword" class="ion-ios-eye-off toggle-password"></span>
+	            </div>
             <small class="text-danger"><form:errors path="password"/></small>
+            
         </div>
 
         <!-- Confirm Password -->
@@ -82,4 +87,5 @@
 </div>
     
   </body>
+  <script src="${pageContext.request.contextPath}/assets/js/more/icon-password.js"></script>
 </html>

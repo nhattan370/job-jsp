@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="enums.UserStatus" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,19 +33,19 @@
           
           <c:set var="status" value="${principal.user.status}" />
           	<c:choose>
-          		 <c:when test="${status == 'LOCKED'}">
+          		 <c:when test="${status == UserStatus.LOCKED}">
             <div class="mb-3">
               Tài khoản của bạn đã bị khóa
             </div>
           </c:when>
 
-          <c:when test="${status == 'DISABLED'}">
+          <c:when test="${status == UserStatus.DISABLED}">
             <div class="mb-3">
               Thông tin đăng nhập không còn hiệu lực.
             </div>
           </c:when>
 
-          <c:when test="${status == 'EXPIRED'}">
+          <c:when test="${status == UserStatus.EXPIRED}">
             <div class="mb-3">
               Tài khoản đã hết hạn.
             </div>

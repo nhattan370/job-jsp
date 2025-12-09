@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="enums.UserStatus" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +20,12 @@
 	        });
 	    </script>
 	</c:if>
+	<sec:authentication property="principal" var="principal"/>
+	<c:set var="status" value="${principal.user.status}" />
+
 	<sec:authorize access="hasAuthority('RECRUITER_PENDING')">
-	hello
 		<div class="container-fluid" style="text-align: center">
-		    <c:if test="${sessionScope.comfirm_await=='unsuccessful'}">
+		    <c:if test="${status==UserStatus.PENDING}">
 			    <p style="font-size: 20px; font-weight: bold; color: #333; margin-top: 10px">
 			        Xác thực email đăng nhập
 			    </p>
@@ -32,7 +35,7 @@
 			        <p style="line-height: 35px; font-size: 16px">
 			            Xin chào, 
 			            <span style="font-weight: bold; color:#333;">
-			                ${userInformation.fullName}
+			                ${principal.user.fullName}
 			            </span>.
 			            Vui lòng kiểm tra email để xác thực tài khoản.
 			            <br>
@@ -44,7 +47,7 @@
 			
 			        <div class="row form-group">
 			            <form action="${COMFIRM_ACCOUNT}" method="post" class="col-md-12">
-			                <input type="hidden" name="email" value="${userInformation.email}">
+			                <input type="hidden" name="email" value="${principal.user.email}">
 			                <input type="submit" value="Nhận email xác thực"
 			                       class="btn px-4 btn-primary text-white"
 			                       style="font-weight: bold;">
@@ -64,14 +67,14 @@
 			        </p>
 			    </div>
 		    </c:if>
-		    <c:if test="${sessionScope.comfirm_await=='sending'}">
+		    <c:if test="${status==UserStatus.SENDING}">
 		        <div style="width: 600px; height: 400px; border-radius: 5px;
 		        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px; margin: 20px auto; padding: 15px;">
 		
 		            <p style="line-height: 35px; font-size: 16px">
 		                Xin chào,
 		                <span style="font-weight: bold; color:#333;">
-		                    ${userInformation.fullName}
+		                    ${principal.user.fullName}
 		                </span>.
 		                <br>
 		                Bạn đã 
@@ -112,7 +115,7 @@
            <p style="line-height: 35px; font-size: 16px">
                Xin chào,
                <span style="font-weight: bold; color:#333;">
-                   ${userInformation.fullName}
+                   ${principal.user.fullName}
                </span>.
                <br>
                Bạn đã 

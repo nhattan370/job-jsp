@@ -1,37 +1,29 @@
 package controller;
 
-import java.net.MalformedURLException;
-
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.Company;
 import model.User;
+import path.RecruiterPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
 import share.ColorExample;
 
 @Controller
-@RequestMapping("/recruiter")
 public class ReviewCvController {
 	
 	private ApplyPostService applyPostService;
@@ -42,7 +34,7 @@ public class ReviewCvController {
 		this.applyPostService = applyPostService;
 	}
 	
-	@PostMapping("/view-cv")
+	@PostMapping(RecruiterPath.VIEW_CV)
 	public ResponseEntity<String> viewCv(@RequestParam("id") Integer id) {
 		logger.info(ColorExample.CYAN+id+ColorExample.RESET);
 	    try {
@@ -62,7 +54,7 @@ public class ReviewCvController {
 	}
 
 	
-	@PostMapping("/handle-cv")
+	@PostMapping(RecruiterPath.HANDLE_CV)
 	public ResponseEntity<String> handleCv(@RequestParam("idApply") Integer id, @RequestParam("status") String status) {
 		try {
 			ApplyPost applyPost = applyPostService.findById(id);
@@ -75,7 +67,7 @@ public class ReviewCvController {
 		}
 	}
 	
-	@GetMapping("/applicants")
+	@GetMapping(RecruiterPath.SHOW_APPLICANT)
 	public String showApplicants(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		User user = customUserDetails.getUser();
 		Company company = user.getCompany();

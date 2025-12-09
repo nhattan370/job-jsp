@@ -34,7 +34,7 @@
             <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
               <div class="team d-md-flex p-4 bg-white">
                 <IMG style="margin-top: 10px" class="img" src="${applyPost.user.image}"
-                onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/images/user.png';"></IMG>
+                onerror="this.onerror=null; this.src='${USER_DEFAULT_IMAGE}"></IMG>
                 <div class="text pl-md-4">
                   <H5 class="location mb-0">${applyPost.user.fullName}</H5>
                   <p style="display: block;color: black">${applyPost.user.address}</p>

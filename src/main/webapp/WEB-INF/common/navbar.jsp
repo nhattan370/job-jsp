@@ -5,11 +5,11 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
   <div class="container-fluid px-md-4 d-flex justify-content-between">
-    <div><a class="navbar-brand" href="${pageContext.request.contextPath}">Work CV</a></div>
+    <div><a class="navbar-brand" href="${HOME}">Work CV</a></div>
     <div class="navbar-nav d-flex align-items-center" id="navbarNav">
       <ul class="navbar-nav ms-auto d-flex align-items-center">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}">Trang chủ</a>
+          <a class="nav-link active" aria-current="page" href="${HOME}">Trang chủ</a>
         </li>
 
 		<sec:authorize access="!isAuthenticated() || hasAuthority('APPLICANT')">
@@ -35,7 +35,7 @@
 				  <button class="nav-link btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			    		<sec:authentication property="principal" var="principal"/>
 			    		<img src="${principal.user.image}"
-			    			 onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/images/user.png';"
+			    			 onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/images/user.png'"
 			                         class="rounded-circle mr-2" id="avatar-nav" style="width:30px; height:30px; object-fit:cover;">
 			            <span><sec:authentication property="principal.user.fullName"/></span>
 				  </button>

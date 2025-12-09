@@ -7,8 +7,8 @@
 <%@ attribute name="id" required="true" %>
 <%@ attribute name="nameCv" required="true" %> --%>
 <%@ attribute name="ap" type="model.ApplyPost" required="true" %>
-<%@ attribute name="HANDLE_CV" required="true" %>
-<%@ attribute name="SHOW_CV" required="true" %>
+<%@ attribute name="HANDLE_CV" required="false" %>
+<%@ attribute name="SHOW_CV" required="false" %>
 <sec:authorize access="hasAuthority('APPLICANT')">
 	<c:if test="${ap.status.name() == 'PENDING'}">
 	   	<p style="color: red; font-weight: bold; margin-top: 10px;">Chờ duyệt</p>

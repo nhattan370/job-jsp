@@ -14,7 +14,7 @@
     <div class="col-md-12 tab-wrap">
         <div class="tab-content p-4" id="v-pills-tabContent">
             <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[0] || param.typeSearch==null ? 'show active' : ''}" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                <form action="${pageContext.request.contextPath}/search/search-job" method="post" class="search-job" onsubmit="handleEmpty(event)">
+                <form action="${SEARCH_JOB}" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
@@ -37,7 +37,7 @@
             </div>
 
             <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[1] ? 'show active' : ''}" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="${pageContext.request.contextPath}/recruiter/search-applicant" method="post" class="search-job" onsubmit="handleEmpty(event)">
+                <form action="${SEARCH_APPLICANT}" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">
@@ -59,7 +59,7 @@
                 </form>
             </div>
             <div class="tab-pane fade ${param.typeSearch==sessionScope.listType[2] ? 'show active' : ''}" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="${pageContext.request.contextPath}/search/search-job" method="post" class="search-job" onsubmit="handleEmpty(event)">
+                <form action="${SEARCH_JOB}" method="post" class="search-job" onsubmit="handleEmpty(event)">
                     <div class="row no-gutters">
                         <div class="col-md-10 mr-md-2">
                             <div class="form-group">

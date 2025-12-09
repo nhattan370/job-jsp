@@ -15,6 +15,7 @@ import model.ApplyPost;
 import model.Category;
 import model.Company;
 import model.Recruitment;
+import path.PublicPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
 import service.CategoryService;
@@ -39,7 +40,7 @@ public class RecruitmentController {
 		this.categoryService = categoryService;
 	}
 	
-	@GetMapping("/company-post")
+	@GetMapping(PublicPath.COMPANY_POST)
 	public String listRecruitment(Model model, @RequestParam("idCompany") String id) {
 		Company company = companyService.getReference(Integer.parseInt(id));
 		
@@ -50,7 +51,7 @@ public class RecruitmentController {
 		return "list-re";
 	}
 	
-	@GetMapping("/detail-recruitment")
+	@GetMapping(PublicPath.DETAIL_RECRUITMENT)
 	public String getDetailRecruitment(Model model, @AuthenticationPrincipal CustomUserDetails details,
 										@RequestParam("idRe") String idRe) {
 		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(idRe));
@@ -66,14 +67,14 @@ public class RecruitmentController {
 		return "detail-post";
 	}
 	
-	@GetMapping("/job-show")
+	@GetMapping(PublicPath.JOB_SHOW)
 	public String getListJob(Model model) {
 		List<Category> categories = categoryService.findAll();
 		model.addAttribute("categories", categories);
 		return "list-job";
 	}
 	
-	@GetMapping("/recruitments-by-category")
+	@GetMapping(PublicPath.LIST_RECRUITMENT_BY_CATEGORY)
 	public String getListRecruitmentByCategory(Model model, @RequestParam("idCa") String id) {
 		Category category = categoryService.getReferenceId(Integer.parseInt(id));
 		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCategory(category);

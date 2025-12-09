@@ -9,4 +9,5 @@ public interface CategoryDAO {
 	List<Category> findAll();
 	Category getReferenceId(int id);
 	Category findById(int id);
+	List<Category> findAllByName(String name);
 }

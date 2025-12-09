@@ -3,10 +3,11 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Use a lot of time -->
-<c:set var="DETAIL_COMPANY" value="${pageContext.request.contextPath}/detail-company?idCompany="/>
-<c:set var="LIST_POST" value="${pageContext.request.contextPath}/company-post?idCompany="/>
-<c:set var="DETAIL_RECRUITMENT" value="${pageContext.request.contextPath}/detail-recruitment?idRe="/>
-<c:set var="JOB" value="${pageContext.request.contextPath}/job-show"/>
+<c:set var="DETAIL_COMPANY" value="${pageContext.request.contextPath}/public/detail-company?idCompany="/>
+<c:set var="LIST_POST" value="${pageContext.request.contextPath}/public/company-post?idCompany="/>
+<c:set var="DETAIL_RECRUITMENT" value="${pageContext.request.contextPath}/public/detail-recruitment?idRe="/>
+<c:set var="JOB" value="${pageContext.request.contextPath}/public/job-show"/>
+<c:set var="HOME" value="${pageContext.request.contextPath}"/>
 
 <!-- Recruiter -->
 <c:set var="HANDLE_CV" value="${pageContext.request.contextPath}/recruiter/handle-cv/"/>
@@ -14,13 +15,21 @@
 <c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/recruiter/confirm-account"/>
 <c:set var="POST" value="${pageContext.request.contextPath}/recruiter/show-post"/>
 <c:set var="LIST_APPLICANT" value="${pageContext.request.contextPath}/recruiter/applicants"/>
-<c:set var="ADD_POST" value="${pageContext.request.contextPath}/recruiter/handle-post"/>
+<c:set var="HANDLE_POST" value="${pageContext.request.contextPath}/recruiter/handle-post"/>
 <c:set var="LIST_POST" value="${pageContext.request.contextPath}/recruiter/list-post"/>
 <c:set var="SHOW_CV" value="${pageContext.request.contextPath}/recruiter/show-cv"/>
 
 <!-- Use one time -->
-<c:set var="LIST_RECRUITMENT_BY_CATEGORY" value="${pageContext.request.contextPath}/recruitments-by-category?idCa="/>
+<c:set var="LIST_RECRUITMENT_BY_CATEGORY" value="${pageContext.request.contextPath}/public/recruitments-by-category?idCa="/>
 <c:set var="UPDATE_USER" value="${pageContext.request.contextPath}/auth/update-user"/>
 <c:set var="LOGIN" value="${pageContext.request.contextPath}/login"/>
 <c:set var="REGISTER" value="${pageContext.request.contextPath}/register"/>
 <c:set var="SHOW_REGISTER_PAGE" value="${pageContext.request.contextPath}/show-register"/>
+
+<!-- Search -->
+<c:set var="SEARCH_JOB" value="${pageContext.request.contextPath}/public/search/search-job"/>
+<c:set var="SEARCH_APPLICANT" value="${pageContext.request.contextPath}/recruiter/search-applicant"/>
+
+<!-- Image -->
+<c:set var="BACKGROUND_IMAGE" value="${pageContext.request.contextPath}/assets/images/bg_1.jpg"/>
+<c:set var="USER_DEFAULT_IMAGE" value="${pageContext.request.contextPath}/assets/images/user.png"/>

@@ -6,7 +6,7 @@
 <%@ attribute name="image" required="true" %>
 <%@ attribute name="id" required="true" %>
 <%@ attribute name="title" required="true" %>
-<div class="hero-wrap hero-wrap-2" style="background-image: url(${pageContext.request.contextPath}/assets/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+<div class="hero-wrap hero-wrap-2" style="background-image: url(${BACKGROUND_IMAGE})" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start">

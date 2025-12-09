@@ -20,6 +20,7 @@ import model.ApplyPost;
 import model.Recruitment;
 import model.SaveJob;
 import model.User;
+import path.ApplicantPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
 import service.RecruitmentService;
@@ -28,7 +29,6 @@ import service.UploadCloudinaryService;
 import share.ColorExample;
 
 @Controller
-@RequestMapping("/user")
 public class HandleJobUserController {
 	
 	private final Logger logger = Logger.getLogger(HandleJobUserController.class.getName());
@@ -47,7 +47,7 @@ public class HandleJobUserController {
 		this.applyPostService = applyPostService;
 	}
 
-	@GetMapping("/save-job")
+	@GetMapping(ApplicantPath.SAVE_JOB)
 	@ResponseBody
 	public Map<String, String> saveJob(@RequestParam("idRe") String re,
 						@AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -67,7 +67,7 @@ public class HandleJobUserController {
 		return map;
 	}
 	
-	@PostMapping("/apply-job")
+	@PostMapping(ApplicantPath.APPLY_JOB)
 	@ResponseBody
 	public Map<String, String> applyJob(@RequestParam("file") MultipartFile file,
 										@RequestParam("idRe") String idRe,
@@ -94,7 +94,7 @@ public class HandleJobUserController {
 		return map;
 	}
 	
-	@PostMapping("/apply-job1")
+	@PostMapping(ApplicantPath.APPLY_JOB_1)
 	@ResponseBody
 	public Map<String, String> applyJob1(@RequestParam("idRe") String idRe,
 										 @RequestParam("text") String text,

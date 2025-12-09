@@ -36,4 +36,12 @@ public class CategoryDAOImpl implements CategoryDAO{
 		return em.find(Category.class, id);
 	}
 
+	@Override
+	public List<Category> findAllByName(String name) {
+		List<Category> category = em.createQuery("SELECT c FROM Category c WHERE LOWER(c.name) LIKE :n",Category.class)
+									.setParameter("n","%"+name.toLowerCase()+"%")
+									.getResultList();
+		return category;
+	}
+
 }

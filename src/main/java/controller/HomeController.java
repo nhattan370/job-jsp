@@ -3,6 +3,7 @@ package controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dto.CategoryDTO;
 import dto.CompanyHomeDTO;
 import dto.DashboardStatus;
 import dto.RecruitmentDTO;
 import enums.Search;
 import enums.Session;
 import model.Category;
+import path.PublicPath;
 import security.CustomUserDetails;
 import service.CategoryService;
 import service.CompanyService;
@@ -48,7 +51,7 @@ public class HomeController {
 	}
 	
 	
-	@GetMapping("/")
+	@GetMapping(PublicPath.HOME)
 	public String home(Model model, HttpSession session, HttpServletResponse response) {		
 		DashboardStatus ds = dashboardService.getDashboardStats();
 		List<RecruitmentDTO> listRe = recruitmentService.findTwoAndSort();
@@ -62,10 +65,22 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/api/categories")
+	@GetMapping(PublicPath.LIST_CATEGORY)
 	@ResponseBody
-	public List<Category> getAllCategories(){
-		return categoryService.findAll();
+	public List<CategoryDTO> getAllCategories(){
+		return categoryService.findAll()
+				.stream()
+				.map(cat -> new CategoryDTO(cat.getId(), cat.getName(), cat.getNumberChoose()))
+				.collect(Collectors.toList());
+	}
+	
+	@GetMapping(PublicPath.LIST_CATEGORY_BY_NAME)
+	@ResponseBody
+	public List<CategoryDTO> getAllCategoriesByName(@RequestParam String name){
+		return categoryService.findAllByName(name)
+				.stream()
+				.map(cat -> new CategoryDTO(cat.getId(), cat.getName(), cat.getNumberChoose()))
+				.collect(Collectors.toList());
 	}
 
 }

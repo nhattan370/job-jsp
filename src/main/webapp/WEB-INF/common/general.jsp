@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="hero-wrap img" style="background-image: url(${pageContext.request.contextPath}/assets/images/bg_1.jpg);">
+<div class="hero-wrap img" style="background-image: url(${BACKGROUND_IMAGE})">
     <div class="overlay"></div>
     <div class="container">
         <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">

@@ -18,12 +18,12 @@ import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.SaveJob;
 import model.User;
+import path.ApplicantPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
 import service.SaveJobService;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 	
 	private final SaveJobService saveJobService;
@@ -35,7 +35,7 @@ public class UserController {
 		this.applyPostService = applyPostService;
 	}
 
-	@GetMapping("/list-save-job")
+	@GetMapping(ApplicantPath.LIST_SAVE_JOB)
 	public String getListSaveJob(Model model, @AuthenticationPrincipal CustomUserDetails details) {
 		User user = details.getUser();
 		List<SaveJob> saveJobs = saveJobService.findAllByUser(user);
@@ -44,7 +44,7 @@ public class UserController {
 		return "list-save-job";
 	}
 	
-	@GetMapping("/get-list-apply")
+	@GetMapping(ApplicantPath.LIST_APPLY)
 	public String getListApply(Model model, @AuthenticationPrincipal CustomUserDetails details) {
 		User user = details.getUser();
 		List<ApplyPost> applyPosts = applyPostService.findAllByUserAndStatus(user, ApplyPostStatus.WITHDRAWN, true);
@@ -53,7 +53,7 @@ public class UserController {
 		return "list-apply-job";
 	}
 	
-	@PostMapping("/delete-save-job")
+	@PostMapping(ApplicantPath.DELETE_SAVE_JOB)
 	@ResponseBody
 	public Map<String, String> deleteSaveJob(@RequestParam("idSa") String idSa,
 			@AuthenticationPrincipal CustomUserDetails details) {
@@ -67,7 +67,7 @@ public class UserController {
 		return map;
 	}
 	
-	@PostMapping("/delete-apply-job")
+	@PostMapping(ApplicantPath.DELETE_APPLY_JOB)
 	@ResponseBody
 	public Map<String, String> deleteApply(@RequestParam("idApply") String idApply,
 										   @AuthenticationPrincipal CustomUserDetails details){

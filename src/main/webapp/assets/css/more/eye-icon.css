@@ -1,0 +1,39 @@
+/* icon eye */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 48px; 
+  height: 44px;        
+  line-height: 1.2;
+}
+
+/* .toggle-password {
+  position: absolute;
+  top: 50px;
+  right: 12px;                     
+  transform: translateY(-50%);     
+  color: #6c757d;
+  cursor: pointer;
+  user-select: none;
+  font-size: 30px;
+} */
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #6c757d;
+  cursor: pointer;
+  user-select: none;
+  font-size: 24px;
+}
+
+
+.toggle-password:hover,
+.password-wrapper input:focus + .toggle-password {
+  color: #333;
+}
