@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import enums.RoleUser;
 import enums.UserStatus;
 import model.User;
+import path.RecruiterPath;
 import share.ColorExample;
 
 @Component
@@ -30,15 +31,9 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 		CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 		User user = customUserDetails.getUser();
 		
-		
-		authentication.getAuthorities().forEach(a -> {
-		    System.out.println("SEC AUTHORITY = " + a.getAuthority());
-		});
-
-		
 		//Redirect page depend on status
 		if(user.getRole().getRoleName().equals(RoleUser.RECRUITER_PENDING)) {
-			response.sendRedirect(request.getContextPath() + "/re-pending/show-verified-page");
+			response.sendRedirect(request.getContextPath() + RecruiterPath.VERIFY_PAGE);
 		}else if(!user.getStatus().equals(UserStatus.ACTIVE)) {
 			response.sendRedirect(request.getContextPath() + "/account-status");
 		}else {

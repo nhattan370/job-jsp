@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import path.PublicPath;
 import share.ColorExample;
 
 @Component
@@ -27,7 +28,7 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler{
 		response.addCookie(cookie);
 		
 		request.getSession().setAttribute("mes", "Đăng xuất thành công");
-		response.sendRedirect(request.getContextPath()+"/");
+		response.sendRedirect(request.getContextPath()+PublicPath.HOME);
 		
 	}
 

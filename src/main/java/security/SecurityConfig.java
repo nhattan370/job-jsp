@@ -19,23 +19,26 @@ import share.ColorExample;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"security", "service", "dao", "cloudinary"})
+@ComponentScan(basePackages = {"security", "service", "dao", "cloudinary", "emailVerify"})
 public class SecurityConfig implements WebMvcConfigurer{
 	
 	private final Logger log = Logger.getLogger(SecurityConfig.class.getName());
 	private final CustomUserDetailsService customUserDetailsService;
 	private final MyLogoutSuccessHandler myLogoutSuccessHandler;
 	private final MyLoginSuccessHandler myLoginSuccessHandler;
+	private final MyLoginFailureHandler myLoginFailureHandler;
 	private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	public SecurityConfig(CustomUserDetailsService customUserDetailsService,
 						  MyLogoutSuccessHandler myLogoutSuccessHandler, 
 						  MyLoginSuccessHandler myLoginSuccessHandler,
+						  MyLoginFailureHandler myLoginFailureHandler,
 						  PasswordEncoder passwordEncoder) {
 		this.customUserDetailsService = customUserDetailsService;
 		this.myLogoutSuccessHandler = myLogoutSuccessHandler;
 		this.myLoginSuccessHandler = myLoginSuccessHandler;
+		this.myLoginFailureHandler = myLoginFailureHandler;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -59,7 +62,8 @@ public class SecurityConfig implements WebMvcConfigurer{
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .successHandler(myLoginSuccessHandler)
-                .failureUrl("/login?error=true")
+//                .failureUrl("/login?error=true")
+                .failureHandler(myLoginFailureHandler)
                 .permitAll()
             )
 		.logout(logout -> logout

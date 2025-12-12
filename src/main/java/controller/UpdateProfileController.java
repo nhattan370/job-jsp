@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dto.UserDTO;
+import enums.RoleUser;
+import enums.UserStatus;
 import model.Cv;
 import model.User;
 import path.AuthPath;
@@ -95,6 +97,7 @@ public class UpdateProfileController {
 		model.addAttribute("userInformation", user);
 		
 		UserDTO userDto = new UserDTO(user.getAddress(), user.getDescription(), user.getEmail(), user.getFullName(), user.getPhoneNumber());
+		
 		model.addAttribute("userDto",userDto);
 		return "profile-user";
 	}
@@ -110,6 +113,8 @@ public class UpdateProfileController {
 			user.setEmail(userDTO.getEmail());
 			user.setFullName(userDTO.getFullName());
 			user.setPhoneNumber(userDTO.getPhoneNumber());
+			user.setStatus(user.getRole().getRoleName().equals(RoleUser.RECRUITER_PENDING) ? UserStatus.PENDING : user.getStatus());
+			
 			
 			userService.update(user);
 			redirectAttributes.addFlashAttribute("mes", "Cập nhật thành công");

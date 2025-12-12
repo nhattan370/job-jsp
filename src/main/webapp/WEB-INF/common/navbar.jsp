@@ -29,6 +29,12 @@
 	          <a class="nav-link btn btn-outline-primary me-2" href="${POST}">Đăng tuyển</a>
 	        </li>
         </sec:authorize>
+        
+        <sec:authorize access="hasAuthority('RECRUITER_PENDING')">
+	        <li class="nav-item">
+	          <a class="nav-link btn btn-outline-primary me-2" href="${VERIFIED_PAGE}">Email Confirm</a>
+	        </li>
+        </sec:authorize>
 
 		<sec:authorize access="isAuthenticated()">
 			<div class="dropdown nav-item">

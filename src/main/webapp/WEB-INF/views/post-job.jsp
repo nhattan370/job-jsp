@@ -84,26 +84,16 @@
             </div>
 
             <!-- Category -->
-<%--             <div class="form-group">
+             <div class="form-group">
                 <label for="category">Danh mục công việc</label>
-                <form:select class="form-control" path="category">
+                <form:select class="form-control js-example-basic-single" path="category">
                     <form:option selected="true" disabled="true" value="">Chọn danh mục công việc</form:option>
                     <c:forEach var="cat" items="${categories}">
                         <form:option value="${cat.id}">${cat.name}</form:option>
                     </c:forEach>
                 </form:select>
                 <small class="text-danger"><form:errors path="category"/></small>
-            </div> --%>
-            
-            <div class="form-group">
-			    <label for="category">Danh mục công việc</label>
-			
-			    <form:select id="category" class="form-control" path="category">
-			        <form:option value="">Tìm danh mục...</form:option>
-			    </form:select>
-			
-			    <small class="text-danger"><form:errors path="category"/></small>
-			</div>
+            </div> 
             
 
             <!-- Số người -->
@@ -158,8 +148,12 @@
 <!-- start footer -->
 	<%@ include file="/WEB-INF/common/footer.jsp" %>
 <!-- end footer -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/more/search-select.js"></script> 
 </body>
+<script>
+	$(document).ready(function() {
+	    $('.js-example-basic-single').select2();
+	});
+</script>
 </html>

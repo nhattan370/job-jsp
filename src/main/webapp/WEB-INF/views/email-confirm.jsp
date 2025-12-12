@@ -20,10 +20,10 @@
 	        });
 	    </script>
 	</c:if>
-	<sec:authentication property="principal" var="principal"/>
-	<c:set var="status" value="${principal.user.status}" />
+ 	<sec:authentication property="principal" var="principal"/>
+	<c:set var="status" value="${principal.user.status}" /> 
 
-	<sec:authorize access="hasAuthority('RECRUITER_PENDING')">
+	 <sec:authorize access="hasAuthority('RECRUITER_PENDING')"> 
 		<div class="container-fluid" style="text-align: center">
 		    <c:if test="${status==UserStatus.PENDING}">
 			    <p style="font-size: 20px; font-weight: bold; color: #333; margin-top: 10px">
@@ -66,49 +66,11 @@
 			            <a href="https://mail.google.com/" style="color:#5f80ec; font-weight: bold;">hotro@workcv.vn</a>
 			        </p>
 			    </div>
-		    </c:if>
-		    <c:if test="${status==UserStatus.SENDING}">
-		        <div style="width: 600px; height: 400px; border-radius: 5px;
-		        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px; margin: 20px auto; padding: 15px;">
-		
-		            <p style="line-height: 35px; font-size: 16px">
-		                Xin chào,
-		                <span style="font-weight: bold; color:#333;">
-		                    ${principal.user.fullName}
-		                </span>.
-		                <br>
-		                Bạn đã 
-		                <span style="font-weight: bold; color:#27ae60;">gửi yêu cầu xác thực thành công</span>.
-		                <br>
-		                Vui lòng kiểm tra mail để hoàn tất xác thực.
-		                <br>Cảm ơn bạn!!!
-		            </p>
-		            
-					<p style="text-align:center; margin-top:30px;">
-			            <a href="https://mail.google.com/" target="_blank"
-			               style="display:inline-block; padding:10px 20px; background-color:#5f80ec;
-			                      color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
-			                Mở Gmail
-			            </a>
-			        </p>
-			        
-		            <p style="margin-top: 15px;">
-		                Mọi thắc mắc vui lòng liên hệ bộ phận 
-		                <span style="font-weight: bold; color:#333;">CSKH của WorkCV</span>:
-		            </p>
-		
-		            <p>
-		                - Điện thoại:
-		                <span style="color:#5f80ec; font-weight: bold;">(024) 6680 5588</span><br>
-		                - Email:
-		                <a href="https://mail.google.com/" style="color:#5f80ec; font-weight: bold;">hotro@workcv.vn</a>
-		            </p>
-		        </div>
-		    </c:if>
+			</c:if>
 		</div>
-	</sec:authorize>
+	 </sec:authorize>
 	
-    <sec:authorize access="hasAuthority('RECRUITER')">
+     <sec:authorize access="hasAuthority('RECRUITER')"> 
    	<div style="width: 600px; height: 400px; border-radius: 5px;
        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px; margin: 20px auto; padding: 15px;">
 

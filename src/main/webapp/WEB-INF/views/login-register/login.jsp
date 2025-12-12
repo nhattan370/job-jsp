@@ -24,15 +24,22 @@
 	    </script>
 	</c:if>
 	<div class="login-container">
+		<c:if test="${not empty sessionScope.login_error}">
+		    <div class="alert alert-warning">
+		        <c:out value="${sessionScope.login_error}" escapeXml="false" />
+		    </div>
+		    <c:remove var="login_error" scope="session"/>
+		</c:if>
+	
 	    <h2>Login</h2>
 	    <form action="verify-login" method="post">
 	    	<input type="hidden" name="redirect" value="${param.redirect}">
 	        <div class="form-group">
 	            <label for="email">Email</label>
 	            <input type="email" id="email" name="email" required>
-	            <c:if test="${param.error}">
+<%-- 	            <c:if test="${param.error}">
 	            	<small style = "color:red"> Email or password is wrong</small>            
-	            </c:if>
+	            </c:if> --%>
 	        </div>
 	        <div class="form-group">
 			    <label for="password">Password</label>
@@ -41,9 +48,9 @@
 				    <span id="togglePassword" class="ion-ios-eye-off toggle-password"></span>
 			    </div>
 			
-			    <c:if test="${param.error}">
+<%-- 			    <c:if test="${param.error}">
 			        <small style="color:red"> Email or password is wrong</small>
-			    </c:if>
+			    </c:if> --%>
 			</div>
 
 	        <div class="form-group">

@@ -10,9 +10,11 @@
 <c:set var="HOME" value="${pageContext.request.contextPath}"/>
 
 <!-- Recruiter -->
+<c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/re-ecruiter/confirm-account"/>
+<c:set var="VERIFIED_PAGE" value="${pageContext.request.contextPath}/re-pending/show-verified-page"/>
+
 <c:set var="HANDLE_CV" value="${pageContext.request.contextPath}/recruiter/handle-cv/"/>
 <c:set var="UPDATE_COMPANY" value="${pageContext.request.contextPath}/recruiter/update-company"/>
-<c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/recruiter/confirm-account"/>
 <c:set var="POST" value="${pageContext.request.contextPath}/recruiter/show-post"/>
 <c:set var="LIST_APPLICANT" value="${pageContext.request.contextPath}/recruiter/applicants"/>
 <c:set var="HANDLE_POST" value="${pageContext.request.contextPath}/recruiter/handle-post"/>

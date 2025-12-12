@@ -74,4 +74,11 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
+	@Override
+	public User updateStatusSending(User user) {
+		user.setStatus(UserStatus.SENDING);
+		userDAO.update(user);
+		return user;
+	}
+
 }

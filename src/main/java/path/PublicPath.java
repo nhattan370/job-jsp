@@ -11,4 +11,5 @@ public class PublicPath {
 	public final static String LIST_RECRUITMENT_BY_CATEGORY = "/public/recruitments-by-category";
 	public final static String SEARCH = "/public/search";
 	public final static String SEARCH_JOB = "/public/search/search-job";
+	public final static String LOGIN_PAGE = "/login";
 }

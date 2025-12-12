@@ -9,4 +9,5 @@ public interface UserService {
 	User update(User user);
 	void save(User user);
 	User userRegister(UserRegisterDTO userRegisterDTO);
+	User updateStatusSending(User user);
 }
