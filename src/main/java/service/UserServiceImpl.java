@@ -81,4 +81,12 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
+	@Override
+	public User updatePassword(User user, String newPassword, RoleUser roleUser) {
+		user.setPassword(encoder.encode(newPassword));
+		user.setRole(roleService.findByRoleName(roleUser));
+		userDAO.update(user);
+		return user;
+	}
+
 }

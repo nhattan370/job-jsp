@@ -1,0 +1,10 @@
+body {
+    background: #f4f6f9;
+}
+.forgot-container {
+    max-width: 420px;
+    margin: 100px auto;
+}
+.card {
+    border-radius: 8px;
+}

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import enums.RoleUser;
 import enums.UserStatus;
 import model.User;
+import path.PasswordPath;
 import path.RecruiterPath;
 import share.ColorExample;
 
@@ -34,7 +35,10 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 		//Redirect page depend on status
 		if(user.getRole().getRoleName().equals(RoleUser.RECRUITER_PENDING)) {
 			response.sendRedirect(request.getContextPath() + RecruiterPath.VERIFY_PAGE);
-		}else if(!user.getStatus().equals(UserStatus.ACTIVE)) {
+		}else if(user.getRole().getRoleName().equals(RoleUser.FORGOT_PASSWORD)) {
+			response.sendRedirect(request.getContextPath() + PasswordPath.RESET_PASSWORD_PAGE);
+		}
+		else if(!user.getStatus().equals(UserStatus.ACTIVE)) {
 			response.sendRedirect(request.getContextPath() + "/account-status");
 		}else {
 			//Set cookie

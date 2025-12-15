@@ -4,7 +4,8 @@ public enum RoleUser {
 	APPLICANT("Ứng viên"),
 	ADMIN("Quản trị viên"),
 	RECRUITER("Nhà tuyển dụng"),
-	RECRUITER_PENDING("Chưa xác thực");
+	RECRUITER_PENDING("Chưa xác thực"),
+	FORGOT_PASSWORD("Quên mật khẩu");
 	
 	private final String label;
 	

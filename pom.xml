@@ -161,6 +161,14 @@
 	    <artifactId>spring-context-support</artifactId>
 	    <version>5.3.30</version>
 	</dependency>
+	
+<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+	<dependency>
+	    <groupId>commons-beanutils</groupId>
+	    <artifactId>commons-beanutils</artifactId>
+	    <version>1.11.0</version>
+	</dependency>
+
 
     <!-- JUnit (test) -->
     <dependency>

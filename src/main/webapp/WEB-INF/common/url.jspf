@@ -35,3 +35,11 @@
 <!-- Image -->
 <c:set var="BACKGROUND_IMAGE" value="${pageContext.request.contextPath}/assets/images/bg_1.jpg"/>
 <c:set var="USER_DEFAULT_IMAGE" value="${pageContext.request.contextPath}/assets/images/user.png"/>
+
+<!-- Gmail -->
+<c:set var="GMAIL" value="https://mail.google.com"/>
+
+<!-- Forgot password -->
+<c:set var="FORGOT_PASSWORD_PAGE" value="${pageContext.request.contextPath}/forgot-password-page"/>
+<c:set var="SEND_NEW_PASSWORD" value="${pageContext.request.contextPath}/send-new-password"/>
+<c:set var="RESET_PASSWORD" value="${pageContext.request.contextPath}/password/reset-password"/>

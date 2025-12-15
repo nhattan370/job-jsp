@@ -77,8 +77,6 @@ public class RegisterController {
 			
 			return "redirect:"+RecruiterPath.VERIFY_PAGE;
 		}
-
-		
 		return "redirect:"+PublicPath.HOME;
 	}
 }

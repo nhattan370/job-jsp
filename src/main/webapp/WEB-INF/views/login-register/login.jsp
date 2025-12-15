@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <%@ include file="/WEB-INF/common/head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/more/eye-icon.css">
 </head>
@@ -30,6 +31,14 @@
 		    </div>
 		    <c:remove var="login_error" scope="session"/>
 		</c:if>
+		
+		<c:if test="${not empty mes}">
+		    <div class="alert alert-warning">
+		        <p>Gửi mật khẩu thành công. Vui lòng truy cập 
+		        	<a href="${GMAIL}">gmail</a> 
+		        để lấy mật khẩu mới và tiến hành <Strong>đăng nhập lại</Strong></p>
+		    </div>
+		</c:if>
 	
 	    <h2>Login</h2>
 	    <form action="verify-login" method="post">
@@ -37,9 +46,6 @@
 	        <div class="form-group">
 	            <label for="email">Email</label>
 	            <input type="email" id="email" name="email" required>
-<%-- 	            <c:if test="${param.error}">
-	            	<small style = "color:red"> Email or password is wrong</small>            
-	            </c:if> --%>
 	        </div>
 	        <div class="form-group">
 			    <label for="password">Password</label>
@@ -47,15 +53,17 @@
 				    <input type="password" id="password" name="password" required>
 				    <span id="togglePassword" class="ion-ios-eye-off toggle-password"></span>
 			    </div>
-			
-<%-- 			    <c:if test="${param.error}">
-			        <small style="color:red"> Email or password is wrong</small>
-			    </c:if> --%>
 			</div>
-
+			<div class="form-group text-right">
+			    <a href="${FORGOT_PASSWORD_PAGE}"
+			       class="text-primary">
+			        Quên mật khẩu?
+			    </a>
+			</div>
 	        <div class="form-group">
 	            <button type="submit">Login</button>
 	        </div>
+	        
 	        <div class="demo-link">
 			    <a href="test-account" target="_blank">
 			        🚀 Tài khoản demo

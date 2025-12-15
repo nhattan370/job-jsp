@@ -19,7 +19,7 @@ import share.ColorExample;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"security", "service", "dao", "cloudinary", "emailVerify"})
+@ComponentScan(basePackages = {"security", "service", "dao", "cloudinary", "emailVerify", "forgotPassword"})
 public class SecurityConfig implements WebMvcConfigurer{
 	
 	private final Logger log = Logger.getLogger(SecurityConfig.class.getName());
@@ -53,6 +53,7 @@ public class SecurityConfig implements WebMvcConfigurer{
 				.antMatchers("/admin/**").hasAuthority(RoleUser.ADMIN.name())
 				.antMatchers("/re-pending").hasAuthority(RoleUser.RECRUITER_PENDING.name())
 				.antMatchers("/auth/**").hasAnyAuthority(RoleUser.ADMIN.name(),RoleUser.APPLICANT.name(),RoleUser.RECRUITER.name())
+				.antMatchers("/password/**").hasAuthority(RoleUser.FORGOT_PASSWORD.name())
 //				.antMatchers("/auth/**").authenticated()
 				.anyRequest().permitAll()
 			)

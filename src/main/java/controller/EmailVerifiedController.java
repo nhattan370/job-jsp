@@ -58,11 +58,12 @@ public class EmailVerifiedController {
 		User user = userService.findByEmail(email);
 		
 		applicationEventPublisher.publishEvent(new OnRegistrationInitiatedEvent(user));
-		if(!user.getStatus().equals(UserStatus.SENDING)) {
-			logger.info(ColorExample.RED+user.getStatus()+ColorExample.RESET);
-			userService.updateStatusSending(user);
-			logger.info(ColorExample.RED+user.getStatus()+ColorExample.RESET);
-		}
+		/*
+		 * if(!user.getStatus().equals(UserStatus.SENDING)) {
+		 * logger.info(ColorExample.RED+user.getStatus()+ColorExample.RESET);
+		 * userService.updateStatusSending(user);
+		 * logger.info(ColorExample.RED+user.getStatus()+ColorExample.RESET); }
+		 */
 		
 		return "redirect:"+RecruiterPath.VERIFY_PAGE;
 	}

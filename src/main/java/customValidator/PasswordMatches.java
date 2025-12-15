@@ -14,8 +14,15 @@ import javax.validation.Payload;
 @Constraint(validatedBy = PasswordMatchesValidator.class)
 @Documented
 public @interface PasswordMatches {
+
     String message() default "Mật khẩu xác nhận không khớp";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
+
+    String passwordField();
+    String confirmPasswordField();
 }
+
 

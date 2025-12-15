@@ -10,7 +10,9 @@ import customValidator.UniqueEmailUser;
 import enums.UserStatus;
 import model.Role;
 
-@PasswordMatches(message = "Mật khẩu xác nhận không trùng khớp")
+@PasswordMatches(message = "Mật khẩu xác nhận không trùng khớp",
+				 passwordField = "password",
+				 confirmPasswordField = "confirmPassword")
 public class UserRegisterDTO {
 
     @NotBlank(message = "Email không được để trống")
