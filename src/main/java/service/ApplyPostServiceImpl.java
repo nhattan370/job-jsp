@@ -1,6 +1,5 @@
 package service;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,17 +9,18 @@ import org.springframework.stereotype.Service;
 
 import dao.ApplyPostDAO;
 import enums.ApplyPostStatus;
-import enums.RoleUser;
 import model.ApplyPost;
 import model.Company;
 import model.Recruitment;
 import model.User;
+import paginationResult.PaginationResult;
 
 @Service
 @Transactional
 public class ApplyPostServiceImpl implements ApplyPostService {
 	
 	private final ApplyPostDAO dao;
+	private final int SIZE = 2;
 	
 	@Autowired
 	public ApplyPostServiceImpl(ApplyPostDAO applyPostDAO) {
@@ -38,10 +38,10 @@ public class ApplyPostServiceImpl implements ApplyPostService {
 		return applyPost;
 	}
 
-	@Override
-	public List<ApplyPost> findAllByUser(User user) {
-		return user.getRole().getRoleName()==RoleUser.APPLICANT ? dao.findAllByUser(user) : Collections.emptyList();
-	}
+//	@Override
+//	public List<ApplyPost> findAllByUser(User user) {
+//		return user.getRole().getRoleName()==RoleUser.APPLICANT ? dao.findAllByUser(user) : Collections.emptyList();
+//	}
 
 	@Override
 	public ApplyPost findById(int id) {
@@ -55,20 +55,19 @@ public class ApplyPostServiceImpl implements ApplyPostService {
 	}
 
 	@Override
-	public List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus applyPostStatus, Boolean exclude) {
-		List<ApplyPost> applyPosts = dao.findAllByUserAndStatus(user, applyPostStatus, exclude);
+	public PaginationResult<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus applyPostStatus, int currentPage, Boolean exclude) {
+		return dao.findAllByUserAndStatus(user, applyPostStatus, currentPage, SIZE, exclude);
+	}
+
+	@Override
+	public PaginationResult<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter, int currentPage) {
+		PaginationResult<ApplyPost> applyPosts = dao.findByRecruitmentAndRecruiter(recruitment, recruiter, currentPage, SIZE);
 		return applyPosts;
 	}
 
 	@Override
-	public List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter) {
-		List<ApplyPost> applyPosts = dao.findByRecruitmentAndRecruiter(recruitment, recruiter);
-		return applyPosts;
-	}
-
-	@Override
-	public List<ApplyPost> findAllByCompany(Company company) {
-		return dao.findAllByCompany(company);
+	public PaginationResult<ApplyPost> findAllByCompany(Company company, int currentPage) {
+		return dao.findAllByCompany(company, currentPage, SIZE);
 	}
 	
 }

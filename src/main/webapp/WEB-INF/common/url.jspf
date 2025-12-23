@@ -8,6 +8,8 @@
 <c:set var="DETAIL_RECRUITMENT" value="${pageContext.request.contextPath}/public/detail-recruitment?idRe="/>
 <c:set var="JOB" value="${pageContext.request.contextPath}/public/job-show"/>
 <c:set var="HOME" value="${pageContext.request.contextPath}"/>
+<c:set var="LIST_SAVE_JOB" value="${pageContext.request.contextPath}/user/list-save-job"/>
+<c:set var="LIST_APPLY" value="${pageContext.request.contextPath}/user/get-list-apply"/>
 
 <!-- Recruiter -->
 <c:set var="COMFIRM_ACCOUNT" value="${pageContext.request.contextPath}/re-ecruiter/confirm-account"/>

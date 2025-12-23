@@ -59,8 +59,8 @@
 			            </sec:authorize>
 			            
 					    <sec:authorize access="hasAuthority('APPLICANT')">
-			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-save-job">Công việc đã lưu</a>
-			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/get-list-apply">Công việc đã ứng tuyển</a>
+			                <a class="dropdown-item" href="${LIST_SAVE_JOB}">Công việc đã lưu</a>
+			                <a class="dropdown-item" href="${LIST_APPLY}">Công việc đã ứng tuyển</a>
 			                <a class="dropdown-item" href="${pageContext.request.contextPath}/user/list-follow-company">Công ty đã theo dõi</a>
 			            </sec:authorize>
 					

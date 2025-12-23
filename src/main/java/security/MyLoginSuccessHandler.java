@@ -44,7 +44,7 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 			//Set cookie
 			Cookie cookie = new Cookie("loginId", user.getId()+"");
 			cookie.setPath("/");
-			cookie.setHttpOnly(true);
+//			cookie.setHttpOnly(true);
 			response.addCookie(cookie);
 			
 			//Show swal
@@ -53,6 +53,5 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler{
 		}
 		
 	}
-
 }
  

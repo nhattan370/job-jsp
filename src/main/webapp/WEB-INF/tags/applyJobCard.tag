@@ -16,7 +16,7 @@
               <div>
                   <comp:deleteButton id="${ap.id}" type="button"></comp:deleteButton>             
               </div>
-              <comp:applyStatus ap="ap"/>
+              <comp:applyStatus ap="${ap}"/>
     </div>
 </comp:wrapperCard>
                

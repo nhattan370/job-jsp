@@ -18,6 +18,7 @@ import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.SaveJob;
 import model.User;
+import paginationResult.PaginationResult;
 import path.ApplicantPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
@@ -36,18 +37,20 @@ public class UserController {
 	}
 
 	@GetMapping(ApplicantPath.LIST_SAVE_JOB)
-	public String getListSaveJob(Model model, @AuthenticationPrincipal CustomUserDetails details) {
+	public String getListSaveJob(Model model, @RequestParam(name="page", defaultValue = "1") Integer page,
+								 @AuthenticationPrincipal CustomUserDetails details) {
 		User user = details.getUser();
-		List<SaveJob> saveJobs = saveJobService.findAllByUser(user);
+		PaginationResult<SaveJob> saveJobs = saveJobService.findAllByUser(user, page);
 		
 		model.addAttribute("saveJobList", saveJobs);
 		return "list-save-job";
 	}
 	
 	@GetMapping(ApplicantPath.LIST_APPLY)
-	public String getListApply(Model model, @AuthenticationPrincipal CustomUserDetails details) {
+	public String getListApply(Model model, @RequestParam(name="page", defaultValue = "1") Integer page, 
+							   @AuthenticationPrincipal CustomUserDetails details) {
 		User user = details.getUser();
-		List<ApplyPost> applyPosts = applyPostService.findAllByUserAndStatus(user, ApplyPostStatus.WITHDRAWN, true);
+		PaginationResult<ApplyPost> applyPosts = applyPostService.findAllByUserAndStatus(user, ApplyPostStatus.WITHDRAWN, page, true);
 		
 		model.addAttribute("applyJobList", applyPosts);
 		return "list-apply-job";

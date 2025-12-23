@@ -18,6 +18,7 @@ import enums.ApplyPostStatus;
 import model.ApplyPost;
 import model.Company;
 import model.User;
+import paginationResult.PaginationResult;
 import path.RecruiterPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
@@ -68,10 +69,11 @@ public class ReviewCvController {
 	}
 	
 	@GetMapping(RecruiterPath.SHOW_APPLICANT)
-	public String showApplicants(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+	public String showApplicants(Model model, @RequestParam(name="page", defaultValue = "1") Integer page, 
+								 @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		User user = customUserDetails.getUser();
 		Company company = user.getCompany();
-		List<ApplyPost> applyPosts = applyPostService.findAllByCompany(company);
+		PaginationResult<ApplyPost> applyPosts = applyPostService.findAllByCompany(company, page);
 		
 		model.addAttribute("applyPosts", applyPosts);
 		return "list-user";

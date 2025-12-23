@@ -8,6 +8,7 @@
 
 <div class="one-third mb-4 mb-md-0"> 
      <div class="job-post-item-header align-items-center">
+     	<span class="subadge">${re.id}.</span>
      	<span class="subadge">${re.type}</span>
     	<h2 class="mr-3 text-black"><a href="${DETAIL_RECRUITMENT}${re.id}">${re.title}</a></h2>
     </div> 

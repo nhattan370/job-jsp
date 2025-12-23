@@ -1,11 +1,11 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,23 +14,25 @@ import model.ApplyPost;
 import model.Company;
 import model.Recruitment;
 import model.User;
+import paginationResult.BasePagination;
+import paginationResult.PaginationResult;
+import share.ColorExample;
 
 @Repository
-public class ApplyPostDAOImpl implements ApplyPostDAO {
-
-	@PersistenceContext
-	private EntityManager entityManager;
+public class ApplyPostDAOImpl extends BasePagination implements ApplyPostDAO {
 	
+	private final Logger logger = Logger.getLogger(ApplyPostDAOImpl.class.getName());
+
 	@Override
 	public ApplyPost save(ApplyPost applyPost) {
-		entityManager.persist(applyPost);
+		em.persist(applyPost);
 		return applyPost;
 	}
 
 	@Override
 	public Optional<ApplyPost> findByRecruitmentAndUser(Recruitment recruitment, User user) {
 		try {
-			ApplyPost applyPost = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment = :r AND a.user = :u",ApplyPost.class)
+			ApplyPost applyPost = em.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment = :r AND a.user = :u",ApplyPost.class)
 											   .setParameter("r", recruitment)
 											   .setParameter("u", user)
 											   .getSingleResult();
@@ -40,50 +42,54 @@ public class ApplyPostDAOImpl implements ApplyPostDAO {
 		}
 	}
 
-	@Override
-	public List<ApplyPost> findAllByUser(User user) {
-		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.user = :u", ApplyPost.class)
-												  .setParameter("u", user)
-												  .getResultList();
-									
-		return applyPosts;
-	}
+//	@Override
+//	public List<ApplyPost> findAllByUser(User user) {
+//		List<ApplyPost> applyPosts = em.createQuery("SELECT a FROM ApplyPost a WHERE a.user = :u", ApplyPost.class)
+//												  .setParameter("u", user)
+//												  .getResultList();
+//									
+//		return applyPosts;
+//	}
 
 	@Override
 	public ApplyPost findById(int id) {
-		ApplyPost applyPost = entityManager.find(ApplyPost.class, id);
+		ApplyPost applyPost = em.find(ApplyPost.class, id);
 		return applyPost;
 	}
 
 	@Override
 	public ApplyPost update(ApplyPost applyPost) {
-		return entityManager.merge(applyPost);
+		return em.merge(applyPost);
 	}
 
 	@Override
-	public List<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus status, Boolean exclude) {
-		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.user=:u AND "
-															+ (exclude ? "a.status <> :s" : "a.status = :s"),ApplyPost.class)
-												  .setParameter("u", user)
-												  .setParameter("s", status)
-												  .getResultList();
+	public PaginationResult<ApplyPost> findAllByUserAndStatus(User user, ApplyPostStatus status, 
+															  int currentPage, int size, Boolean exclude) {
+		String condition = exclude ? "a.status <> :s" : "a.status = :s";
+		String dataJpql = "SELECT a FROM ApplyPost a WHERE a.user=:u AND " + condition;
+		String countJpql = "SELECT COUNT(a) FROM ApplyPost a WHERE a.user=:u AND " + condition;
+		PaginationResult<ApplyPost> applyPosts = paginate(dataJpql, countJpql, 
+														  currentPage, size, ApplyPost.class, 
+														  Map.of("u", user, "s", status));
 		return applyPosts;
 	}
 
 	@Override
-	public List<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter) {
-		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment =: r AND a.recruitment.company.user = :u",ApplyPost.class)
-												  .setParameter("r", recruitment)
-												  .setParameter("u", recruiter)
-												  .getResultList();
+	public PaginationResult<ApplyPost> findByRecruitmentAndRecruiter(Recruitment recruitment, User recruiter, int currentPage, int size) {
+		String condition = "WHERE a.recruitment =: r AND a.recruitment.company.user = :u";
+		String dataJpql = "SELECT a FROM ApplyPost a "+condition;
+		String countJpql = "SELECT COUNT(a) FROM ApplyPost a "+condition;
+		
+		PaginationResult<ApplyPost> applyPosts = paginate(dataJpql, countJpql, currentPage, size, ApplyPost.class, Map.of("r", recruitment, "u", recruiter));
 		return applyPosts;
 	}
 
 	@Override
-	public List<ApplyPost> findAllByCompany(Company company) {
-		List<ApplyPost> applyPosts = entityManager.createQuery("SELECT a FROM ApplyPost a WHERE a.recruitment.company= :c",ApplyPost.class)
-												  .setParameter("c", company)
-												  .getResultList();
+	public PaginationResult<ApplyPost> findAllByCompany(Company company, int currentPage, int size) {
+		String dataJpql = "SELECT a FROM ApplyPost a WHERE a.recruitment.company= :c";
+		String countJpql = "SELECT COUNT(a) FROM ApplyPost a WHERE a.recruitment.company=:c";
+		
+		PaginationResult<ApplyPost> applyPosts = paginate(dataJpql, countJpql, currentPage, size, ApplyPost.class, Map.of("c",company));
 		return applyPosts;
 	}
 

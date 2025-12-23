@@ -1,6 +1,5 @@
 package service;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
@@ -12,6 +11,7 @@ import dao.SaveJobDAO;
 import model.Recruitment;
 import model.SaveJob;
 import model.User;
+import paginationResult.PaginationResult;
 
 @Service
 @Transactional
@@ -19,6 +19,7 @@ public class SaveJobServiceImpl implements SaveJobService{
 
 	private final SaveJobDAO dao;
 	private final Logger logger = Logger.getLogger(SaveJobServiceImpl.class.getName()); 
+	private final int SIZE = 2;
 	
 	@Autowired
 	public SaveJobServiceImpl(SaveJobDAO dao) {
@@ -42,8 +43,8 @@ public class SaveJobServiceImpl implements SaveJobService{
 	}
 
 	@Override
-	public List<SaveJob> findAllByUser(User user) {
-		return dao.findAllByUser(user);
+	public PaginationResult<SaveJob> findAllByUser(User user, int currentPage) {	
+		return dao.findAllByUser(user, currentPage, SIZE);
 	}
 
 	@Override

@@ -30,11 +30,11 @@
     <div class="row">
       <div class="col-lg-12 pr-lg-5">
         <div class="row">
-          <c:forEach var="applyPost" items= "${applyPosts}">
+          <c:forEach var="applyPost" items= "${applyPosts.data}">
             <div class="col-md-12" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;margin: 20px auto;">
               <div class="team d-md-flex p-4 bg-white">
                 <IMG style="margin-top: 10px" class="img" src="${applyPost.user.image}"
-                onerror="this.onerror=null; this.src='${USER_DEFAULT_IMAGE}"></IMG>
+                onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/images/user.png'"></IMG>
                 <div class="text pl-md-4">
                   <H5 class="location mb-0">${applyPost.user.fullName}</H5>
                   <p style="display: block;color: black">${applyPost.user.address}</p>
@@ -49,25 +49,13 @@
               </div>
             </div>
           </c:forEach>
-          <c:if test="${applyPosts.size() == 0}">
+          <c:if test="${applyPosts.totalItems == 0}">
 	          <div  style="text-align: center">
 	            <p style="color: red">Không có kết quả nào</p>
 	          </div>
           </c:if>
         </div>
-<%--         <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li th:if="${numberPage>0}"><a th:href="@{'/user/list-candidate/'(page = ${list.number - 1})}">&lt;</a></li>
-                <th:block th:each="recruitment,state  : ${recruitmentList}">
-                  <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{'/user/list-candidate/'(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                </th:block>
-                <li th:if="${numberPage<list.totalPages - 1}"><a th:href="@{'/user/list-candidate/' (page = ${list.number + 1})}">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div> --%>
+        <comp:pagination ob="${applyPosts}" link="${LIST_APPLICANT}?"></comp:pagination>
       </div>
 
     </div>

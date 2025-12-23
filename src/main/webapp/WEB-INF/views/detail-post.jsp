@@ -94,22 +94,23 @@
         </div>
         
         <sec:authorize access="hasAuthority('RECRUITER')">
-        	<c:if test="${applyPosts!=null}">
+        	<c:if test="${applyPosts.data!=null}">
 	        	<div class="row">
 		            <div class="col-lg-12 pr-lg-4">
 		                <div class="row">
-		                    <c:if test="${applyPosts.size() > 0}"> 
-			                    <c:forEach var="applyPost" items="${applyPosts}">
+		                    <c:if test="${applyPosts.totalItems > 0}"> 
+			                    <c:forEach var="applyPost" items="${applyPosts.data}">
 	    							<comp:candidateApplicationCard ap="${applyPost}" HANDLE_CV="${HANDLE_CV}" SHOW_CV="${SHOW_CV}"/>
 			                    </c:forEach>
 		                    </c:if>
-		                    <c:if test="${applyPosts.size()<1}">
+		                    <c:if test="${applyPosts.totalItems < 1}">
 		                        <p>Chưa có ứng cử viên nào ứng tuyển</p>
 		                    </c:if>
 		                </div>
 		            </div>
 		          </div>
 	          </c:if>
+	          <comp:pagination ob="${applyPosts}" link="${DETAIL_RECRUITMENT}${recruitment.id}&"></comp:pagination>
           </sec:authorize>
       </div>
         

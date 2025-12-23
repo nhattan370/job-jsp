@@ -16,9 +16,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 pr-lg-5">
-            	<c:if test="${applyJobList.size()>0}">
+            	<c:if test="${applyJobList.totalItems>0}">
                 <div class="row">
-                    <c:forEach var="applyJob" items="${applyJobList}">
+                    <c:forEach var="applyJob" items="${applyJobList.data}">
                         <comp:applyJobCard ap="${applyJob}" 
                         				   DETAIL_COMPANY="${DETAIL_COMPANY}" 
                         				   DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"/>
@@ -26,24 +26,12 @@
                     </c:forEach>
                 </div>
                 </c:if>
-                <c:if test="${applyJobList.size() < 1}">
+                <c:if test="${applyJobList.totalItems < 1}">
 	                <div style="text-align: center">
 	                    <p style="color:red;">Danh sách trống</p>
 	                </div>
                 </c:if>
-<%--                 <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{/save-job/get-list(page = ${applyJobList.number - 1})}">&lt;</a></li>
-                                <th:block th:each="recruitment,state  : ${recruitmentList}">
-                                    <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{/save-job/get-list(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                                </th:block>
-                                <li th:if="${numberPage<applyJobList.totalPages - 1}"><a th:href="@{/save-job/get-list(page = ${applyJobList.number + 1})}">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --%>
+                <comp:pagination ob="${applyJobList}" link="${LIST_APPLY}?"/>
             </div>
 
         </div>

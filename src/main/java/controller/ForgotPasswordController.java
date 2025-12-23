@@ -88,6 +88,7 @@ public class ForgotPasswordController {
 		}else {
 			userService.updatePassword(user, resetPasswordDTO.getPassword(), roleUser);
 			loginService.loginAuto(user);
+			session.removeAttribute("oldRole");
 			return "redirect:" + PublicPath.HOME;
 		}
 	}

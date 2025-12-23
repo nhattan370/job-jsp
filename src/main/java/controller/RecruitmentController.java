@@ -15,6 +15,7 @@ import model.ApplyPost;
 import model.Category;
 import model.Company;
 import model.Recruitment;
+import paginationResult.PaginationResult;
 import path.PublicPath;
 import security.CustomUserDetails;
 import service.ApplyPostService;
@@ -53,14 +54,14 @@ public class RecruitmentController {
 	
 	@GetMapping(PublicPath.DETAIL_RECRUITMENT)
 	public String getDetailRecruitment(Model model, @AuthenticationPrincipal CustomUserDetails details,
-										@RequestParam("idRe") String idRe) {
+									   @RequestParam("idRe") String idRe, @RequestParam(name="page", defaultValue = "1") Integer page) {
 		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(idRe));
 		
 		if(details==null || details.getUser().getRole().getRoleName().equals(RoleUser.APPLICANT)) {
 			List<RecruitmentDTO> recruitments = recruitmentService.findAll();
 			model.addAttribute("recruitments",recruitments);
 		}else if(details.getUser().getRole().getRoleName().equals(RoleUser.RECRUITER) && details.getUser().getId().equals(recruitment.getCompany().getUser().getId())) {
-			List<ApplyPost> applyPosts = applyPostService.findByRecruitmentAndRecruiter(recruitment, details.getUser());
+			PaginationResult<ApplyPost> applyPosts = applyPostService.findByRecruitmentAndRecruiter(recruitment, details.getUser(), page);
 			model.addAttribute("applyPosts",applyPosts);
 		}
 		model.addAttribute(recruitment);

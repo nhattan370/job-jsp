@@ -21,7 +21,8 @@ public class CategoryDAOImpl implements CategoryDAO{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Category> findAll() {
-		return em.createQuery("SELECT c FROM Category c",Category.class).getResultList();
+		return em.createQuery("SELECT c FROM Category c",Category.class)
+				 .getResultList();
 	}
 
 	@Override
