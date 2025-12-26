@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Company;
 import model.FollowCompany;
 import model.User;
+import paginationResult.PaginationResult;
 import path.ApplicantPath;
 import path.PublicPath;
 import security.CustomUserDetails;
@@ -45,9 +46,10 @@ public class CompanyController {
 	}
 	
 	@GetMapping(ApplicantPath.LIST_FOLLOW_COMPANY)
-	public String getListFollowCompany(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+	public String getListFollowCompany(Model model, @RequestParam(name="page", defaultValue = "1") Integer page,
+									   @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		User user = customUserDetails.getUser();
-		List<FollowCompany> followCompanies = followCompanyService.findAllByUser(user);
+		PaginationResult<FollowCompany> followCompanies = followCompanyService.findAllByUser(user, page);
 
 		model.addAttribute("followCompanies", followCompanies);
 

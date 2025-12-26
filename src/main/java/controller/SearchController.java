@@ -1,7 +1,5 @@
 package controller;
 
-
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import paginationResult.PaginationResult;
 import path.PublicPath;
 import path.RecruiterPath;
 import service.SearchService;
@@ -28,24 +27,26 @@ public class SearchController {
 	}
 	
 	@GetMapping(PublicPath.SEARCH)
-	public String showSearchPage(Model model, 
+	public String showSearchPage(Model model, @RequestParam(name="page", defaultValue = "1") Integer page,
 								 @RequestParam("keySearch") String keySearch,
 								 @RequestParam("typeSearch") String typeSearch) {
 		
-		List<?> searchResult = searchService.searchResult(typeSearch, keySearch);
+		PaginationResult<?> searchResult = searchService.searchResult(typeSearch, keySearch, page);
 		
 		model.addAttribute("list", searchResult);
 		return "result-search";
 	}
 	
 	//Search recruitment with address or title
-	@PostMapping({PublicPath.SEARCH_JOB, RecruiterPath.SEARCH_APPLICANT})
+	@GetMapping({PublicPath.SEARCH_JOB, RecruiterPath.SEARCH_APPLICANT})
 	public String searchJob(RedirectAttributes redirectAttributes,
 						 @RequestParam("keySearch") String keySearch, 
-						 @RequestParam("typeSearch") String typeSearch) {	
+						 @RequestParam("typeSearch") String typeSearch,
+						 @RequestParam(name="page", defaultValue = "1") Integer page) {	
 
 		redirectAttributes.addAttribute("keySearch", keySearch);
 		redirectAttributes.addAttribute("typeSearch", typeSearch);
+		redirectAttributes.addAttribute("page", page);
 		
 		return "redirect:"+PublicPath.SEARCH;
 	}

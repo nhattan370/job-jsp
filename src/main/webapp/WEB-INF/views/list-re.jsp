@@ -16,9 +16,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 pr-lg-5">
-       <c:if test="${recruitments.size()>0}">
+       <c:if test="${recruitments.totalItems>0}">
         	<div class="row">
-          		<c:forEach var="recruitment" items="${recruitments}">
+          		<c:forEach var="recruitment" items="${recruitments.data}">
 				    <comp:applySave 
     						re="${recruitment}" 
     						DETAIL_COMPANY="${DETAIL_COMPANY}" 
@@ -26,25 +26,12 @@
           		</c:forEach>
         	</div>
         </c:if>
-        <c:if test="${recruitments.size()<1}">
+        <c:if test="${recruitments.totalItems<1}">
 	        <div style="text-align: center">
 	          <p style="color:red;">Danh sách trống</p>
 	        </div>
         </c:if>
-<%--         <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li th:if="${numberPage>0}"><a th:href="@{'/recruitment/category/'+${category.id}(page = ${saveJobList.number - 1})}">&lt;</a></li>
-                <th:block th:each="recruitment,state  : ${recruitmentList}">
-                  <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{'/recruitment/category/'+${category.id}(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                </th:block>
-                <li th:if="${numberPage<saveJobList.totalPages - 1}"><a th:href="@{'/recruitment/category/'+${category.id}(page = ${saveJobList.number + 1})}">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div> --%>
-        
+	    <comp:pagination ob="${recruitments}" link="${pageLink}"></comp:pagination>
       </div>
     </div>
   </div>

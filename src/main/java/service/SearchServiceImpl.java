@@ -1,19 +1,19 @@
 package service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.SearchDAO;
 import enums.Search;
 import exception.SearchTypeNotFoundException;
+import paginationResult.PaginationResult;
 import util.SearchUtil;
 
 @Service
 public class SearchServiceImpl implements SearchService{
 	
 	private final SearchDAO searchDAO;
+	private final int SIZE = 2;
 
 	@Autowired
 	public SearchServiceImpl(SearchDAO searchDAO) {
@@ -21,17 +21,17 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<?> searchResult(String typeSearch, String keySearch) {
+	public PaginationResult<?> searchResult(String typeSearch, String keySearch, int currentPage) {
 		String key = SearchUtil.standardizeKeySearch(keySearch);
 		
-		List<?> list = null;
+		PaginationResult<?> list = null;
 		if(typeSearch.equals(Search.JOB.getValue())) {
-			list = searchDAO.searchTitleRecruitment(key);
+			list = searchDAO.searchTitleRecruitment(key, currentPage, SIZE);
 		}
 		else if(typeSearch.equals(Search.USER.getValue())) {
-			list = searchDAO.searchUser(key);
+			list = searchDAO.searchUser(key, currentPage, SIZE);
 		}else if(typeSearch.equals(Search.ADDRESS.getValue())) {
-			list = searchDAO.searchAddressRecruitment(key);
+			list = searchDAO.searchAddressRecruitment(key, currentPage, SIZE);
 		}else {
 			throw new SearchTypeNotFoundException("Unsupport search type "+typeSearch);
 		}

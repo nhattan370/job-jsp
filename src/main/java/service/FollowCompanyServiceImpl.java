@@ -10,12 +10,14 @@ import dao.FollowCompanyDAO;
 import model.Company;
 import model.FollowCompany;
 import model.User;
+import paginationResult.PaginationResult;
 
 @Service
 @Transactional
 public class FollowCompanyServiceImpl implements FollowCompanyService {
 
 	private final FollowCompanyDAO dao;
+	private final int SIZE = 2;
 	
 	public FollowCompanyServiceImpl(FollowCompanyDAO followCompanyDAO) {
 		this.dao = followCompanyDAO;
@@ -39,8 +41,8 @@ public class FollowCompanyServiceImpl implements FollowCompanyService {
 	}
 
 	@Override
-	public List<FollowCompany> findAllByUser(User user) {
-		return dao.findAllByUser(user);
+	public PaginationResult<FollowCompany> findAllByUser(User user, int currentPage) {
+		return dao.findAllByUser(user, currentPage, SIZE);
 	}
 
 	@Override

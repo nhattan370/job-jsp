@@ -115,19 +115,20 @@
       </div>
         
         <sec:authorize access="hasAuthority('APPLICANT') || !isAuthenticated()">
-        	<c:if test="${recruitments!=null}">
-        		<c:if test="${recruitments.size()>0}">
-		        	<c:forEach var="recruitment" items= "${recruitments}">
+        	<c:if test="${recruitments.data!=null}">
+        		<c:if test="${recruitments.totalItems>0}">
+		        	<c:forEach var="recruitment" items="${recruitments.data}">
 	    				<comp:applySave 
     						re="${recruitment}" 
     						DETAIL_COMPANY="${DETAIL_COMPANY}" 
     						DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"/>
 		        	</c:forEach>
 	        	</c:if>
-	        	<c:if test="${recruitments.size()<1}">
+	        	<c:if test="${recruitments.totalItems<1}">
 	        		<p>Chưa có bài viết nào</p>
 	        	</c:if>
 	        </c:if>
+	        <comp:pagination ob="${recruitments}" link="${DETAIL_RECRUITMENT}${recruitment.id}&"></comp:pagination>
         </sec:authorize>
 </section> 
 

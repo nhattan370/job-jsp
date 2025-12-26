@@ -17,7 +17,6 @@
                 <ul class="list-unstyled">
                     <li><a href="${pageContext.request.contextPath}" class="footer-link">Trang chủ</a></li>
                     <li><a href="" class="footer-link">Công việc</a></li>
-                    <li><a href="${FORGOT_PASSWORD_PAGE}" class="footer-link">test</a></li>
                 </ul>
             </div>
 

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-12 pr-lg-5">
                 <div class="row">
-                    <c:forEach var="recruitment"  items="${list}" >
+                    <c:forEach var="recruitment" items="${list.data}" >
                         <comp:applySave 
                         		re="${recruitment}" 
                         		DETAIL_COMPANY="${DETAIL_COMPANY}" 
@@ -18,28 +18,14 @@
                         <!-- end -->
                         <!-- Modal -->
 		                   <comp:applyModal id="${recruitment.id}" title="${recruitment.title}"/>
-                        
                     </c:forEach>
-                    <c:if test="${list.size()==0}">
+                    <c:if test="${list.totalItems==0}">
 	                    <div style="text-align: center">
 	                        <p style="color: red">Không có kết quả nào</p>
 	                    </div>
                     </c:if>
                 </div>
-
-<%--                 <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{'/recruitment/search/'+ ${keySearch}(page = ${list.number - 1})}">&lt;</a></li>
-                                <th:block th:each="recruitment,state  : ${recruitmentList}">
-                                    <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{'/recruitment/search/'+ ${keySearch}(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                                </th:block>
-                                <li th:if="${numberPage<list.totalPages - 1}"><a th:href="@{'/recruitment/search/'+ ${keySearch}(page = ${list.number + 1})}">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --%>
+                <comp:pagination ob="${list}" link=""></comp:pagination>
             </div>
 
         </div>

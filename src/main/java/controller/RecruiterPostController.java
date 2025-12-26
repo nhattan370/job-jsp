@@ -25,6 +25,7 @@ import dto.RecruitmentDTO;
 import enums.RecruitmentStatus;
 import model.Company;
 import model.Recruitment;
+import paginationResult.PaginationResult;
 import path.RecruiterPath;
 import security.CustomUserDetails;
 import service.CategoryService;
@@ -77,9 +78,10 @@ public class RecruiterPostController {
 	}
 	
 	@GetMapping(RecruiterPath.LIST_POST)
-	public String listPost(Model model, @AuthenticationPrincipal CustomUserDetails details) {
+	public String listPost(Model model, @RequestParam(name="page", defaultValue = "1") Integer page, 
+						   @AuthenticationPrincipal CustomUserDetails details) {
 		Company company = details.getUser().getCompany();
-		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCompany(company);
+		PaginationResult<RecruitmentDTO> recruitments = recruitmentService.findAllByCompany(company, page);
 		
 		model.addAttribute("reDTO",recruitments);
 		return "post-list";

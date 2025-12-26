@@ -14,12 +14,14 @@ import enums.RecruitmentStatus;
 import model.Category;
 import model.Company;
 import model.Recruitment;
+import paginationResult.PaginationResult;
 
 @Service
 @Transactional
 public class RecruitmentServiceImpl implements RecruitmentService{
 	
 	private final RecruitmentDAO recruitmentDAO;
+	private final int SIZE = 2;
 
 	@Autowired
 	public RecruitmentServiceImpl(RecruitmentDAO recruitmentDAO) {
@@ -43,18 +45,19 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 	}
 
 	@Override
-	public List<RecruitmentDTO> findAllByCompany(Company company) {
-		return recruitmentDAO.findAllByCompany(company);
+	public PaginationResult<RecruitmentDTO> findAllByCompany(Company company, int currentPage) {
+		return recruitmentDAO.findAllByCompany(company, currentPage, SIZE);
 	}
 
 	@Override
-	public List<RecruitmentDTO> findAll() {
-		return recruitmentDAO.findAll();
+	public PaginationResult<RecruitmentDTO> findAll(int currentPage) {
+		return recruitmentDAO.findAll(currentPage, SIZE);
 	}
 
 	@Override
-	public List<RecruitmentDTO> findAllByCategory(Category category) {
-		return recruitmentDAO.findAllByCategory(category);
+	public PaginationResult<RecruitmentDTO> findAllByCategory(Category category, int currentPage) {
+		int size = 1;
+		return recruitmentDAO.findAllByCategory(category, currentPage, size);
 	}
 
 	@Override

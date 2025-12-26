@@ -3,6 +3,8 @@ package controller;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,13 +44,16 @@ public class RecruitmentController {
 	}
 	
 	@GetMapping(PublicPath.COMPANY_POST)
-	public String listRecruitment(Model model, @RequestParam("idCompany") String id) {
+	public String listRecruitment(Model model, @RequestParam("idCompany") String id, HttpServletRequest request,
+								  @RequestParam(name="page", defaultValue = "1") Integer page 
+								  ) {
 		Company company = companyService.getReference(Integer.parseInt(id));
 		
-		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCompany(company);
+		PaginationResult<RecruitmentDTO> recruitments = recruitmentService.findAllByCompany(company, page);
 		
-		logger.info(ColorExample.GRAY+recruitments.size()+ColorExample.RESET);
 		model.addAttribute("recruitments",recruitments);
+		model.addAttribute("pageLink", request.getContextPath() + PublicPath.COMPANY_POST +"?idCompany=" + id + "&");
+
 		return "list-re";
 	}
 	
@@ -58,7 +63,7 @@ public class RecruitmentController {
 		Recruitment recruitment = recruitmentService.findById(Integer.parseInt(idRe));
 		
 		if(details==null || details.getUser().getRole().getRoleName().equals(RoleUser.APPLICANT)) {
-			List<RecruitmentDTO> recruitments = recruitmentService.findAll();
+			PaginationResult<RecruitmentDTO> recruitments = recruitmentService.findAll(page);
 			model.addAttribute("recruitments",recruitments);
 		}else if(details.getUser().getRole().getRoleName().equals(RoleUser.RECRUITER) && details.getUser().getId().equals(recruitment.getCompany().getUser().getId())) {
 			PaginationResult<ApplyPost> applyPosts = applyPostService.findByRecruitmentAndRecruiter(recruitment, details.getUser(), page);
@@ -76,11 +81,14 @@ public class RecruitmentController {
 	}
 	
 	@GetMapping(PublicPath.LIST_RECRUITMENT_BY_CATEGORY)
-	public String getListRecruitmentByCategory(Model model, @RequestParam("idCa") String id) {
+	public String getListRecruitmentByCategory(Model model, @RequestParam("idCa") String id, HttpServletRequest request,
+											   @RequestParam(name="page", defaultValue = "1") Integer page) {
 		Category category = categoryService.getReferenceId(Integer.parseInt(id));
-		List<RecruitmentDTO> recruitments = recruitmentService.findAllByCategory(category);
+		PaginationResult<RecruitmentDTO> recruitments = recruitmentService.findAllByCategory(category, page);
 		
 		model.addAttribute("recruitments",recruitments);
+		model.addAttribute("pageLink", request.getContextPath() + PublicPath.LIST_RECRUITMENT_BY_CATEGORY +"?idCa=" + id + "&");
+
 		return "list-re";
 	}
 }

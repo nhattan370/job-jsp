@@ -5,7 +5,7 @@ public class RecruiterPath {
 	
 	public final static String VERIFY = "/re-pending/verify";
 	public final static String VERIFY_PAGE = "/re-pending/show-verified-page";
-	public final static String CONFIRM_EMAIL = "/re-ecruiter/confirm-account";
+	public final static String CONFIRM_EMAIL = "/re-recruiter/confirm-account";
 	
 	public final static String SHOW_POST = "/recruiter/show-post";
 	public final static String HANDLE_POST = "/recruiter/handle-post";

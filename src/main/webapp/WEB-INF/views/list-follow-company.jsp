@@ -16,9 +16,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 pr-lg-5">
-            	<c:if test="${followCompanies.size() > 0}">
+            	<c:if test="${followCompanies.totalItems > 0}">
                 <div class="row">
-                	<c:forEach var="follow" items="${followCompanies}">
+                	<c:forEach var="follow" items="${followCompanies.data}">
                 		<comp:wrapperCard id="${follow.id}">
                                 <div class="one-third mb-4 mb-md-0">
                                     <div class="job-post-item-header align-items-center">
@@ -36,7 +36,7 @@
                                         <comp:deleteButton id="${follow.id}"></comp:deleteButton>
                                     </div>
                                     <a href="${DETAIL_COMPANY}${follow.company.id}" class="btn btn-primary py-2">Chi tiết</a>
-                                    <a href="${LIST_POST}${follow.company.id}" class="btn btn-warning py-2 ml-1">Danh sách bài đăng</a>
+                                    <a href="${COMPANY_POST}${follow.company.id}" class="btn btn-warning py-2 ml-1">Danh sách bài đăng</a>
                                 </div>
                         </comp:wrapperCard>
                         <!-- Modal xác nhận xóa -->
@@ -50,25 +50,12 @@
                 </div>
                </c:if>
                
-               <c:if test="${followCompanies.size() < 1}">
+               <c:if test="${followCompanies.totalItems < 1}">
 	                <div style="text-align: center">
 	                    <p style="color:red;">Danh sách trống</p>
 	                </div>
                 </c:if>
-<%--                 <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{/save-job/get-list(page = ${followCompanies.number - 1})}">&lt;</a></li>
-                                <th:block th:each="recruitment,state  : ${recruitmentList}">
-                                    <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{/save-job/get-list(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                                </th:block>
-                                <li th:if="${numberPage<followCompanies.totalPages - 1}"><a th:href="@{/save-job/get-list(page = ${followCompanies.number + 1})}">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --%>
-          
+                <comp:pagination ob="${followCompanies}" link="${LIST_FOLLOW_COMPANY}?"></comp:pagination>
             </div>
         </div>
     </div>

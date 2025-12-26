@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-lg-12 pr-lg-4">
                 <div class="row">
-                	<c:if test="${reDTO.size()==0}">
+                	<c:if test="${reDTO.totalItems==0}">
                         <div class="row form-group" >
                             <label for="company-website-tw d-block">Danh sách bài tuyển dụng </label> <br>
                             <div class="col-md-12">
@@ -37,8 +37,8 @@
                             </div>
                         </div>
                     </c:if>
-                 <c:if test="${reDTO.size()>0}">
-                    <c:forEach var="re" items= "${reDTO}">
+                 <c:if test="${reDTO.totalItems>0}">
+                    <c:forEach var="re" items= "${reDTO.data}">
                     	<comp:wrapperCard id="${re.id}">
                     		<comp:informationRecruitment 
 			 					isDto="<%= Boolean.TRUE %>"
@@ -46,7 +46,6 @@
 			 					DETAIL_RECRUITMENT="${DETAIL_RECRUITMENT}"
 			 					DETAIL_COMPANY="${DETAIL_COMPANY}"
 	    					/>
-	    					
 	    					<comp:deleteButton id="${re.id}" type="button" title="Xóa bài"></comp:deleteButton>
 	    					<a href="${DETAIL_RECRUITMENT}${re.id}" class="btn btn-primary py-2 ml-2">Chi tiết</a>
                             <a href="${POST}?id=${re.id}" class="btn btn-warning py-2 ml-2">Cập nhật</a>
@@ -58,22 +57,7 @@
                         </c:forEach>
                     </c:if>
                 </div>
-<%--                 <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li th:if="${numberPage>0}"><a th:href="@{/user/list-post(page = ${list.number - 1})}">&lt;</a></li>
-                                <th:block th:each="recruitment,state  : ${recruitmentList}">
-<!--                                    <th:block th:if="${numberPage == 0}">-->
-<!--                                        <li th:class="${numberPage == 0 ? 'active' : null }"><a th:href="@{/user/list-post(page = ${state.index})}" th:text="${state.index + 1}"></a></li>-->
-<!--                                    </th:block>-->
-                                        <li th:class="${numberPage == state.index  ? 'active' : null }"><a th:href="@{/user/list-post(page = ${state.index})}" th:text="${state.index + 1}"></a></li>
-                                </th:block>
-                                <li th:if="${numberPage<list.totalPages - 1}"><a th:href="@{/user/list-post(page = ${list.number + 1})}">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --%>
+                <comp:pagination ob="${reDTO}" link="${LIST_POST}?"></comp:pagination>
            
             </div>
         </div>

@@ -1,12 +1,12 @@
 package dao;
 
-import java.util.List;
-
-import dto.ApplyPostDTO;
 import dto.RecruitmentDTO;
+import model.ApplyPost;
+import model.User;
+import paginationResult.PaginationResult;
 
 public interface SearchDAO {
-	List<RecruitmentDTO> searchTitleRecruitment(String keySearch);
-	List<RecruitmentDTO> searchAddressRecruitment(String keySearch);
-	List<ApplyPostDTO> searchUser(String KeySearch);
+	PaginationResult<RecruitmentDTO> searchTitleRecruitment(String keySearch, int currentPage, int size);
+	PaginationResult<RecruitmentDTO> searchAddressRecruitment(String keySearch, int currentPage, int size);
+	PaginationResult<User> searchUser(String KeySearch, int currentPage, int size);
 }
